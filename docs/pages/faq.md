@@ -26,7 +26,7 @@ We have chosen the minimum required size of your contribution such that it is sm
 
 <details>
 <summary markdown="span">Which object classes to you support?</summary>
-Please check out our [overview]({{ "/overview" | relative_url }}) page for a list of supported classes and object tags.
+Please check out our [overview]({{ "/overview/" | relative_url }}) page for a list of supported classes and object tags.
 </details>
 
 

@@ -11,7 +11,7 @@ order: 2
 {:.no_toc}
 
 To solve the task of cone detection, we provide manually annotated bounding boxes and segmentation masks.
-Both annotation types consist of the same semantic classes and additional tags (see [overview]({{ "/overview" | relative_url }})).
+Both annotation types consist of the same semantic classes and additional tags (see [overview]({{ "/overview/" | relative_url }})).
 A small sample dataset can be downloaded at the bottom of this page helping you to understand our data structure.
 
 * TOC

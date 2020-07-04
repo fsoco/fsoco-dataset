@@ -57,7 +57,7 @@ Check out our [stats for nerds showcase]({{ "/stats_for_nerds" | relative_url }}
 
 To ensure high quality of FSOCO, new contributions need to follow a set of guidelines.
 They describe how to follow our conventions, e.g., they define which parts of a cone a bounding boxes should cover and how to use our classes and tags.
-Check out our full [labeling guidelines]({{ "/labeling_guidelines" | relative_url }}).
+Check out our full [labeling guidelines]({{ "/labeling_guidelines/" | relative_url }}).
 
 
 ### Differences to FSOCOv1

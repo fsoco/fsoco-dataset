@@ -12,10 +12,10 @@ order: 3
 
 The FSOCO Tools [CLI](https://en.wikipedia.org/wiki/Command-line_interface "Opens in a new tab."){:target="_blank"} facilitates preparing your dataset to contribute to the project.
 It is a small, extensible tool for data manipulation and analysis that is based on [Click](https://click.palletsprojects.com/en/7.x/ "Opens in a new tab."){:target="_blank"} to sensibly combine scripts into a uniform package.
-For installation, please refer to the [README](https://github.com/fsoco/fsoco/tree/master/tools).
+For installation, please refer to the [README](https://github.com/fsoco/fsoco-dataset/blob/master/tools/README.md).
 
 We welcome contributions and would be thrilled to review and, hopefully, accept your contribution as well.
-If you are interested, please refer to [CONTRIBUTING](https://github.com/fsoco/fsoco/tools/CONTRIBUTING.md).
+If you are interested, please refer to [CONTRIBUTING](https://github.com/fsoco/fsoco-dataset/blob/master/tools/CONTRIBUTING.md).
 <br/>
 A good way to find inspiration is by looking for "Help Wanted" Issues.
 

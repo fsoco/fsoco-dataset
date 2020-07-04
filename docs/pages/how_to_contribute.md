@@ -103,11 +103,11 @@ stateDiagram
 
 #### Preparation
 
-1. Submit the form on our [contact us]({{ "/contact_us" | relative_url }}) page. Information on the similarity score can be found [here]({{ "/tools/#image-similarity-score" | relative_url }}). 
+1. Submit the form on our [contact us]({{ "/contact_us/" | relative_url }}) page. Information on the similarity score can be found [here]({{ "/tools/#image-similarity-score" | relative_url }}).
 2. We will check your sample images. If you already have labels, please include them there.
 3. You will get an email from us covering the next steps.
 4. If you have not done yet, please create an account on [Supervisely](https://supervise.ly/ "Opens in a new tab."){:target="_blank"} and send us the username by replying to our email.
-5. We will add this account to our FSOCO team and assign a labeling exam to you to ensure that you are familiar with our [labeling guidelines]({{ "/labeling_guidelines" | relative_url }}).
+5. We will add this account to our FSOCO team and assign a labeling exam to you to ensure that you are familiar with our [labeling guidelines]({{ "/labeling_guidelines/" | relative_url }}).
 
 
 #### Upload your data

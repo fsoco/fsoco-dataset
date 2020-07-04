@@ -15,7 +15,7 @@ State-of-the-art object detection systems require a substantial amount of data, 
 We aim to overcome this problem by providing data and to help experienced teams to even further boost their performance on the track with an increased set of ground truth data.
 
 FSOCO contains bounding box and segmentation annotations from multiple teams and continues to grow thanks to numerous contributions from the Formula Student community.
-Details on supported [object classes]({{ "/overview" | relative_url }}) and [examples of our annotations]({{ "/examples" | relative_url }}) can be found on this website.
+Details on supported [object classes]({{ "/overview/" | relative_url }}) and [examples of our annotations]({{ "/examples/" | relative_url }}) can be found on this website.
 
 ### Formula Student Driverless
 
