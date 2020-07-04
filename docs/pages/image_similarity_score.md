@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Tools
+title: Tools - Image Similarity Score
 permalink: /tools/image_similarity_score
 feature-img: assets/img/fsg/HD/fsg_res.jpg
 feature-img-credits: Photo ©FSG Haertl
