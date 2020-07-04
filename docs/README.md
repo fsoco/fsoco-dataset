@@ -1,3 +1,5 @@
+![License GPL-3.0](https://img.shields.io/github/license/fsoco/fsoco-dataset?style=for-the-badge) ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen?style=for-the-badge) ![contributions welcome](https://img.shields.io/badge/donation_surplus-2,369_images-red?style=for-the-badge) 
+
 # The FSOCO Dataset
 
 <img align="right" width="400" src="assets/img/examples/index.png">
@@ -18,9 +20,31 @@ Formula Student / FSAE is an international design competition, where students de
 In 2017, Formula Student Germany introduced a new driverless class challenging the students to equip their cars with additional sensors and compute hardware to enable autonomous racing.
 Henceforth, other events have adapted the driverless class and the self-driving racecars are quickly closing the gap to human drivers.
 
+## Contribute
+
+Some of the ways to contribute are:
+
+[Dataset contributions](https://www.fsoco-dataset.com/how_to_contribute):
+- Donate raw data for other teams to label that don't have cones or sensors
+- Label donated images as your contribution to the dataset
+- Contribute your team's private dataset
+
+[Tools contributions](../tools/CONTRIBUTING.md#contribute):
+- Report bugs
+- Correct or add documentation
+- Add a new tool
+
+### Contributors
+FSOCO is only made possible by your contributions.<br>
+We'd like to thank all [FS teams that have contributed](https://www.fsoco-dataset.com/contributors/) to the dataset.
+
+Likewise, we'd like to thank the individual contributors that have helped write the tools that enable this project:
+
+| <a href="https://github.com/ddavid"><img src="https://github.com/ddavid.png?size=60"></a> | <a href="https://github.com/mitchellmitch"><img src="https://github.com/mitchellmitch.png?size=60"></a> | <a href="https://github.com/vniclas"><img src="https://github.com/vniclas.png?size=60"></a> |
+|---|---|---|
+
 ## Contact
 
 Please feel free to contact us with any questions, suggestions, or comments:
-* Contact form: www.fsoco-dataset.com/contact_us
-* Email: fsoco.dataset@gmail.com
-  
+* Contact form: [www.fsoco-dataset.com/contact_us](www.fsoco-dataset.com/contact_us)
+* Email: <a href="mailto:fsoco.dataset@gmail.com">fsoco.dataset@gmail.com</a>
