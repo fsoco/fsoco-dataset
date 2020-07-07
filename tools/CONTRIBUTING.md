@@ -18,7 +18,7 @@ You've probably arrived here after reading [Tools website](https://www.fsoco-dat
 * [Additional notes](#notes)
     * [Issue and Pull request labels](#gh_labels)
 
-The structure of this TOC is heavily borrowed from the [Atom editor Contribution Guidelines]()
+The structure of this TOC is heavily borrowed from the [Atom editor Contribution Guidelines](https://github.com/atom/atom/blob/master/CONTRIBUTING.md)
 
 ### <a name="contribute"></a> How Can I Contribute?
 #### <a name="bugs"></a> Reporting bugs
@@ -121,7 +121,7 @@ Summing up:
 1. Write a small wrapper file for your script's Click interface
 1. Add your wrapped script to the existing command group as a sub-command 
 1. Make sure the naming expresses what your addition does 
-1. Open a [Pull Request](#pull_request)
+1. Open a [Pull Request](#pull_requests)
 
 ##### <a name="standalone"></a> Adding a new stand-alone command
 For a more creative contribution example, refer to [Adding a new command to an existing command group.](#existing)
@@ -155,7 +155,7 @@ The steps for adding a new stand-alone command are the following:
     fsoco.add_command(your_command, name="command_name")
     ``` 
     The name parameter can be left out, if its contents are equivalent to `your_command`, in this case. 
-1. Open a [Pull Request](#pull_request)
+1. Open a [Pull Request](#pull_requests)
 ##### <a name="group"></a> Adding a new command group
 
 For a more creative contribution example, refer to [Adding a new command to an existing command group.](#existing)
@@ -198,7 +198,7 @@ The steps for adding a new command group are the following:
     fsoco.add_command(your_command, name="command_name")
     ``` 
     The name parameter can be left out, if its contents are equivalent to `your_command`, in this case. 
-1. Open a [Pull Request](#pull_request)    
+1. Open a [Pull Request](#pull_requests)    
 #### <a name="pull_requests"></a> Pull requests
 The workflow for the contribution is the same as in [GitHub Flow](https://guides.github.com/introduction/flow/index.html) two additions.
 * Forking repository before opening PR
@@ -214,7 +214,7 @@ Pull Requests should always resolve a previously opened Issue and reference it i
 
 For those more visually inclined:
 
-![FSOCO GitHub Flow](https://vniclas.github.io/fsocov2_prototyping/assets/img/tools/FSOCO_branching.svg)
+![FSOCO GitHub Flow](https://fsoco.github.io/fsoco-dataset/assets/img/tools/FSOCO_branching.svg)
 ### <a name="style"></a> Styleguides
 #### <a name="pep"></a> [PEP 8](https://www.python.org/dev/peps/pep-0008/)
 Please use the official Style Guide for Python Code (PEP 8) to ensure consistency and readability.
