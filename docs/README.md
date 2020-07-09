@@ -56,5 +56,5 @@ Likewise, we would like to thank the individual contributors that have helped wr
 ## Contact
 
 Please feel free to contact us with any questions, suggestions, or comments:
-* Contact form: [www.fsoco-dataset.com/contact_us](www.fsoco-dataset.com/contact_us)
+* Contact form: [www.fsoco-dataset.com/contact_us](https://www.fsoco-dataset.com/contact_us)
 * Email: <a href="mailto:fsoco.dataset@gmail.com">fsoco.dataset@gmail.com</a>
