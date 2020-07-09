@@ -5,9 +5,9 @@
 
 # The FSOCO Dataset
 
-<a href="https://www.fsoco-dataset.com/overview" target="_blank">![Teams 3](https://img.shields.io/badge/Teams-3-green.svg)</a>
-<a href="https://www.fsoco-dataset.com/overview" target="_blank">![Amount of labeled images 2034](https://img.shields.io/badge/Images-2034-blue.svg)</a>
-<a href="https://www.fsoco-dataset.com/overview" target="_blank">![Amount of labeled cones 30607](https://img.shields.io/badge/Cones-31k-blue.svg)</a>
+<a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Teams 3](https://img.shields.io/badge/Teams-3-green.svg)</a>
+<a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Amount of labeled images 2034](https://img.shields.io/badge/Images-2034-blue.svg)</a>
+<a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Amount of labeled cones 30607](https://img.shields.io/badge/Cones-31k-blue.svg)</a>
 
 <img align="right" width="400" src="assets/img/examples/index.png">
 
@@ -31,7 +31,7 @@ Henceforth, other events have adapted the driverless class and the self-driving 
 
 Some of the ways to contribute are:
 
-[Dataset contributions](https://www.fsoco-dataset.com/how_to_contribute):
+[Dataset contributions](https://www.fsoco-dataset.com/how_to_contribute/):
 - Donate raw data for other teams to label that don't have cones or sensors
 - Label donated images as your contribution to the dataset
 - Contribute your team's private dataset
@@ -56,5 +56,5 @@ Likewise, we would like to thank the individual contributors that have helped wr
 ## Contact
 
 Please feel free to contact us with any questions, suggestions, or comments:
-* Contact form: [www.fsoco-dataset.com/contact_us](https://www.fsoco-dataset.com/contact_us)
+* Contact form: [www.fsoco-dataset.com/contact_us](https://www.fsoco-dataset.com/contact_us/)
 * Email: <a href="mailto:fsoco.dataset@gmail.com">fsoco.dataset@gmail.com</a>
