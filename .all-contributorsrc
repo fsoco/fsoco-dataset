@@ -1,0 +1,15 @@
+{
+  "files": [
+    "docs/README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "fsoco-dataset",
+  "projectOwner": "fsoco",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
