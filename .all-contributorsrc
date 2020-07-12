@@ -5,6 +5,15 @@
   "imageSize": 100,
   "commit": false,
   "contributors": [
+    {
+      "login": "fsoco",
+      "name": "fsoco",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/63293624?v=4",
+      "profile": "http://www.fsoco-dataset.com",
+      "contributions": [
+        "doc"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "fsoco-dataset",
