@@ -23,8 +23,8 @@ from .labelbox2sly import main
 )
 def labelbox2sly(images_folder, lb_labels_file, out_path, project_name, dataset_name):
     """
-    \b
     Labelbox => Supervisely format
+
     https://docs.supervise.ly/ann_format/
 
     \b

@@ -30,16 +30,16 @@ def _fsoco_meta():
     return meta_data
 
 
-def class_id_to_fsoco(id):
+def class_id_to_fsoco(class_id):
     mapping_file = os.path.join(
         os.path.dirname(os.path.realpath(__file__)), "class_id_to_fsoco.yaml"
     )
     with open(mapping_file, "r") as f:
         mapping_dict = yaml.full_load(f)
     for class_name, class_ids in mapping_dict.items():
-        if isinstance(class_ids, int) and id == class_ids:
+        if isinstance(class_ids, int) and class_id == class_ids:
             return class_name
-        elif isinstance(class_ids, list) and id in class_ids:
+        elif isinstance(class_ids, list) and class_id in class_ids:
             return class_name
     return None
 

@@ -1,6 +1,6 @@
 import click
 from similarity_scorer.utils.logger import Logger
-from collect_stats.stats_collector import Stats_Collector
+from collect_stats.stats_collector import StatsCollector
 
 
 @click.command()
@@ -19,7 +19,6 @@ def collect_stats(
     sly_project_name: str, calc_similarity: bool, num_workers: int, gpu: bool
 ):
     """
-    \b
     Collect stats from a local supervisely project for later analysis.
 
     \b
@@ -45,7 +44,7 @@ def collect_stats(
 
     Logger.log_info("Start collecting stats")
 
-    collector = Stats_Collector(calc_similarity, num_workers, gpu)
+    collector = StatsCollector(calc_similarity, num_workers, gpu)
     if collector.load_sly_project(sly_project_name):
         image_df, box_df = collector.collect_stats()
 
