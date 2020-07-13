@@ -53,6 +53,11 @@ Likewise, we would like to thank the individual contributors that have helped wr
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.fsoco-dataset.com"><img src="https://avatars1.githubusercontent.com/u/63293624?v=4" width="100px;" alt=""/><br /><sub><b>fsoco</b></sub></a><br /><a href="https://github.com/fsoco/fsoco-dataset/commits?author=fsoco" title="Documentation">📖</a> <a href="https://github.com/fsoco/fsoco-dataset/commits?author=fsoco" title="Tests">⚠️</a></td>
+  </tr>
+</table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
