@@ -11,9 +11,9 @@ try:
     import supervisely_lib as sly
 except ImportError:
     Logger.log_error(
-        f"Please install the Supervisly SDK from https://github.com/supervisely/supervisely "
-        f"or use the [sly] option for pip install on fsoco tools.\n"
-        f"pip install --editable .[sly] "
+        "Please install the Supervisly SDK from https://github.com/supervisely/supervisely "
+        "or use the [sly] option for pip install on fsoco tools.\n"
+        "pip install --editable .[sly] "
     )
     sys.exit(-1)
 

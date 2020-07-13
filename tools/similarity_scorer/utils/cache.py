@@ -20,7 +20,7 @@ class Cache:
                 self._data = data
                 return True
             else:
-                Logger.log_error(f"Cache File has wrong type or version!")
+                Logger.log_error("Cache File has wrong type or version!")
                 return False
 
     def store_to_file(self, cache_file: Path):

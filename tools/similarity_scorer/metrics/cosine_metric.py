@@ -23,9 +23,9 @@ class CosineMetric(Metric):
         start_time = time.time()
         if per_folder:
             Logger.log_info(
-                f"Start cosine similarity calculation per folder ...", ctx=self.name
+                "Start cosine similarity calculation per folder ...", ctx=self.name
             )
-            for folder, index in self.get_index_per_folder():
+            for _, index in self.get_index_per_folder():
                 new_index, img_vecs = self.get_feature_vectors_for_index(index)
                 similarity_matrix = self._calculate_similarity(img_vecs)
                 metric_value = self._get_similarity_metric_value(similarity_matrix)
@@ -33,7 +33,7 @@ class CosineMetric(Metric):
 
         else:
             Logger.log_info(
-                f"Start cosine similarity calculation for all images ...", ctx=self.name
+                "Start cosine similarity calculation for all images ...", ctx=self.name
             )
             all_images_index = self.get_index_for_all_images()
             new_index, img_vecs = self.get_feature_vectors_for_index(all_images_index)
@@ -51,7 +51,8 @@ class CosineMetric(Metric):
 
         return metric
 
-    def _calculate_similarity(self, img_vec):
+    @staticmethod
+    def _calculate_similarity(img_vec):
         similarity_matrix = cosine_similarity(img_vec)
         return similarity_matrix.astype(np.float32)
 
