@@ -50,8 +50,16 @@ We would like to thank all [FS teams that have contributed](https://www.fsoco-da
 
 Likewise, we would like to thank the individual contributors that have helped write the tools that enable this project:
 
-| <a href="https://github.com/ddavid"><img src="https://github.com/ddavid.png?size=60"></a> | <a href="https://github.com/mitchellmitch"><img src="https://github.com/mitchellmitch.png?size=60"></a> | <a href="https://github.com/vniclas"><img src="https://github.com/vniclas.png?size=60"></a> |
-|---|---|---|
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
+For details on what the emoji mean, please see the [contribution documentation](../tools/CONTRIBUTING.md#all_contributors).
 
 ## Contact
 

@@ -1,3 +1,19 @@
+// To clear things when we float the element inside nav and ul
+.clear {
+  *zoom: 1;
+
+  &:after {
+    clear: both;
+  }
+
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+}
+
+
 .site-footer {
   @extend %padding-post;
   display: inline-block;
@@ -5,7 +21,7 @@
   width: 100%;
   color: lighten($text-color, 24%);
   font-size: 0.9em;
-
+  
   .footer-icons {
     ul {
       list-style: none;
@@ -18,6 +34,104 @@
       a:hover {
         color: darken($link-color, 15%);
       }
+    }
+  }
+  
+  .separator {
+    user-select: none;
+    opacity: $navbar-separator-opacity;
+
+    &:first-child {
+      display: none;
+    }
+  }
+  
+  nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      opacity: 100% !important;
+      font-size: 0.9em !important;
+    }
+
+    li {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: white !important;
+    }
+
+    a {
+      &:hover {
+        color: $link-color;
+      }
+
+      &#pull {
+        i {
+          margin-top: 13px;
+          margin-right: 10px;
+          float: right;
+        }
+
+      }
+
+    }
+  }
+}
+/* ---- Responsive ---- */
+
+@media (min-width: $break) {
+  a#pull {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $break) {
+  
+  nav {
+    height: auto;
+
+    .separator {
+      display: none !important;
+    }
+
+    ul {
+      width: 100%;
+      overflow: hidden;
+
+      /* fade out, then shrink */
+      transition: opacity .25s 0s, font-size .25s 0s;
+      transition-delay: 0s;
+
+      &.hide {
+        font-size: 0;
+        margin: 0;
+        opacity: 0;
+        padding: 0;
+      }
+    }
+
+    li {
+      width: 100%;
+      text-align: center;
+      font-size: 1em;
+      position: relative;
+      background-color: darken($background-color, 2%);
+
+      &:nth-of-type(4n) {
+        background-color: $background-color;
+      }
+
+      a {
+        width: 100%;
+        margin: 0;
+        display: block;
+      }
+
     }
   }
 }
