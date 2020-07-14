@@ -53,6 +53,11 @@ Likewise, we would like to thank the individual contributors that have helped wr
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/ddavid"><img src="https://avatars0.githubusercontent.com/u/18621443?v=4" width="100px;" alt=""/><br /><sub><b>David Dodel</b></sub></a><br /><a href="https://github.com/fsoco/fsoco-dataset/issues?q=author%3Addavid" title="Bug reports">🐛</a> <a href="https://github.com/fsoco/fsoco-dataset/commits?author=ddavid" title="Documentation">📖</a> <a href="#tool-ddavid" title="Tools">🔧</a></td>
+  </tr>
+</table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
