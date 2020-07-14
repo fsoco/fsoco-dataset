@@ -5,6 +5,17 @@
   "imageSize": 100,
   "commit": false,
   "contributors": [
+    {
+      "login": "vniclas",
+      "name": "Niclas",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/49001036?v=4",
+      "profile": "https://github.com/vniclas",
+      "contributions": [
+        "bug",
+        "doc",
+        "tool"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "fsoco-dataset",

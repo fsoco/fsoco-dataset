@@ -12,6 +12,7 @@ You've probably arrived here after reading [Tools website](https://www.fsoco-dat
         * [Adding a new stand-alone command](#standalone)
         * [Adding a new command group](#group)
     * [Pull requests](#pull_requests)
+    * [Contributor status attribution](#all_contributors)
 * [Styleguides](#style)
     * [pep8](#pep)
     * [Documentation](#doc)
@@ -215,6 +216,21 @@ Pull Requests should always resolve a previously opened Issue and reference it i
 For those more visually inclined:
 
 ![FSOCO GitHub Flow](https://fsoco.github.io/fsoco-dataset/assets/img/tools/FSOCO_branching.svg)
+
+#### <a name="all_contributors"></a> Contributor Status Attribution
+After contributing to the project, if you wish to be added as a contributor, follow these steps:
+1. Mention All-Contributors bot in a comment in the issue your PR is linked to and state your contribution (see commands in table below)
+1. In the PR created by the bot, reference the issue your contribution PR solved
+1. Address requests by reviewer, if anything is unclear 
+
+| Contribution Type | Emoji | Bot command                                                      |
+|-------------------|-------|------------------------------------------------------------------|
+| Bug-Fix           | 🐛     | @all-contributors  please add  @your_user_name for bug-fix       |
+| Documentation     | 📖     | @all-contributors  please add  @your_user_name for documentation |
+| Tools             | 🔧     | @all-contributors  please add  @your_user_name for tools         |
+
+See the [All-Contributors project page](https://allcontributors.org/docs/en/overview), if you are interested in how the bot works.
+
 ### <a name="style"></a> Styleguides
 #### <a name="pep"></a> [PEP 8](https://www.python.org/dev/peps/pep-0008/)
 Please use the official Style Guide for Python Code (PEP 8) to ensure consistency and readability.
