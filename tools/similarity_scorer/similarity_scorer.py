@@ -97,7 +97,7 @@ class SimilarityScorer:
         global_score = self.df[GLOBAL_SCORE_METRIC].mean()
 
         print(f"{Logger.Colors.OKBLUE}{Logger.Colors.BOLD}")
-        print(f"[Lower is better]\n")
+        print("[Lower is better]\n")
         print(
             f"Your{' ' if self.single_folder else ' global '}score is: {global_score:.2f}"
         )
@@ -106,18 +106,18 @@ class SimilarityScorer:
             f"This means that on average, your images have {global_score:.2f} images that have a cosine similarity "
             f"higher than 0.95."
         )
-        print(f"Or put simply, they have a lot of image features in common.")
+        print("Or put simply, they have a lot of image features in common.")
         print(
-            f"So you should take a look if these images add enough new training information."
+            "So you should take a look if these images add enough new training information."
         )
         print(
-            f"Please note, that the score is mainly based on the 'background' features, as it looks at the entire "
-            f"image."
+            "Please note, that the score is mainly based on the 'background' features, as it looks at the entire "
+            "image."
         )
-        print(f"To improve your score, you can try different background scenes.")
+        print("To improve your score, you can try different background scenes.")
         print(
-            f"If your images are composed of similar-looking backgrounds but different cone position/lighting "
-            f"conditions, it is still ok to have a higher score."
+            "If your images are composed of similar-looking backgrounds but different cone position/lighting "
+            "conditions, it is still ok to have a higher score."
         )
         print()
 

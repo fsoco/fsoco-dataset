@@ -6,6 +6,17 @@
   "commit": false,
   "contributors": [
     {
+      "login": "vniclas",
+      "name": "Niclas",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/49001036?v=4",
+      "profile": "https://github.com/vniclas",
+      "contributions": [
+        "bug",
+        "doc",
+        "tool"
+      ]
+    },
+    {
       "login": "ddavid",
       "name": "David Dodel",
       "avatar_url": "https://avatars0.githubusercontent.com/u/18621443?v=4",
@@ -15,7 +26,6 @@
         "doc",
         "tool"
       ]
-    }
   ],
   "contributorsPerLine": 7,
   "projectName": "fsoco-dataset",

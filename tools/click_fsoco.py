@@ -12,6 +12,9 @@ from collect_stats.click_collect_stats import collect_stats
 
 class Tools(object):
     def __init__(self, home=None, debug=False):
+        """
+        Initialize tools class.
+        """
         self.home = os.path.abspath(home or ".")
         self.debug = debug
 
@@ -22,7 +25,8 @@ class Tools(object):
 @click.pass_context
 def fsoco(ctx, tools_home, debug):
     """
-    This is the cli tool-suite for the FSOCO dataset.
+    CLI tool-suite for the FSOCO dataset.
+
     Its purpose is to aid with data processing tasks revolving around the project.\n
     The current use-cases:
 

@@ -25,8 +25,8 @@ def yolo2sly(
     images_folder, darknet_labels_folder, out_path, project_name, dataset_name
 ):
     """
-    \b
-    Darknet YOLO => Supervisely
+    Darknet YOLO => Supervisely format
+
     https://docs.supervise.ly/ann_format/
 
     \b

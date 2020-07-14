@@ -82,7 +82,6 @@ def resize_logo(img_logo):
 
 
 def draw_text_on_img(cv_img, anchors, texts):
-    assert len(anchors) is len(texts)
     pil_img = cvmat_to_pil(cv_img)
     font = ImageFont.truetype(FONT_PATH, FONT_SIZE)
 
@@ -134,7 +133,9 @@ def should_watermark_file(path, logo_path, image_format):
 
 
 def main(cwd, image_format=None, logo_file_name=None):
-    assert image_format in SUPPORTED_IMAGE_FORMATS
+    if image_format not in SUPPORTED_IMAGE_FORMATS:
+        print("Image format not supported:", image_format)
+        exit(-1)
     # Save actual cwd to go back after executing script
     original_cwd = os.path.abspath(os.getcwd())
     # Always require directory as a positional argument and change to it
@@ -150,7 +151,7 @@ def main(cwd, image_format=None, logo_file_name=None):
     logo_path = logo_path.pop()
     logo_img = cv.imread(logo_path)
 
-    for subdir, dirs, files in os.walk(os.getcwd()):
+    for subdir, _, files in os.walk(os.getcwd()):
         image_paths = [
             path
             for path in files

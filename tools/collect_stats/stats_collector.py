@@ -11,9 +11,9 @@ try:
     import supervisely_lib as sly
 except ImportError:
     Logger.log_error(
-        f"Please install the Supervisly SDK from https://github.com/supervisely/supervisely "
-        f"or use the [sly] option for pip install on fsoco tools.\n"
-        f"pip install --editable .[sly] "
+        "Please install the Supervisly SDK from https://github.com/supervisely/supervisely "
+        "or use the [sly] option for pip install on fsoco tools.\n"
+        "pip install --editable .[sly] "
     )
     sys.exit(-1)
 
@@ -34,8 +34,11 @@ def get_stat_template():
     return stat
 
 
-class Stats_Collector:
+class StatsCollector:
     def __init__(self, calc_similarity: bool, num_workers: int, use_gpu: bool):
+        """
+        Initialize the stats collector.
+        """
         self.calc_similarity = calc_similarity
         self.num_workers = num_workers
         self.use_gpu = use_gpu
@@ -138,7 +141,8 @@ class Stats_Collector:
 
         return similarity_stats
 
-    def _extract_box_stats(self, annotation_stats: list):
+    @staticmethod
+    def _extract_box_stats(annotation_stats: list):
         box_rows = []
         for image_row in annotation_stats:
             for box_idx, bbox in enumerate(image_row["bounding_boxes"]):
@@ -182,7 +186,8 @@ class Stats_Collector:
         Logger.log_info(f"Extracted {len(box_rows)} bounding boxes.")
         return box_df
 
-    def _merge_stats(self, annotation_stats: list, similarity_stats: pd.DataFrame):
+    @staticmethod
+    def _merge_stats(annotation_stats: list, similarity_stats: pd.DataFrame):
         image_df = pd.DataFrame(annotation_stats)
         image_df.drop(columns=["bounding_boxes"], inplace=True)
 

@@ -42,14 +42,14 @@ We have defined a set of minimum requirements for submitting to FSOCO.
 They are based on the experience with the first version of FSOCO.
 
 * Your team's **bounding box** contribution should:  
-  1. Contain 5,000 official cones, e.g., 500 images with 10 cones/image (approx. labeling effort of 30hr for one person). *Please let us know if the time is entirely off for you.*
+  1. Contain at least 5,000 official cones, e.g., 500 images with 10 cones/image (approx. labeling effort of 30hr for one person). *Please let us know if the time is entirely off for you.*
   2. Consist of approx. 50% images showing on-board data of rules-compliant tracks (acceleration, skidpad, autocross).  
   3. Not contain images, where one can identify people and licenses plates without their (owners) explicit permission.  
   4. Comply with the contribution policy above.  
-  5. Contain 250 segmentation masks, e.g., 50 images with 5 cones/image (approx. labeling effort of 3.5hr for one person); see the note below.   
+  5. Contain at least 250 segmentation masks, e.g., 50 images with 5 cones/image (approx. labeling effort of 3.5hr for one person); see the note below.   
 <br>
 * Your team's **segmentation** contribution should:  
-  1. Contain 1,750 official cones, i.e., 350 images with 5 cones/image (approx. labeling effort of 24hr for one person).  
+  1. Contain at least 1,750 official cones, i.e., 350 images with 5 cones/image (approx. labeling effort of 24hr for one person).  
   2. Consist of approx. 50% images showing on-board data of rules-compliant tracks (acceleration, skidpad, autocross).  
   3. Not contain images, where one can identify people and licenses plates without their (owners) explicit permission.  
   4. Comply with the contribution policy above.   

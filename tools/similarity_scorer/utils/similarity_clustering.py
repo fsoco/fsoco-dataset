@@ -26,7 +26,8 @@ class SimilarityClustering:
     def active(self):
         return self.clustering_threshold > 0
 
-    def _create_output_folders(self, folder: str):
+    @staticmethod
+    def _create_output_folders(folder: str):
         src_folder = Path(folder)
         review_folder = Path(f"{folder}/{CLUSTER_FOLDER_NAME}")
 
@@ -51,9 +52,9 @@ class SimilarityClustering:
 
     def _find_clusters(self):
         high_similarity = self.similarity_matrix > self.clustering_threshold
-        G = nx.from_numpy_matrix(high_similarity, create_using=nx.Graph)
+        graph = nx.from_numpy_matrix(high_similarity, create_using=nx.Graph)
         self.clusters = [
-            cluster for cluster in nx.connected_components(G) if len(cluster) > 1
+            cluster for cluster in nx.connected_components(graph) if len(cluster) > 1
         ]
         self.clusters.sort(key=len)
         self.clusters.reverse()
@@ -77,7 +78,7 @@ class SimilarityClustering:
         self._find_clusters()
         for folder, ids_in_folder in self.ids_in_folder.items():
             ids_in_folder = set(ids_in_folder)
-            src_folder, review_folder = self._create_output_folders(folder)
+            _, review_folder = self._create_output_folders(folder)
             clusters_in_folder, in_no_cluster = self._get_clusters_for_ids(
                 ids_in_folder
             )
@@ -98,7 +99,7 @@ class SimilarityClustering:
                     dst = cluster_folder / src.name
                     shutil.copy2(src, dst)
 
-            no_cluster_folder = Path(review_folder / f"_no_cluster_")
+            no_cluster_folder = Path(review_folder / "_no_cluster_")
             Path.mkdir(no_cluster_folder)
 
             for file in self._get_filenames_for_ids(in_no_cluster):
