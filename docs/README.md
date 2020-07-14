@@ -56,6 +56,7 @@ Likewise, we would like to thank the individual contributors that have helped wr
 <table>
   <tr>
     <td align="center"><a href="https://github.com/MitchellMitch"><img src="https://avatars0.githubusercontent.com/u/9809116?v=4" width="100px;" alt=""/><br /><sub><b>MitchMitchell</b></sub></a><br /><a href="https://github.com/fsoco/fsoco-dataset/issues?q=author%3AMitchellMitch" title="Bug reports">🐛</a> <a href="https://github.com/fsoco/fsoco-dataset/commits?author=MitchellMitch" title="Documentation">📖</a> <a href="#tool-MitchellMitch" title="Tools">🔧</a></td>
+    <td align="center"><a href="https://github.com/vniclas"><img src="https://avatars2.githubusercontent.com/u/49001036?v=4" width="100px;" alt=""/><br /><sub><b>Niclas</b></sub></a><br /><a href="https://github.com/fsoco/fsoco-dataset/issues?q=author%3Avniclas" title="Bug reports">🐛</a> <a href="https://github.com/fsoco/fsoco-dataset/commits?author=vniclas" title="Documentation">📖</a> <a href="#tool-vniclas" title="Tools">🔧</a></td>
   </tr>
 </table>
 
