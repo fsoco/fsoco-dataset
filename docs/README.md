@@ -53,6 +53,11 @@ Likewise, we would like to thank the individual contributors that have helped wr
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/vniclas"><img src="https://avatars2.githubusercontent.com/u/49001036?v=4" width="100px;" alt=""/><br /><sub><b>Niclas</b></sub></a><br /><a href="https://github.com/fsoco/fsoco-dataset/issues?q=author%3Avniclas" title="Bug reports">🐛</a> <a href="https://github.com/fsoco/fsoco-dataset/commits?author=vniclas" title="Documentation">📖</a> <a href="#tool-vniclas" title="Tools">🔧</a></td>
+  </tr>
+</table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
