@@ -15,6 +15,28 @@
         "doc",
         "tool"
       ]
+    },
+    {
+      "login": "ddavid",
+      "name": "David Dodel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/18621443?v=4",
+      "profile": "https://github.com/ddavid",
+      "contributions": [
+        "bug",
+        "doc",
+        "tool"
+      ]
+    },
+    {
+      "login": "MitchellMitch",
+      "name": "MitchMitchell",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/9809116?v=4",
+      "profile": "https://github.com/MitchellMitch", 
+      "contributions": [
+        "bug",
+        "doc",
+        "tool"
+      ]
     }
   ],
   "contributorsPerLine": 7,
