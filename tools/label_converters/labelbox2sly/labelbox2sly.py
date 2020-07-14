@@ -2,8 +2,8 @@
 # coding: utf-8
 
 """
-    \b
     Labelbox => Supervisely format
+
     https://docs.supervise.ly/ann_format/
 
     \b

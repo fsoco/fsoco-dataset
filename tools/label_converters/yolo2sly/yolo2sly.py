@@ -2,8 +2,8 @@
 # coding: utf-8
 
 """
-    \b
-    Darknet YOLO => Supervisely
+    Darknet YOLO => Supervisely format
+
     https://docs.supervise.ly/ann_format/
 
     \b

@@ -115,7 +115,7 @@ class FeatureExtractor:
         )
 
     def extract_feature_vectors_for_files(self, image_glob: str):
-        Logger.log_info(f"Start extracting feature vectors ...")
+        Logger.log_info("Start extracting feature vectors ...")
 
         files = sorted([Path(f) for f in glob(image_glob)])
         files = [f for f in files if f.is_file()]
@@ -184,7 +184,6 @@ class FeatureExtractor:
     @staticmethod
     def _extract_features_from_image(image_file: Path):
         global process_local_cache
-        image = None
         feature_vector = None
         file_hash = ""
         cached = False
