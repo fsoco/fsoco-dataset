@@ -26,7 +26,17 @@
         "doc",
         "tool"
       ]
-    }
+    },
+    {
+      "login": "ddavid",
+      "name": "David Dodel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/18621443?v=4",
+      "profile": "https://github.com/ddavid",
+      "contributions": [
+        "bug",
+        "doc",
+        "tool"
+      ]
   ],
   "contributorsPerLine": 7,
   "projectName": "fsoco-dataset",
