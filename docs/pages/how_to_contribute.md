@@ -44,14 +44,14 @@ They are based on the experience with the first version of FSOCO.
 * Your team's **bounding box** contribution should:  
   1. Contain at least 5,000 official cones, e.g., 500 images with 10 cones/image (approx. labeling effort of 30hr for one person). *Please let us know if the time is entirely off for you.*
   2. Consist of approx. 50% images showing on-board data of rules-compliant tracks (acceleration, skidpad, autocross).  
-  3. Not contain images, where one can identify people and licenses plates without their (owners) explicit permission.  
+  3. Not contain images, where one can identify people and license plates without their (owners) explicit permission.  
   4. Comply with the contribution policy above.  
   5. Contain at least 250 segmentation masks, e.g., 50 images with 5 cones/image (approx. labeling effort of 3.5hr for one person); see the note below.   
 <br>
 * Your team's **segmentation** contribution should:  
   1. Contain at least 1,750 official cones, i.e., 350 images with 5 cones/image (approx. labeling effort of 24hr for one person).  
   2. Consist of approx. 50% images showing on-board data of rules-compliant tracks (acceleration, skidpad, autocross).  
-  3. Not contain images, where one can identify people and licenses plates without their (owners) explicit permission.  
+  3. Not contain images, where one can identify people and license plates without their (owners) explicit permission.  
   4. Comply with the contribution policy above.   
 
 > **Note**
@@ -132,7 +132,7 @@ The following steps depend on whether your team already has raw images and exist
 
 **We do not have images**
 1. We will assign a labeling job with raw data to your Supervisely account.  
-2. If you would like to add more accounts to share the work within your team, please send us the usernames.  
+2. If you would like to add more accounts to share the work within your team, please send us the usernames. We support a maximum number of 5 labelers; each of them has to pass the exam.
 
 #### Access the dataset
 
