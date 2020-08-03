@@ -1,6 +1,6 @@
 # FSOCO Tools CLI
 
-You've probably arrived here after reading [Tools website](https://www.fsoco-dataset.com/tools) or coming across the FSOCO Tools directly from GitHub.<br/> Either way, we're thrilled to have you here! This page should get you up and running in around 10-15 m reading time; <br/>we're looking forward to your contribution!
+You've probably arrived here after reading [Tools website](https://www.fsoco-dataset.com/tools) or coming across the FSOCO Tools directly from GitHub.<br/> Either way, we're thrilled to have you here! This page should get you up and running in around 10-15 min reading time; <br/>we're looking forward to your contribution!
 ## Table Of Contents
 
 * [Code of Conduct](./CODE_OF_CONDUCT.md)
