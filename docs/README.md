@@ -6,7 +6,7 @@
 
 # The FSOCO Dataset
 
-<a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Teams 4](https://img.shields.io/badge/Teams-4-green.svg)</a>
+<a href="https://www.fsoco-dataset.com/contributors/" target="_blank">![Teams 4](https://img.shields.io/badge/Teams-4-green.svg)</a>
 <a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Amount of labeled images 2053](https://img.shields.io/badge/Images-2053-blue.svg)</a>
 <a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Amount of labeled cones 35490](https://img.shields.io/badge/Cones-35k-blue.svg)</a>
 
