@@ -1,14 +1,14 @@
 <a href="../LICENSE" target="_blank">![License GPL-3.0](https://img.shields.io/github/license/fsoco/fsoco-dataset?style=flat)</a>
 <a href="https://www.codacy.com/manual/fsoco/fsoco-dataset?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fsoco/fsoco-dataset&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/16570c4c4b43418aa862bff60f6a61d4"/></a>
 <a href="https://www.fsoco-dataset.com/how_to_contribute/" target="_blank">![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat)</a>
-<a href="https://www.fsoco-dataset.com/contact_us/" target="_blank">![donations welcome](https://img.shields.io/badge/donation_surplus-2,200_images-red?style=flat)</a> <br>
+<a href="https://www.fsoco-dataset.com/contact_us/" target="_blank">![donations welcome](https://img.shields.io/badge/donation_surplus-2201_images-red?style=flat)</a> <br>
 
 
 # The FSOCO Dataset
 
 <a href="https://www.fsoco-dataset.com/contributors/" target="_blank">![Teams 4](https://img.shields.io/badge/Teams-4-green.svg)</a>
 <a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Amount of labeled images 2053](https://img.shields.io/badge/Images-2053-blue.svg)</a>
-<a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Amount of labeled cones 35490](https://img.shields.io/badge/Cones-35k-blue.svg)</a>
+<a href="https://www.fsoco-dataset.com/overview/" target="_blank">![Amount of labeled cones 33078](https://img.shields.io/badge/Cones-33k-blue.svg)</a>
 
 <img align="right" width="400" src="assets/img/examples/index.png">
 

@@ -27,8 +27,8 @@ On this page we give an overview of the dataset's features, its content, and our
 - Semantic segmentation
 
 **Volume**
-- 1,884 annotated images with bounding boxes (on average 15.0 boxes per image)
-- 168 annotated images with segmentation masks (on average 8.2 masks per image)
+- 2053 annotated images with bounding boxes (on average 16.1 boxes per image)
+- 190 annotated images with segmentation masks (on average 9.0 masks per image)
 
 **Diversity**
 - 3 teams
