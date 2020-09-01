@@ -12,7 +12,7 @@ Combining data from the entire FSD community is a huge challenge as both sensor 
 2.  **Data is king.** Even the most sophisticated approach can only perform as well as the underlying data allows for.
 3.  Images, where only half the cones are labeled, will confuse a human learner and a computer alike.
 4.  Cones have to adhere to the official FSG rules, e.g., see [here](#classes). You can upload images with non-compliant cones but those annotations will not count towards your contribution.
-5.  [Tags](#tags) allow to further analyze the FSOCOv2 dataset
+5.  [Tags](#tags) allow to further analyze the FSOCO dataset
 6.  To get started with the supervisely annotation tool, check out this [overview page](https://docs.supervise.ly/labeling/editors/images "Opens in a new tab."){:target="_blank"}.
 
 ---
