@@ -15,6 +15,4 @@ We will get in touch with you as soon as possible.
 
 #### I would like to contribute
 
-> Please note that we are still beta testing our services and, thus, only accept contribution inquiries of invited teams.
-
 {% include contribution_form.html %}
