@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Contact us
-permalink: /contact_us_thanks/
+permalink: /contact_form_thanks/
 feature-img: assets/img/fsg/HD/fsg_laptop.jpg
 feature-img-credits: Photo ©FSG Sturm
 hide: true
