@@ -15,7 +15,7 @@ It is a small, extensible tool for data manipulation and analysis that is based 
 For installation, please refer to the [README](https://github.com/fsoco/fsoco-dataset/blob/master/tools/README.md).
 
 We welcome contributions and would be thrilled to review and, hopefully, accept your contribution as well.
-If you are interested, please refer to [CONTRIBUTING](https://github.com/fsoco/fsoco-dataset/blob/master/tools/CONTRIBUTING.md).
+If you are interested, please refer to [CONTRIBUTING](https://github.com/fsoco/fsoco-dataset/blob/master/CONTRIBUTING.md).
 <br/>
 A good way to find inspiration is by looking for "Help Wanted" Issues.
 

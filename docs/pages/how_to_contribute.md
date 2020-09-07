@@ -68,7 +68,7 @@ They are based on the experience with the first version of FSOCO.
 > If you do not have a cone detector yet, just start training as soon as you have a basic set and then continuously re-train it while extending your dataset.
 > <br>
 > For segmentation labels, Supervisely's smart labeling tool works very well for nearby cones.
-> For cones that are farther away, it is typically faster to first draw the boundary and the fill it.
+> For cones that are farther away, it is typically faster to first draw the boundary and then fill it.
 
 ### Step-by-step Manual
 
