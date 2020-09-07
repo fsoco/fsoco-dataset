@@ -11,7 +11,7 @@ order: 1
 {:.no_toc}
 
 The FSOCO dataset consists of manually annotated images that have been submitted by the Formula Student Driverless community.
-We provide ground truth data for cone detection and support both bounding boxes and semantic segmentation.
+We provide ground truth data for cone detection and support both bounding boxes and instance segmentation.
 On this page we give an overview of the dataset's features, its content, and our labeling policy.
 
 * TOC
@@ -24,7 +24,7 @@ On this page we give an overview of the dataset's features, its content, and our
 
 **Type of annotations**
 - Bounding boxes
-- Semantic segmentation
+- Instance segmentation
 
 **Volume**
 - 2053 annotated images with bounding boxes (on average 16.1 boxes per image)

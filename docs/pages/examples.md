@@ -10,7 +10,7 @@ order: 2
 ## Examples
 {:.no_toc}
 
-To solve the task of cone detection, we provide manually annotated bounding boxes and segmentation masks.
+To solve the task of cone detection, we provide manually annotated bounding boxes and instance segmentation masks.
 Both annotation types consist of the same semantic classes and additional tags (see [overview]({{ "/overview/" | relative_url }})).
 A small sample dataset can be downloaded at the bottom of this page helping you to understand our data structure.
 
@@ -28,7 +28,7 @@ Each color represents a different cone type.
 
 ### Segmentation
 
-We further provide pixel-based semantic masks for a smaller subset of our images.
+We further provide pixel-based object masks for a smaller subset of our images.
 Note that each cone is labeled individually and, thus, allows for both class and instance segmentation.
 In the case of overlapping cones, the mask of the partially covered cone might consist of multiple patches belonging to the same label.  
 
