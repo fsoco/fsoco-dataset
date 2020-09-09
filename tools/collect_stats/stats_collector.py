@@ -90,6 +90,8 @@ class StatsCollector:
         for label in ann.labels:
             if isinstance(label.geometry, sly.geometry.rectangle.Rectangle):
                 class_name = label.obj_class.name
+                cleaned_tags = list(map(lambda tag_dict: tag_dict["name"], label.tags.to_json())) # remove user metadata information
+                tags = cleaned_tags
 
                 x = int(label.geometry.left + label.geometry.width / 2)
                 y = int(label.geometry.top + label.geometry.height / 2)
@@ -100,6 +102,7 @@ class StatsCollector:
                 bboxes.append(
                     {
                         "class_name": class_name,
+                        "tags": tags,
                         "x": x,
                         "y": y,
                         "width": w,
@@ -146,7 +149,7 @@ class StatsCollector:
         box_rows = []
         for image_row in annotation_stats:
             for box_idx, bbox in enumerate(image_row["bounding_boxes"]):
-                class_name, x, y, w, h, aspect_ratio = bbox.values()
+                class_name, tags, x, y, w, h, aspect_ratio = bbox.values()
 
                 box_rows.append(
                     (
@@ -157,6 +160,7 @@ class StatsCollector:
                         image_row["image_height"],
                         box_idx,
                         class_name,
+                        tags,
                         x,
                         y,
                         w,
@@ -175,6 +179,7 @@ class StatsCollector:
                 "image_height",
                 "box_id",
                 "class",
+                "tags",
                 "mid-x",
                 "mid-y",
                 "width",
