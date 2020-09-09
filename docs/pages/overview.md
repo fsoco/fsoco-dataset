@@ -22,7 +22,7 @@ On this page we give an overview of the dataset's features, its content, and our
 
 <img src="../assets/img/overview/merged_image.png" style="width: 60%;  height: auto; float:right;">
 
-**Type of annotations**
+**Types of annotations**
 - Bounding boxes
 - Instance segmentation
 
