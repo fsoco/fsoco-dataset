@@ -90,7 +90,9 @@ class StatsCollector:
         for label in ann.labels:
             if isinstance(label.geometry, sly.geometry.rectangle.Rectangle):
                 class_name = label.obj_class.name
-                cleaned_tags = list(map(lambda tag_dict: tag_dict["name"], label.tags.to_json())) # remove user metadata information
+                cleaned_tags = list(
+                    map(lambda tag_dict: tag_dict["name"], label.tags.to_json())
+                )  # remove user metadata information
                 tags = cleaned_tags
 
                 x = int(label.geometry.left + label.geometry.width / 2)
