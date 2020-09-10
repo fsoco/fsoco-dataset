@@ -37,7 +37,7 @@ Some of the ways to contribute are:
 - Label donated images as your contribution to the dataset
 - Contribute your team's private dataset
 
-[Tools contributions](../tools/CONTRIBUTING.md#contribute):
+[Tools contributions](../CONTRIBUTING.md#contribute):
 - Report bugs
 - Correct or add documentation
 - Add a new tool
@@ -67,7 +67,7 @@ Likewise, we would like to thank the individual contributors that have helped wr
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
-For details on what the emoji mean, please see the [contribution documentation](../tools/CONTRIBUTING.md#all_contributors).
+For details on what the emoji mean, please see the [contribution documentation](../CONTRIBUTING.md#all_contributors).
 
 ## Contact
 
