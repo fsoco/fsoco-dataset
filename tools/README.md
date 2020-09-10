@@ -9,10 +9,13 @@ conda create -n fsoco-tools python=3.6
 # Activate created environment
 conda activate fsoco-tools
 
+# Upgrade pip to version 19.3.0 or later
+pip install --upgrade pip
+
 # Make sure you're in the tools directory, otherwise adjust the '.' path to point to it.
 # Use Setuptools configuration to install tools to environment
-# For usage of the CLI tools only 
-pip install --editable .
+# For usage of the CLI tools only
+pip install --editable .[sly]
 # For development
 pip install -r requirements.txt
 pre-commit install
