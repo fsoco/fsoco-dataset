@@ -62,7 +62,7 @@ The currently available conversions are:
 | Label Formats| Darknet YOLO | Supervisely | LabelBox | COCO | VOC | MM | NAS |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Darknet YOLO | - | <span style='font-size:20px;'>&#9989;</span> | - | - | - | - | - | 
-| Supervisely | - | - | - | - | - | - | - |
+| Supervisely | <span style='font-size:20px;'>&#9989;</span> | - | - | - | - | - | - |
 | LabelBox | - | <span style='font-size:20px;'>&#9989;</span> | - | - | - | - | - | 
 | COCO | <span style='font-size:20px;'>&#9989;</span><sup><small> [1]</small></sup> | - | - | - | - | - | - |
 | VOC | <span style='font-size:20px;'>&#9989;</span><sup><small> [1]</small></sup> | - | - | - | - | - | - |
