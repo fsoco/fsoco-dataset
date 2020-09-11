@@ -68,7 +68,26 @@ def handle_folder(folder: Path, sample_size: float):
 
 
 def handle_image(label_file: Path, image_file: Path, index: int, total: int):
+    if not image_file.exists():
+        possible_candidates = list(image_file.parent.glob(f"{image_file.stem}.*"))
+
+        if len(possible_candidates) == 0:
+            print(f"Could not find image for label file [{label_file}]")
+            return "next"
+        elif len(possible_candidates) > 1:
+            print(
+                f"There are more then one possible image for label file [{label_file}]"
+            )
+            return "next"
+        else:
+            image_file = possible_candidates[0]
+
     image = cv2.imread(str(image_file))
+
+    if image is None:
+        print(f"Could not open image [{image_file}]")
+        return "next"
+
     image_width = image.shape[1]
     image_height = image.shape[0]
 
