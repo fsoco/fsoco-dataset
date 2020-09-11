@@ -15,7 +15,7 @@ setup(
     " please refer to the further documentation.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://www.fsoco-dataset.com",
+    url="https://www.fsoco-dataset.com/tools/",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
