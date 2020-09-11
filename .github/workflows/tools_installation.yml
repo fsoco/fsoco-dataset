@@ -1,6 +1,9 @@
 name: CI - FSOCO tools installation
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   install:
@@ -15,11 +18,24 @@ jobs:
         with:
           python-version: '3.6'
 
-      - name: Install dependencies
+      - name: Install PIP dependencies
         working-directory: ./tools
         run: |
-          pip install --upgrade pip setuptools
-          pip install --editable .[sly]
+          pip install --upgrade pip setuptools wheel
+          pip install --editable .
 
-      - name: Test execution
+      - name: Install Supervisely SDK
+        working-directory: ./tools
+        run: pip install --editable .[sly]
+
+      - name: Test execution (user)
+        run: fsoco --help
+
+      - name: Install development dependencies
+        working-directory: ./tools
+        run: |
+          pip install -r requirements.txt
+          pre-commit install
+
+      - name: Test execution (developer)
         run: fsoco --help
