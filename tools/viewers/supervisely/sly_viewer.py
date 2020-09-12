@@ -28,6 +28,7 @@ class SuperviselyViewer(Viewer):
 
             for label in label_data["objects"]:
                 color = self._class_to_color(label["classTitle"])
+                # color = list(np.random.choice(range(256), size=3))  # debugging
 
                 if label["geometryType"] == "rectangle":
                     pt1 = tuple(int(x) for x in label["points"]["exterior"][0])
@@ -42,6 +43,23 @@ class SuperviselyViewer(Viewer):
                         origin[0] : origin[0] + mask.shape[1],
                     ][mask == 1] = mask[mask == 1]
                     mask_color = np.repeat(mask[:, :, np.newaxis], 3, axis=2) * color
+
+                    # Find edges of the shape and paint them black
+                    ext_mask = np.zeros(
+                        (mask.shape[0] + 2, mask.shape[1] + 2), dtype=np.int
+                    )
+                    edge_mask = np.zeros(
+                        (mask.shape[0] + 2, mask.shape[1] + 2), dtype=np.int
+                    )
+                    ext_mask[1:-1, 1:-1] = mask
+                    edge_mask[1:, :] += np.diff(ext_mask, axis=0)
+                    edge_mask[:-1, :] += np.diff(-ext_mask, axis=0)
+                    edge_mask[:, 1:] += np.diff(ext_mask, axis=1)
+                    edge_mask[:, :-1] += np.diff(-ext_mask, axis=1)
+                    edge_mask = edge_mask[1:-1, 1:-1]
+                    mask_color[edge_mask > 0] = 0
+
+                    # Copy colored instance mask to image-wide mask
                     image_mask_color[
                         origin[1] : origin[1] + mask.shape[0],
                         origin[0] : origin[0] + mask.shape[1],
