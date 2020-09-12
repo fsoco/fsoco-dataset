@@ -100,13 +100,13 @@ def _handle_image(label_file: Path, image_file: Path, index: int, total: int):
                 image_mask[
                     origin[1] : origin[1] + mask.shape[0],
                     origin[0] : origin[0] + mask.shape[1],
-                ] = mask
+                ][mask == 1] = mask[mask == 1]
                 mask_color = np.repeat(mask[:, :, np.newaxis], 3, axis=2) * color
                 image_mask_color[
                     origin[1] : origin[1] + mask.shape[0],
                     origin[0] : origin[0] + mask.shape[1],
                     :,
-                ] = mask_color
+                ][mask == 1] = mask_color[mask == 1]
 
         image[image_mask == 1] = image_mask_color[image_mask == 1]
 
@@ -141,7 +141,7 @@ def _handle_image(label_file: Path, image_file: Path, index: int, total: int):
         (255, 255, 255),
         2,
     )
-    cv2.imshow("image", canvas)
+    cv2.imshow("FSOCO label viewer", canvas)
 
     action = ""
     while True:
