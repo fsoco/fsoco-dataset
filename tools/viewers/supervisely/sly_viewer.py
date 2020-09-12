@@ -2,6 +2,8 @@
 # coding: utf-8
 
 import json
+import os
+import sys
 from pathlib import Path
 
 import cv2
@@ -48,7 +50,24 @@ class SuperviselyViewer(Viewer):
 
             image[image_mask == 1] = image_mask_color[image_mask == 1]
 
+    def main_sample_data(self, input_folder: str, sample_size: float):
+        # This tools should work out-of-the-box for the FSOCO sample data.
+        # Thus, we activate a special mode if this data has been detected.
+        input_folder_content = os.listdir(input_folder)
+        if (
+            "bounding_boxes" in input_folder_content
+            and "segmentation" in input_folder_content
+            and "images" in input_folder_content
+        ):
+            self.images_subdir = "images"
+            self.labels_subdir = "bounding_boxes"
+            self.main(input_folder, sample_size)
+            self.labels_subdir = "segmentation"
+            self.main(input_folder, sample_size)
+            sys.exit()
+
 
 def main(input_folder: str, sample_size: float):
     viewer = SuperviselyViewer()
+    viewer.main_sample_data(input_folder, sample_size)
     viewer.main(input_folder, sample_size)

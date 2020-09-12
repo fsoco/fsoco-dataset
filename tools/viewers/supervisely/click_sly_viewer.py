@@ -5,7 +5,7 @@ from .sly_viewer import main
 
 @click.command()
 @click.argument("input_folder", type=str)
-@click.option("-sample_size", type=click.FloatRange(0.0, 1.0), default=1.0)
+@click.option("--sample_size", type=click.FloatRange(0.0, 1.0), default=1.0)
 def supervisely(input_folder, sample_size):
     """
     Supervisely label viewer
