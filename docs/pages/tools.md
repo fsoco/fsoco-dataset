@@ -30,10 +30,21 @@ This tool will check your dataset for similarly looking images.
 Its purpose is to assure that all contributions are actually expanding the dataset, helping to achieve algorithms with greater generalization potential.
 Please find detailed information and instructions how to use our image similarity scorer on [this page](./image_similarity_score).
 
+
+####  Label Viewer
+The FSOCO label viewer is an easy way to visualize our dataset. Currently, it supports bounding boxes in both Supervisely and Darknet YOLO format and segmentation labels from Supervisely.
+
+Example usage:
+```
+# Activate python venv where tools are installed
+conda activate fsoco-tools 
+fsoco viewers supervisely input_directory/
+```
+
 #### Team Logo Watermark
 This tool allows you to test how your watermarked images will look like when using the Supervisely import plugin for image donations. Please refer to the tool's help for usage details.
 
-Example Usage:
+Example usage:
 ```
 # Activate python venv where tools are installed
 conda activate fsoco-tools 
