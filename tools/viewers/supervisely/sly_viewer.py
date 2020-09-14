@@ -69,7 +69,7 @@ class SuperviselyViewer(Viewer):
             image[image_mask == 1] = image_mask_color[image_mask == 1]
 
     def main_sample_data(self, input_folder: str, sample_size: float):
-        # This tools should work out-of-the-box for the FSOCO sample data.
+        # This tool should work out-of-the-box for the FSOCO sample data.
         # Thus, we activate a special mode if this data has been detected.
         input_folder_content = os.listdir(input_folder)
         if (
