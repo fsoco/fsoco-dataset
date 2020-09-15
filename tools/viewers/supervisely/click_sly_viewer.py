@@ -12,7 +12,7 @@ def supervisely(input_folder, sample_size):
 
     \b
     This viewer allows you to visualize labels in Supervisely's bounding box and segmentation formats.
-    Specify --sample_size [0.0-1.0] to only show a smaller subset of all labels.
+    Specify --sample_size [0.0-1.0] to only show a smaller subset of all labels without changing their order.
 
     \b
     Input:
