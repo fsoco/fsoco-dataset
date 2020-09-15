@@ -101,7 +101,7 @@ class Viewer(metaclass=ABCMeta):
                 return "next"
             elif len(possible_candidates) > 1:
                 print(
-                    f"[WARNING] There is more then one possible image for label file [{label_file}]"
+                    f"[WARNING] There is more than one possible image for label file [{label_file}]"
                 )
                 return "next"
             else:
