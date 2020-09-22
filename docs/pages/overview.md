@@ -26,15 +26,7 @@ On this page we give an overview of the dataset's features, its content, and our
 - Bounding boxes
 - Instance segmentation
 
-**Volume**
-- 2053 annotated images with bounding boxes (on average 16.1 boxes per image)
-- 190 annotated images with segmentation masks (on average 9.0 masks per image)
-
-**Diversity**
-- 3 teams
-- Large variety in testing and event sites
-- Different sensor setups
-- Diverse lighting conditions
+{% include overview_stats.html %}
 
 Check out our [stats for nerds showcase]({{ "/stats_for_nerds" | relative_url }}) for more detailed statistics on the FSOCO dataset.
 
