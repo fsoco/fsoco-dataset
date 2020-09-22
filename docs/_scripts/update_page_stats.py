@@ -108,4 +108,5 @@ def main():
     update_span_stats_pages([relative_paths[0]], stats)
 
 
-main()
+if __name__ == "__main__":
+    main()
