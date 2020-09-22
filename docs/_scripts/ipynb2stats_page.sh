@@ -31,7 +31,7 @@ jupyter nbconvert --execute --to slides \
   --TagRemovePreprocessor.enabled=True \
   --TagRemovePreprocessor.remove_all_outputs_tags="{'hide_output'}" \
   --output hidden_input-analyse_stats \
-  --stdout $1 > $stats_for_nerds_html && echo "Successfully executed and updated stats notebook " $1 || echo "Something went wrong while executing the stats notebook " $1 && exit 1
+  --stdout $1 > $stats_for_nerds_html && echo "Successfully executed and updated stats notebook " $1 || (echo "Something went wrong while executing the stats notebook " $1 && exit 1)
 
 echo "Trimming output notebook HTML file."
 # sed -i 's/Reveal\.initialize({/Reveal.initialize({width: "100%", height: "100%", margin: 0, minScale: 1, maxScale: 1,/' $stats_for_nerds_html
@@ -40,5 +40,5 @@ sed -i 's/Reveal\.initialize({/Reveal.initialize({width: 900, height: 900, margi
 python $prep_script -f $stats_for_nerds_html -o $stats_for_nerds_html
 python $update_pages_script
 
-mv $stats_for_nerds_html $stats_for_nerds_include_path && echo "Successfully updated Stats page at " $stats_for_nerds_include_path || echo "Something went wrong while updating the Stats page at " $stats_for_nerds_include_path && exit 1
+mv $stats_for_nerds_html $stats_for_nerds_include_path && echo "Successfully updated Stats page at " $stats_for_nerds_include_path || (echo "Something went wrong while updating the Stats page at " $stats_for_nerds_include_path && exit 1)
 
