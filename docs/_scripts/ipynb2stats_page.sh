@@ -11,7 +11,8 @@ if [[ ! "$1" || "$1" == "-h" || "$1" == "--help" ]]; then
     exit 1
 fi
 
-python_prep_script=../_scripts/prepare_slides_html.py
+prep_script=../_scripts/prepare_slides_html.py
+update_pages_script=../_scripts/update_page_stats.py
 
 if [[ "$2" ]]; then
     python_prep_script=$2
@@ -36,7 +37,8 @@ echo "Trimming output notebook HTML file."
 # sed -i 's/Reveal\.initialize({/Reveal.initialize({width: "100%", height: "100%", margin: 0, minScale: 1, maxScale: 1,/' $stats_for_nerds_html
 sed -i 's/Reveal\.initialize({/Reveal.initialize({width: 900, height: 900, margin: 0, minScale: 0.2, maxScale: 2.0,/' $stats_for_nerds_html
 
-python $python_prep_script -f $stats_for_nerds_html -o $stats_for_nerds_html
+python $prep_script -f $stats_for_nerds_html -o $stats_for_nerds_html
+python $update_pages_script
 
 mv $stats_for_nerds_html $stats_for_nerds_include_path && echo "Successfully updated Stats page at " $stats_for_nerds_include_path || echo "Something went wrong while updating the Stats page at " $stats_for_nerds_include_path && exit 1
 
