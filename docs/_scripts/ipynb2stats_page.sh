@@ -3,9 +3,9 @@
 which jupyter >/dev/null || (echo "Couldn't find jupyter." && echo "Please make sure you've activated the correct virtual environment." && exit 1)
 
 if [[ ! "$1" || "$1" == "-h" || "$1" == "--help" ]]; then
-    echo "Please input a valid path to a Jupyter Notebook to convert."
+    echo "Please input a valid path to a Jupyter Notebook to convert and thereafter update the stats pages."
     echo ""
-    echo "Usage: bash ipynb2slides.sh IPYNB_FILE [PYTHON_HTML_PREP_SCRIPT_PATH] [STATS4NERDS_INCLUDE_PATH]"
+    echo "Usage: bash ipynb2stats_page.sh IPYNB_FILE [PYTHON_HTML_PREP_SCRIPT_PATH] [STATS4NERDS_INCLUDE_PATH]"
     echo ""
     echo "If no path is given for the python prep script or stats4nerds_include, this script assumes you are in the fsoco-dataset/docs/assets directory."
     exit 1
