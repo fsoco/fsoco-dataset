@@ -1,6 +1,8 @@
 beautifulsoup4==4.9
 jupyter==1.0
+jupyter_contrib_nbextensions
 holoviews==1.13
 bokeh==2.0
 pandas==1.1
+lxml
 
