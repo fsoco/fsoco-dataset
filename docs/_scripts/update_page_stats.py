@@ -3,7 +3,6 @@ import logging
 import requests
 import argparse
 import pandas as pd
-import html2markdown as html2md
 from bs4 import BeautifulSoup
 from markdown import markdown as md2html
 
@@ -49,8 +48,7 @@ def update_stats_badges(md_paths: [str], stats: dict):
             f"Overwriting with current stats the following markdown file: {md_path}"
         )
         with open(md_path, "w") as stats_md:
-            markdown = html2md.convert(repr(stats_soup))
-            stats_md.write(markdown)
+            stats_md.write(repr(stats_soup))
 
 
 def update_span_stats_pages(html_paths: [str], stats: dict):

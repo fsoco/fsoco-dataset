@@ -1,4 +1,4 @@
-<html><body><p></p><p><a href="../LICENSE" target="_blank"><img alt="License GPL-3.0" src="https://img.shields.io/github/license/fsoco/fsoco-dataset?style=flat"/></a>
+<html><body><p><a href="../LICENSE" target="_blank"><img alt="License GPL-3.0" src="https://img.shields.io/github/license/fsoco/fsoco-dataset?style=flat"/></a>
 <a href="https://www.codacy.com/manual/fsoco/fsoco-dataset?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fsoco/fsoco-dataset&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/16570c4c4b43418aa862bff60f6a61d4"/></a>
 <a href="https://www.fsoco-dataset.com/how_to_contribute/" target="_blank"><img alt="contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat"/></a>
 <a href="https://www.fsoco-dataset.com/contact_us/" target="_blank"><img alt="donations welcome" src="https://img.shields.io/badge/donation_surplus-2201_images-red?style=flat"/></a> <br/></p>
@@ -50,6 +50,12 @@ We would like to thank all <a href="https://www.fsoco-dataset.com/contributors/"
 <p>This project follows the <a href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification.
 For details on what the emoji mean, please see the <a href="../CONTRIBUTING.md#all_contributors">contribution documentation</a>.</p>
 <h2>Contact</h2>
-<p>Please feel free to contact us with any questions, suggestions, or comments:
-* Contact form: <a href="https://www.fsoco-dataset.com/contact_us/">www.fsoco-dataset.com/contact_us</a>
-* Email: <a href="mailto:fsoco.dataset@gmail.com">fsoco.dataset@gmail.com</a></p></body></html>
+Please feel free to contact us with any questions, suggestions, or comments:
+<ul>
+<li>
+<p>Contact form: <a href="https://www.fsoco-dataset.com/contact_us/">www.fsoco-dataset.com/contact_us</a></p>
+</li>
+<li>
+<p>Email: <a href="mailto:fsoco.dataset@gmail.com">fsoco.dataset@gmail.com</a></p>
+</li>
+</ul></body></html>
