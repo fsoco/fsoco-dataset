@@ -21,13 +21,19 @@ Henceforth, other events have adapted the driverless class and the self-driving 
 <h2>Contributing</h2>
 <p>Some of the ways to contribute are:</p>
 <p><a href="https://www.fsoco-dataset.com/how_to_contribute/">Dataset contributions</a>:
-- Donate raw data for other teams to label that don't have cones or sensors
-- Label donated images as your contribution to the dataset
-- Contribute your team's private dataset</p>
+<ul>
+<li> Donate raw data for other teams to label that don't have cones or sensors</li>
+<li> Label donated images as your contribution to the dataset</li>
+<li> Contribute your team's private dataset</li>
+</ul>
+</p>
 <p><a href="../CONTRIBUTING.md#contribute">Tools contributions</a>:
-- Report bugs
-- Correct or add documentation
-- Add a new tool</p>
+<ul>
+<li>Report bugs</li>
+<li>Correct or add documentation</li>
+<li>Add a new tool</li>
+</ul>
+</p>
 <p>Please be mindful of correctly using the linter and formatter when working on your contributions to the tools.
 Following the development install instructions and reading the linter's quick-start guide should get you going quickly.</p>
 <h3>Contributors</h3>
