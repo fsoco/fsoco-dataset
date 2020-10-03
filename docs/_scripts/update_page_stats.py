@@ -10,6 +10,10 @@ from markdown import markdown as md2html
 # Files to update stats
 FILES = ["overview_stats.html", "../README.md"]
 box_stats_url = "https://drive.google.com/u/1/uc?id=1Om1iwSnJrJ1o_U9UGouVXuzWhkHYVEXf&export=download"
+seg_stats_url = "https://drive.google.com/u/1/uc?id=1GOaH3itz7FaNXsH0PGFqRmlCqdlqJ3bd&export=download"
+
+temp_box_df = "temp_box_stats.df"
+temp_seg_df = "temp_seg_stats.df"
 
 
 def update_stats_badges(md_paths: [str], stats: dict):
@@ -82,6 +86,11 @@ def update_span_stats_pages(html_paths: [str], stats: dict):
             stats_include.write(repr(stats_soup))
 
 
+def download_gdrive_df(df_url, fp):
+    r = requests.get(df_url)
+    open(fp, "wb").write(r.content)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -97,21 +106,25 @@ def main():
     args = parser.parse_args()
     base_path = args.includes_directory
     relative_paths = [os.path.join(base_path, path) for path in FILES]
-    # print(relative_paths)
 
     logging.basicConfig(level=logging.INFO)
-    logging.info(f"Updating stats in the following _includes: {relative_paths}.")
+    logging.info(f"Updating stats in the following files: {relative_paths}.")
 
-    r = requests.get(box_stats_url)
-    open("temp_box_stats.df", "wb").write(r.content)
-    box_stats_df = pd.read_pickle("temp_box_stats.df")
+    download_gdrive_df(box_stats_url, temp_box_df)
+    download_gdrive_df(seg_stats_url, temp_seg_df)
+
+    box_stats_df = pd.read_pickle(temp_box_df)
+    seg_stats_df = pd.read_pickle(temp_seg_df)
 
     # The keys match the id's of the span tags to be filled
     stats = {
         "num_bbox_images": len(pd.unique(box_stats_df["ann_file"])),
         "num_bbox_cones": len(box_stats_df),
+        "num_seg_images": len(pd.unique(seg_stats_df["ann_file"])),
+        "num_seg_cones": len(seg_stats_df),
     }
     stats["avg_bbox_per_img"] = stats["num_bbox_cones"] / stats["num_bbox_images"]
+    stats["avg_seg_per_img"] = stats["num_seg_cones"] / stats["num_seg_images"]
     stats["num_teams"] = len(pd.unique(box_stats_df["team_name"]))
     stats["num_teams_data"] = len(
         pd.unique(
@@ -123,6 +136,9 @@ def main():
 
     update_stats_badges([relative_paths[1]], stats)
     update_span_stats_pages([relative_paths[0]], stats)
+
+    os.remove(temp_box_df)
+    os.remove(temp_seg_df)
 
 
 if __name__ == "__main__":
