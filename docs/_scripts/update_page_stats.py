@@ -40,12 +40,12 @@ def update_stats_badges(md_paths: [str], stats: dict):
                     tag[
                         "src"
                     ] = f"https://img.shields.io/badge/Images-{stats['num_bbox_images']:,}-blue.svg"
-                    tag["alt"] = f"Amount of labeled images: {stats['num_bbox_images']}"
+                    tag["alt"] = f"Number of labeled images: {stats['num_bbox_images']}"
                 elif tag["id"] == "num_bbox_cones":
                     tag[
                         "src"
                     ] = f"https://img.shields.io/badge/Cones-{stats['num_bbox_cones']:,}-blue.svg"
-                    tag["alt"] = f"Amount of labeled cones: {stats['num_bbox_cones']}"
+                    tag["alt"] = f"Number of labeled cones: {stats['num_bbox_cones']}"
         updated_soups.append(bs_badges)
     for stats_soup, md_path in zip(updated_soups, md_paths):
         logging.info(
