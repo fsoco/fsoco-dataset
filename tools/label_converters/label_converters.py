@@ -13,7 +13,7 @@ def label_converters():
     The commands in this group help you convert your labels into other formats.
     Please refer to the documentation page for a more thorough overview on what converters are available.
     If you're interested in extending the available converters, have a look at:
-    https://github.com/fsoco/fsoco/blob/master/tools/CONTRIBUTING.md
+    https://github.com/fsoco/fsoco-dataset/blob/master/CONTRIBUTING.md
     """
     pass
 

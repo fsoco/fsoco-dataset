@@ -33,6 +33,7 @@ def fsoco(ctx, tools_home, debug):
 
     \b
     - Dataset originality score: fsoco similarity-scorer [Options] Arguments
+    - Label viewer: fsoco viewers [Options] Arguments
     - Label conversion: fsoco label-converters [Options] Arguments
     - Image watermarking: fsoco watermark [Options] Arguments
 
@@ -42,15 +43,10 @@ def fsoco(ctx, tools_home, debug):
     ctx.obj = Tools(tools_home, debug)
 
 
-# Add the label-converters click command-group to the fsoco group
 fsoco.add_command(label_converters)
-# Add the watermark click command to the fsoco group
 fsoco.add_command(watermark)
-# Add the similarity checker click command to the fsoco group
 fsoco.add_command(similarity_scorer)
-# Add the collect stats click command to the fsoco group
 fsoco.add_command(collect_stats)
-# Add the label viewers click command to the fsoco group
 fsoco.add_command(viewers)
 
 

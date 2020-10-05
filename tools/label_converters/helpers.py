@@ -30,7 +30,7 @@ def _fsoco_meta():
     return meta_data
 
 
-def class_id_to_fsoco(class_id):
+def class_id_to_fsoco(class_id: int):
     mapping_file = os.path.join(
         os.path.dirname(os.path.realpath(__file__)), "class_id_to_fsoco.yaml"
     )

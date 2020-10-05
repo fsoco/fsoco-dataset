@@ -1,34 +1,33 @@
 import click
 
-from .yolo_viewer import main
+from .sly_viewer import main
 
 
 @click.command()
 @click.argument("input_folder", type=str)
 @click.option("--sample_size", type=click.FloatRange(0.0, 1.0), default=1.0)
-def yolo(input_folder, sample_size):
+def supervisely(input_folder, sample_size):
     """
-    Darknet YOLO label viewer
+    Supervisely label viewer
 
     \b
-    This viewer allows you to visualize labels in Darknet YOLO format.
+    This viewer allows you to visualize labels in Supervisely's bounding box and segmentation formats.
     Specify --sample_size [0.0-1.0] to only show a smaller subset of all labels without changing their order.
 
     \b
     Input:
-    input_folder_1
-        ├── images
+    input_folder
+        ├── img
         │  ├── img_x.jpeg
         │  ├── img_y.jpeg
         │  └── img_z.jpeg
-        └── labels
-           ├── img_x.txt
-           ├── img_y.txt
-           └── img_z.txt
-
+        └── ann
+           ├── img_x.jpeg.json
+           ├── img_y.jpeg.json
+           └── img_z.jpeg.json
 
     """
-    click.echo("[LOG] Running Darknet Yolo label viewer")
+    click.echo("[LOG] Running Supervisely label viewer")
     main(input_folder, sample_size)
 
 
