@@ -1,4 +1,4 @@
-<!-- HTML used for easier automatic updates via scripts --><html><body><p></p><p></p><p></p><p></p><p><a href="../LICENSE" target="_blank"><img alt="License GPL-3.0" src="https://img.shields.io/github/license/fsoco/fsoco-dataset?style=flat"/></a>
+<!-- HTML used for easier automatic updates via scripts --><html><body><p></p><p></p><p></p><p></p><p></p><p><a href="../LICENSE" target="_blank"><img alt="License GPL-3.0" src="https://img.shields.io/github/license/fsoco/fsoco-dataset?style=flat"/></a>
 <a href="https://www.codacy.com/manual/fsoco/fsoco-dataset?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fsoco/fsoco-dataset&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/16570c4c4b43418aa862bff60f6a61d4"/></a>
 <a href="https://www.fsoco-dataset.com/how_to_contribute/" target="_blank"><img alt="contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat"/></a>
 <a href="https://www.fsoco-dataset.com/contact_us/" target="_blank"><img alt="donations needed" src="https://img.shields.io/badge/data_donations-needed-red?style=flat"/></a> <br/></p>
