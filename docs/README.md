@@ -1,13 +1,12 @@
-<!-- HTML used for easier automatic updates via scripts -->
-<html><body>
+<!-- HTML used for easier automatic updates via scripts --><html><body>
 <a href="../LICENSE" target="_blank"><img alt="License GPL-3.0" src="https://img.shields.io/github/license/fsoco/fsoco-dataset?style=flat"/></a>
 <a href="https://www.codacy.com/manual/fsoco/fsoco-dataset?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fsoco/fsoco-dataset&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/16570c4c4b43418aa862bff60f6a61d4"/></a>
 <a href="https://www.fsoco-dataset.com/how_to_contribute/" target="_blank"><img alt="contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat"/></a>
-<a href="https://www.fsoco-dataset.com/contact_us/" target="_blank"><img alt="donations needed" src="https://img.shields.io/badge/data_donations-needed-red?style=flat"/></a> <br/></p>
+<a href="https://www.fsoco-dataset.com/contact_us/" target="_blank"><img alt="donations needed" src="https://img.shields.io/badge/data_donations-needed-red?style=flat"/></a> <br/>
 <h1>The FSOCO Dataset</h1>
-<p><a href="https://www.fsoco-dataset.com/contributors/" target="_blank"><img alt="Teams: 5" id="num_teams" src="https://img.shields.io/badge/Teams-5-green.svg"/></a>
-<a href="https://www.fsoco-dataset.com/overview/" target="_blank"><img alt="Number of labeled images: 2247" id="num_bbox_images" src="https://img.shields.io/badge/Images-2,247-blue.svg"/></a>
-<a href="https://www.fsoco-dataset.com/overview/" target="_blank"><img alt="Number of labeled cones: 37907" id="num_bbox_cones" src="https://img.shields.io/badge/Cones-37,907-blue.svg"/></a></p>
+<p><a href="https://www.fsoco-dataset.com/contributors/" target="_blank"><img alt="Teams: 6" id="num_teams" src="https://img.shields.io/badge/Teams-6-green.svg"/></a>
+<a href="https://www.fsoco-dataset.com/overview/" target="_blank"><img alt="Number of labeled images: 2491" id="num_bbox_images" src="https://img.shields.io/badge/Images-2,491-blue.svg"/></a>
+<a href="https://www.fsoco-dataset.com/overview/" target="_blank"><img alt="Number of labeled cones: 42918" id="num_bbox_cones" src="https://img.shields.io/badge/Cones-42,918-blue.svg"/></a></p>
 <p><img align="right" src="assets/img/examples/index.png" width="400"/></p>
 <p>The FSOCO dataset helps Formula Student / FSAE teams to get started with their visual perception system for driverless disciplines.
 State-of-the-art object detection systems require a substantial amount of data, which can be a challenge for new teams.
@@ -64,4 +63,5 @@ Please feel free to contact us with any questions, suggestions, or comments:
 <li>
 <p>Email: <a href="mailto:fsoco.dataset@gmail.com">fsoco.dataset@gmail.com</a></p>
 </li>
-</ul></body></html>
+</ul>
+</body></html>
