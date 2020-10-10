@@ -12,3 +12,5 @@ We would like to thank all participating teams for helping us to accelerate the 
 
 {% include contributors.html images="teams/amz.png,teams/munich_motorsport.png,teams/fast_forest.png" links="http://www.driverless.amzracing.ch,https://www.munichmotorsport.de,https://www.fast-forest.de" column=3 %}
 {% include contributors.html images="teams/ampera_ufsc.png,teams/umsae.png,teams/racetech.png" links="https://amperaracing.com,https://www.umsae.com, https://racetech-racingteam.de" column=3 %}
+{% include contributors.html images="teams/rennstall_esslingen.png,teams/blank.png,teams/blank.png"
+links="https://rennstall-esslingen.de/,https://www.fsoco-dataset.com/contributors, https://www.fsoco-dataset.com/contributors" column=3 %}
