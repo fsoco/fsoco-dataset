@@ -52,7 +52,9 @@ class StatsCollector:
             self.project = sly.Project(sly_project_name, sly.OpenMode.READ)
             return True
         except FileNotFoundError:
-            Logger.log_error(f"Not able to load supervisly project {sly_project_name}!")
+            Logger.log_error(
+                f"Not able to load supervisely project {sly_project_name}!"
+            )
             return False
 
     def _collect_annotation_stats(self, ann_paths: list):
