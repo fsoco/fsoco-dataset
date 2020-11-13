@@ -1,3 +1,4 @@
+import multiprocessing as mp
 from similarity_scorer.utils.logger import Logger
 from tqdm import tqdm
 import json
@@ -57,8 +58,13 @@ class StatsCollector:
     def _collect_annotation_stats(self, ann_paths: list):
         stats = []
 
-        for ann_path in tqdm(ann_paths):
-            stats.append(self._extract_stats_from_annotation_file(ann_path))
+        with tqdm(total=len(ann_paths)) as pbar:
+            with mp.Pool(self.num_workers) as pool:
+                for res in pool.imap_unordered(
+                    self._extract_stats_from_annotation_file, ann_paths
+                ):
+                    stats.append(res)
+                    pbar.update(1)
 
         return stats
 
