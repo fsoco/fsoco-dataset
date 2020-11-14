@@ -1,4 +1,5 @@
 import click
+from pathlib import Path
 from similarity_scorer.utils.logger import Logger
 from collect_stats.stats_collector import StatsCollector
 
@@ -48,8 +49,8 @@ def collect_stats(
     if collector.load_sly_project(sly_project_name):
         image_df, box_df = collector.collect_stats()
 
-        image_df_filename = f"{sly_project_name}_image_stats.df"
-        bbox_df_filename = f"{sly_project_name}_bbox_stats.df"
+        image_df_filename = Path(f"{sly_project_name}_image_stats.df")
+        bbox_df_filename = Path(f"{sly_project_name}_bbox_stats.df")
 
         image_df.to_pickle(image_df_filename)
         box_df.to_pickle(bbox_df_filename)

@@ -7,6 +7,7 @@ import pandas as pd
 import sys
 
 from similarity_scorer.similarity_scorer import SimilarityScorer
+from similarity_scorer.utils.cache import Cache
 
 try:
     import supervisely_lib as sly
@@ -17,6 +18,14 @@ except ImportError:
         "pip install --editable .[sly] "
     )
     sys.exit(-1)
+
+# Multiprocessing
+DEBUG_DISABLE_MULTIPROCESSING = False
+
+# Cache
+# If set to True, the feature vector is linked to
+USE_CACHE = True
+CACHE_FILE = ".annotation_stats.cache"
 
 
 def get_stat_template():
@@ -47,6 +56,18 @@ class StatsCollector:
         self.project = None
         self._current_dataset = None
 
+        self._cache = None
+        if USE_CACHE:
+            self._cache = Cache()
+            self._load_cache(Path(CACHE_FILE))
+
+    def __del__(self):
+        if mp.current_process().name == "MainProcess":
+            if USE_CACHE and self._cache is not None:
+                file = Path(CACHE_FILE)
+                self._cache.store_to_file(file)
+                Logger.log_info(f"Saved cache to [{file}].")
+
     def load_sly_project(self, sly_project_name: str):
         try:
             self.project = sly.Project(sly_project_name, sly.OpenMode.READ)
@@ -57,16 +78,30 @@ class StatsCollector:
             )
             return False
 
+    def _load_cache(self, cache_file: Path):
+        if cache_file.exists():
+            if self._cache.load_from_file(cache_file):
+                Logger.log_info(f"Using cache file [{cache_file}].")
+            else:
+                Logger.log_error(f"Failed to load cache from {cache_file}!")
+
     def _collect_annotation_stats(self, ann_paths: list):
         stats = []
+        if not ann_paths:
+            return stats
 
-        with tqdm(total=len(ann_paths)) as pbar:
-            with mp.Pool(self.num_workers) as pool:
-                for res in pool.imap_unordered(
-                    self._extract_stats_from_annotation_file, ann_paths
-                ):
-                    stats.append(res)
-                    pbar.update(1)
+        if DEBUG_DISABLE_MULTIPROCESSING:
+            for ann_path in tqdm(ann_paths):
+                res = self._extract_stats_from_annotation_file(ann_path)
+                stats.append(res)
+        else:
+            with tqdm(total=len(ann_paths)) as pbar:
+                with mp.Pool(self.num_workers) as pool:
+                    for res in pool.imap(
+                        self._extract_stats_from_annotation_file, ann_paths
+                    ):
+                        stats.append(res)
+                        pbar.update(1)
 
         return stats
 
@@ -128,14 +163,39 @@ class StatsCollector:
 
     def _handle_dataset(self, dataset: sly.project.project.Dataset):
         self._current_dataset = dataset
-        names, img_paths, ann_paths = [], [], []
+        names, ann_paths = [], []
         for item_name in dataset:
             img_path, ann_path = dataset.get_item_paths(item_name)
             names.append(item_name)
-            img_paths.append(img_path)
             ann_paths.append(ann_path)
 
-        annotation_stats = self._collect_annotation_stats(ann_paths)
+        annotation_stats = []
+
+        if USE_CACHE:
+            recovered_from_cache_indices = []
+            for i, name in enumerate(names):
+                value = self._cache.get_cache_item(
+                    self.project.name, name, default_value=False
+                )
+                if value:
+                    annotation_stats.append(value)
+                    recovered_from_cache_indices.append(i)
+            names = [
+                name
+                for i, name in enumerate(names)
+                if i not in recovered_from_cache_indices
+            ]
+            ann_paths = [
+                ann_path
+                for i, ann_path in enumerate(ann_paths)
+                if i not in recovered_from_cache_indices
+            ]
+
+        annotation_stats.extend(self._collect_annotation_stats(ann_paths))
+
+        if USE_CACHE:
+            for name, annotation_stat in zip(names, annotation_stats):
+                self._cache.add_cache_item(self.project.name, name, annotation_stat)
 
         self._current_dataset = None
 
