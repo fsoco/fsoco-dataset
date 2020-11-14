@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import pandas as pd
 import sys
+from time import time
 
 from similarity_scorer.similarity_scorer import SimilarityScorer
 
@@ -73,8 +74,10 @@ class StatsCollector:
     def _extract_stats_from_annotation_file(self, ann_path: str):
         stats = get_stat_template()
 
+        a = time()
         with open(ann_path) as json_file:
             data = json.load(json_file)
+        print(time() - a, ann_path)
 
         ann = sly.Annotation.from_json(data, self.project.meta)
 
@@ -95,6 +98,7 @@ class StatsCollector:
 
         bboxes = []
 
+        a = time()
         for label in ann.labels:
             if isinstance(label.geometry, sly.geometry.rectangle.Rectangle):
                 class_name = label.obj_class.name
@@ -120,6 +124,7 @@ class StatsCollector:
                         "aspect_ratio": aspect_ratio,
                     }
                 )
+        print(time() - a, "reading")
 
         stats["num_boxes"] = len(bboxes)
         stats["bounding_boxes"] = bboxes
