@@ -33,6 +33,7 @@ def fsoco(ctx, tools_home, debug):
 
     \b
     - Dataset originality score: fsoco similarity-scorer [Options] Arguments
+    - Dataset statistics: fsoco collect-stats [Options] Arguments
     - Label viewer: fsoco viewers [Options] Arguments
     - Label conversion: fsoco label-converters [Options] Arguments
     - Image watermarking: fsoco watermark [Options] Arguments

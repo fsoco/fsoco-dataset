@@ -11,7 +11,7 @@ setup(
     version="0.0.1",
     author=u"David Dodel, Michael Schötz, Niclas Vödisch + further contributors if importing from original FSOCO",
     author_email="fsoco.dataset@gmail.com",
-    description="Tools and scripts for everything revolving around the FSOCOv2 dataset. For more details and listings,"
+    description="Tools and scripts for everything revolving around the FSOCO dataset. For more details and listings,"
     " please refer to the further documentation.",
     long_description=long_description,
     long_description_content_type="text/markdown",
