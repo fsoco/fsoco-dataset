@@ -1,4 +1,6 @@
 from collections import defaultdict
+from typing import Optional
+from pathlib import Path
 
 import pandas as pd
 
@@ -34,6 +36,8 @@ class SimilarityScorer:
         report_csv: str = None,
         debug: bool = False,
         show: int = 0,
+        cache_dir: Optional[Path] = None,
+        cache_use_file_hash: bool = True,
     ):
         self.image_glob = image_glob
         self.report_csv = report_csv
@@ -44,7 +48,9 @@ class SimilarityScorer:
         self.df = None
         self.single_folder = False
 
-        self.extractor = FeatureExtractor(num_workers=num_workers, gpu=gpu)
+        self.extractor = FeatureExtractor(
+            num_workers=num_workers, gpu=gpu, cache_dir=cache_dir
+        )
         self.similarity_viewer = SimilarityViewer(sample_percent=show)
         self.similarity_clustering = SimilarityClustering(
             clustering_threshold=clustering_threshold, auto_select=auto_select
@@ -200,10 +206,10 @@ class SimilarityScorer:
             self.similarity_viewer.load_images(feature_vectors)
             self.similarity_viewer.show_samples()
 
-    def collect_stats(self):
+    def collect_stats(self, cache_use_file_hash: bool):
         # extract features
         feature_vectors = self.extractor.extract_feature_vectors_for_files(
-            self.image_glob
+            self.image_glob, cache_use_file_hash
         )
 
         self._calculate_metrics(feature_vectors)

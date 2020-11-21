@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import pandas as pd
 import sys
+from typing import Optional
 
 from similarity_scorer.similarity_scorer import SimilarityScorer
 from similarity_scorer.utils.cache import Cache
@@ -45,7 +46,13 @@ def get_stat_template():
 
 
 class StatsCollector:
-    def __init__(self, calc_similarity: bool, num_workers: int, use_gpu: bool):
+    def __init__(
+        self,
+        calc_similarity: bool,
+        num_workers: int,
+        use_gpu: bool,
+        cache_dir: Optional[Path] = None,
+    ):
         """
         Initialize the stats collector.
         """
@@ -57,16 +64,19 @@ class StatsCollector:
         self._current_dataset = None
 
         self._cache = None
+        self.cache_dir = cache_dir
+        self.cache_file = (
+            cache_dir / CACHE_FILE if cache_dir is not None else Path(CACHE_FILE)
+        )
         if USE_CACHE:
             self._cache = Cache()
-            self._load_cache(Path(CACHE_FILE))
+            self._load_cache(self.cache_file)
 
     def __del__(self):
         if mp.current_process().name == "MainProcess":
             if USE_CACHE and self._cache is not None:
-                file = Path(CACHE_FILE)
-                self._cache.store_to_file(file)
-                Logger.log_info(f"Saved cache to [{file}].")
+                self._cache.store_to_file(self.cache_file)
+                Logger.log_info(f"Saved cache to [{self.cache_file}].")
 
     def load_sly_project(self, sly_project_name: str):
         try:
@@ -175,9 +185,9 @@ class StatsCollector:
             recovered_from_cache_indices = []
             for i, name in enumerate(names):
                 value = self._cache.get_cache_item(
-                    self.project.name, name, default_value=False
+                    self.project.name, name, default_value=None
                 )
-                if value:
+                if value is not None:
                     annotation_stats.append(value)
                     recovered_from_cache_indices.append(i)
             names = [
@@ -205,12 +215,15 @@ class StatsCollector:
         Logger.log_info("start collecting similarity data.")
         img_glob = f"{self.project.directory}/*/img/*"
         similarity_scorer = SimilarityScorer(
-            image_glob=img_glob, gpu=self.use_gpu, num_workers=self.num_workers
+            image_glob=img_glob,
+            gpu=self.use_gpu,
+            num_workers=self.num_workers,
+            cache_dir=self.cache_dir,
         )
 
         similarity_scorer.per_folder_prefix = "team_"
 
-        similarity_stats = similarity_scorer.collect_stats()
+        similarity_stats = similarity_scorer.collect_stats(cache_use_file_hash=False)
 
         return similarity_stats
 
