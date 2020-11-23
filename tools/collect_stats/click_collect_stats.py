@@ -56,9 +56,8 @@ def collect_stats(
     Logger.log_info("Start collecting stats...")
 
     cache_dir = Path(cache_dir)
-    Logger.log_info(
-        f"Create cache directory '{cache_dir}'."
-    ) if not cache_dir.exists() else None
+    if not cache_dir.exists():
+        Logger.log_info(f"Create cache directory '{cache_dir}'.")
     cache_dir.mkdir(parents=True, exist_ok=True)
 
     collector = StatsCollector(calc_similarity, num_workers, gpu, cache_dir)

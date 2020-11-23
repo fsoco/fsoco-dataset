@@ -73,7 +73,8 @@ class StatsCollector:
             self._load_cache(self.cache_file)
 
     def __del__(self):
-        if mp.current_process().name == "MainProcess":
+        current_process = mp.current_process()
+        if current_process.name == "MainProcess":
             if USE_CACHE and self._cache is not None:
                 self._cache.store_to_file(self.cache_file)
                 Logger.log_info(f"Saved cache to [{self.cache_file}].")
@@ -175,7 +176,7 @@ class StatsCollector:
         self._current_dataset = dataset
         names, ann_paths = [], []
         for item_name in dataset:
-            img_path, ann_path = dataset.get_item_paths(item_name)
+            _, ann_path = dataset.get_item_paths(item_name)
             names.append(item_name)
             ann_paths.append(ann_path)
 

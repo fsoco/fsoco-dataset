@@ -113,9 +113,8 @@ def similarity_scorer(
     """
 
     cache_dir = Path(cache_dir)
-    Logger.log_info(
-        f"Create cache directory '{cache_dir}'."
-    ) if not cache_dir.exists() else None
+    if not cache_dir.exists():
+        Logger.log_info(f"Create cache directory '{cache_dir}'.")
     cache_dir.mkdir(parents=True, exist_ok=True)
 
     # check for non quoted image glob
