@@ -92,9 +92,8 @@ class FeatureExtractor:
         # somewhat inefficient as the model gets loaded to GPU as many times as there are processes!
         # but so far good enough
 
-        current_process = mp.current_process()
         process_id = (
-            int(current_process.name.split("-")[1])
+            int(mp.current_process().name.split("-")[1])  # pylint: disable=not-callable
             if not DEBUG_DISABLE_MULTIPROCESSING
             else 1
         )
