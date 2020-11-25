@@ -7,7 +7,6 @@ from glob import glob
 from pathlib import Path
 import hashlib
 from typing import Optional
-from itertools import repeat
 from functools import partial
 
 
@@ -86,7 +85,6 @@ class FeatureExtractor:
 
         return model_found
 
-    # @staticmethod
     def _pool_process_init(self):
         global img2vec, use_gpu, process_local_cache
         # somewhat inefficient as the model gets loaded to GPU as many times as there are processes!
@@ -177,9 +175,11 @@ class FeatureExtractor:
                 self._pool_process_init()
                 results = []
                 for res in map(
-                    FeatureExtractor._extract_features_from_image,
+                    partial(
+                        FeatureExtractor._extract_features_from_image,
+                        cache_use_file_hash=cache_use_file_hash,
+                    ),
                     files,
-                    repeat(cache_use_file_hash),
                 ):
                     results.append(res)
                     pbar.update(1)
