@@ -1,4 +1,11 @@
 User-agent: *
-Disallow: /
+Disallow: /contact_form_thanks/
+Disallow: /contribution_form_thanks/
+Disallow: /imprint/
+Disallow: /privacy_policy/
+Disallow: /assets/
+Disallow: /stats_for_nerds
+Disallow: /tools/image_similarity_score
+Disallow: /labeling_guidelines/
 
-Sitemap: https://fsoco.github.io/fsoco-dataset/sitemap.xml
+Sitemap: https://www.fsoco-dataset.com/sitemap.xml
