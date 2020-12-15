@@ -8,7 +8,7 @@ hide: true
 
 ### The FSOCO Dataset
 
-<img src="assets/img/examples/index.png" style="width: 60%;  height: auto; float:right; vertical-align:middle; margin:25px 0px 10px">
+<img src="assets/img/examples/index.png" style="width: 60%;  height: auto; float:right; vertical-align:middle; margin:25px 0 10px">
 
 The FSOCO dataset helps Formula Student / FSAE teams to get started with their visual perception system for driverless disciplines.
 State-of-the-art object detection systems require a substantial amount of data, which can be a challenge for new teams.
@@ -22,3 +22,21 @@ Details on supported [object classes]({{ "/overview/" | relative_url }}) and [ex
 Formula Student / FSAE is an international design competition, where students design and build full-scale formula style racecars.
 In 2017, Formula Student Germany introduced a new driverless class challenging the students to equip their cars with additional sensors and compute hardware to enable autonomous racing.
 Henceforth, other events have adapted the driverless class and the self-driving racecars are quickly closing the gap to human drivers.  
+
+
+### Citation
+If you use the FSOCO dataset in your research, please cite our [arXiv preprint](https://arxiv.org/abs/2012.07139):
+{% raw %}
+<pre>
+<code class="language bibtex" style="font-size: .75em">@misc{fsoco2020,
+      title={{FSOCO}: The Formula Student Objects in Context Dataset},
+      author={David Dodel and Michael Schötz and Niclas Vödisch},
+      year={2020},
+      eprint={2012.07139},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      note={arXiv preprint \href{https://arxiv.org/abs/2012.07139}{arXiv:2012.07139}, Dec 2020}
+}</code>
+</pre>
+{% endraw %}
+<br/>

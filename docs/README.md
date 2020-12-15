@@ -24,7 +24,7 @@ Henceforth, other events have adapted the driverless class and the self-driving 
 <p><a href="https://www.fsoco-dataset.com/how_to_contribute/">Dataset contributions</a>:
 </p>
 <ul>
-<li> Donate raw data for other teams to label that don't have cones or sensors</li>
+<li> Donate raw data for other teams to label that do not have cones or sensors</li>
 <li> Label donated images as your contribution to the dataset</li>
 <li> Contribute your team's private dataset</li>
 </ul>
@@ -56,6 +56,19 @@ We would like to thank all <a href="https://www.fsoco-dataset.com/contributors/"
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <p>This project follows the <a href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification.
 For details on what the emoji mean, please see the <a href="../CONTRIBUTING.md#all_contributors">contribution documentation</a>.</p>
+<h2>Citation</h2>
+<p>If you use the FSOCO dataset in your research, please cite our <a href="https://arxiv.org/abs/2012.07139">arXiv preprint</a>:</p>
+<pre>
+<code class="language bibtex" style="font-size: .75em">@misc{fsoco2020,
+      title={{FSOCO}: The Formula Student Objects in Context Dataset},
+      author={David Dodel and Michael Schötz and Niclas Vödisch},
+      year={2020},
+      eprint={2012.07139},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      note={arXiv preprint \href{https://arxiv.org/abs/2012.07139}{arXiv:2012.07139}, Dec 2020}
+}</code>
+</pre>
 <h2>Contact</h2>
 <p>Please feel free to contact us with any questions, suggestions, or comments:</p>
 <ul>
