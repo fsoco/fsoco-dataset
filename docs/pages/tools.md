@@ -35,7 +35,7 @@ Please find detailed information and instructions how to use our image similarit
 The FSOCO label viewer is an easy way to visualize our dataset. Currently, it supports bounding boxes in both Supervisely and Darknet YOLO format and segmentation labels from Supervisely.
 
 Example usage:
-```
+```bash
 # Activate python venv where tools are installed
 conda activate fsoco-tools 
 fsoco viewers supervisely input_directory/
@@ -45,7 +45,7 @@ fsoco viewers supervisely input_directory/
 This tool allows you to test how your watermarked images will look like when using the Supervisely import plugin for image donations. Please refer to the tool's help for usage details.
 
 Example usage:
-```
+```bash
 # Activate python venv where tools are installed
 conda activate fsoco-tools 
 fsoco watermark input_directory/ jpg logo.png
@@ -73,7 +73,7 @@ The currently available conversions are:
 | Label Formats| Darknet YOLO | Supervisely | LabelBox | COCO | VOC | MM | NAS |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Darknet YOLO | - | <span style='font-size:20px;'>&#9989;</span> | - | - | - | - | - | 
-| Supervisely | <span style='font-size:20px;'>&#9989;</span> | - | - | - | - | - | - |
+| Supervisely | <span style='font-size:20px;'>&#9989;</span> | - | - | - | <span style='font-size:20px;'>&#9989;</span> | - | - |
 | LabelBox | - | <span style='font-size:20px;'>&#9989;</span> | - | - | - | - | - | 
 | COCO | <span style='font-size:20px;'>&#9989;</span><sup><small> [1]</small></sup> | - | - | - | - | - | - |
 | VOC | <span style='font-size:20px;'>&#9989;</span><sup><small> [1]</small></sup> | - | - | - | - | - | - |
@@ -82,8 +82,8 @@ The currently available conversions are:
 
 [1] [These scripts](https://github.com/ddavid/fsoco/tree/master/scripts/label-converters) and a [summary of their label formats](https://ddavid.github.io/fsoco/#annotation-types) can be found on the [documentation page](https://ddavid.github.io/fsoco/) of the **deprecated** first version of the project. <br/>
 
-Example Usage:
-```
+Example usage:
+```bash
 # Activate python venv where tools are installed
 conda activate fsoco-tools
 fsoco label-converter yolo2sly -p project_name -d dataset_name img/ darknet_labels/ .
