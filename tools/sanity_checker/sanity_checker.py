@@ -17,7 +17,9 @@ class SanityChecker:
         team_name: str,
         workspace_name: str,
         project_name: str,
+        verbose: bool = True,
     ):
+        self.verbose = verbose
         self.sly_api = None
         self.team = None
         self.workspace = None
@@ -153,13 +155,26 @@ class SanityChecker:
                 annotations = safe_request(
                     self.sly_api.annotation.download_batch, dataset.id, image_ids
                 )
+                updated_annotations = {"image_ids": [], "annotations": []}
 
                 # Iterate over images in batch
                 for image in annotations:
-                    bounding_box_checker = BoundingBoxChecker()
+                    if image.image_name != "amz_02447.png":
+                        continue
+
+                    # We use this object to update the labels. All checkers share the same instance.
+                    updated_annotation = sly.Annotation.from_json(
+                        image.annotation, self.project_meta
+                    )
+                    bounding_box_checker = BoundingBoxChecker(
+                        image.image_name, updated_annotation, self.verbose
+                    )
                     segmentation_checker = SegmentationChecker(
                         image.annotation["size"]["height"],
                         image.annotation["size"]["width"],
+                        image.image_name,
+                        updated_annotation,
+                        self.verbose,
                     )
                     bounding_box_job_names = self._get_image_job_names(
                         image.image_name, "rectangle"
@@ -168,17 +183,18 @@ class SanityChecker:
                         image.image_name, "bitmap"
                     )
 
+                    update_image = False
                     # Iterate over labels in current image
                     for label in image.annotation["objects"]:
                         # We do not convert to a SLY object since it is easier to operate with the JSON dictionary
                         if label["geometryType"] == "rectangle":
-                            is_ok = bounding_box_checker.run(label)
-                            if not is_ok:
+                            if not bounding_box_checker.run(label):
+                                update_image = True
                                 for job_name in bounding_box_job_names:
                                     self.job_statistics[job_name]["numberIssues"] += 1
                         elif label["geometryType"] == "bitmap":
-                            is_ok = segmentation_checker.run(label)
-                            if not is_ok:
+                            if not segmentation_checker.run(label):
+                                update_image = True
                                 for job_name in segmentation_job_names:
                                     self.job_statistics[job_name]["numberIssues"] += 1
                         else:
@@ -186,4 +202,20 @@ class SanityChecker:
                                 f"Found unsupported geometry type: {label['geometryType']}"
                             )
 
+                    if update_image:
+                        assert id(bounding_box_checker.updated_annotation) == id(
+                            segmentation_checker.updated_annotation
+                        )
+                        updated_annotations["image_ids"].append(image.image_id)
+                        updated_annotations["annotations"].append(
+                            bounding_box_checker.updated_annotation
+                        )
                     pbar.update(1)
+
+                # Upload all annotations in the current batch if there are any
+                if updated_annotations["image_ids"]:
+                    safe_request(
+                        self.sly_api.annotation.upload_anns,
+                        updated_annotations["image_ids"],
+                        updated_annotations["annotations"],
+                    )
