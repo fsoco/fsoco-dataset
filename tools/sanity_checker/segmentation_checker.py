@@ -31,7 +31,7 @@ class SegmentationChecker(LabelChecker):
         self._update_issue_tag(label, "Small label", is_small_label)
 
         if self.verbose and is_small_label:
-            Logger.log_warn(
+            Logger.log_info_alt(
                 f'{self.image_name} | segmentation | small label ({np.sum(label["mask"])} < {minimum_area})'
             )
         return is_small_label
@@ -51,5 +51,5 @@ class SegmentationChecker(LabelChecker):
         self._update_issue_tag(label, "Overlapping label", is_overlapping_label)
 
         if self.verbose and is_overlapping_label:
-            Logger.log_warn(f"{self.image_name} | segmentation | overlapping label")
+            Logger.log_info_alt(f"{self.image_name} | segmentation | overlapping label")
         return is_overlapping_label

@@ -28,6 +28,12 @@ class Logger:
         )
 
     @staticmethod
+    def log_info_alt(string: str, ctx: str = None, bold: bool = False):
+        print(
+            f"{Logger.Colors.BOLD if bold else ''}{Logger.Colors.OKBLUE}{Logger._get_log_prefix(ctx)}{string}{Logger.Colors.ENDC}"
+        )
+
+    @staticmethod
     def log_warn(string: str, ctx: str = None, bold: bool = False):
         print(
             f"{Logger.Colors.BOLD if bold else ''}{Logger.Colors.WARNING}{Logger._get_log_prefix(ctx)}{string}{Logger.Colors.ENDC}"

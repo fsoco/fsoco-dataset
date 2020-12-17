@@ -11,18 +11,26 @@ from similarity_scorer.utils.logger import Logger
 @click.option(
     "--token", "server_token", type=str, help="Secret token to access Supervisely."
 )
+@click.option("--dry_run", is_flag=True, help="Do not update the label on Supervisely.")
 @click.option("--verbose", is_flag=True, help="Print discovered issues.")
 def sanity_checker(
     team_name: str,
     workspace_name: str,
     project_name: str,
     server_token: str,
+    dry_run: bool,
     verbose: bool,
 ):
     server_address: str = "https://app.supervise.ly"
 
     checker = SanityChecker(
-        server_address, server_token, team_name, workspace_name, project_name, verbose
+        server_address,
+        server_token,
+        team_name,
+        workspace_name,
+        project_name,
+        dry_run,
+        verbose,
     )
     checker.run()
     Logger.log_info("Sanity checks finished with the following results.")

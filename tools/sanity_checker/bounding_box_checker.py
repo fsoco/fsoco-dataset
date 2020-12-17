@@ -24,7 +24,7 @@ class BoundingBoxChecker(LabelChecker):
         self._update_issue_tag(label, "Small label", is_small_label)
 
         if self.verbose and is_small_label:
-            Logger.log_warn(
+            Logger.log_info_alt(
                 f'{self.image_name} | bounding box | small label ({label["area"]} < {minimum_area})'
             )
         return is_small_label

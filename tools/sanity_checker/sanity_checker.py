@@ -17,8 +17,10 @@ class SanityChecker:
         team_name: str,
         workspace_name: str,
         project_name: str,
+        dry_run: bool = False,
         verbose: bool = False,
     ):
+        self.dry_run = dry_run
         self.verbose = verbose
         self.sly_api = None
         self.team = None
@@ -29,11 +31,22 @@ class SanityChecker:
         self.jobs = []
         self.job_statistics = {}
 
+        if self.dry_run:
+            Logger.log_warn("This is a DRYRUN, i.e., tags will not be uploaded.")
+        if self.verbose:
+            Logger.log_warn(
+                "Verbose mode activated, i.e., all discovered issues will be printed."
+            )
+
         self._initialize_supervisely(
             server_address, server_token, team_name, workspace_name, project_name
         )
         self._initialize_datasets()
         self._initialize_jobs()
+
+    def __del__(self):
+        if self.dry_run:
+            Logger.log_warn("This was a DRYRUN, i.e., tags have not been uploaded.")
 
     def __str__(self):
         string = ""
@@ -210,7 +223,7 @@ class SanityChecker:
                     pbar.update(1)
 
                 # Upload all annotations in the current batch if there are any
-                if updated_annotations["image_ids"]:
+                if updated_annotations["image_ids"] and not self.dry_run:
                     safe_request(
                         self.sly_api.annotation.upload_anns,
                         updated_annotations["image_ids"],
