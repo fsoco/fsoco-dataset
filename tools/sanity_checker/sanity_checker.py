@@ -17,7 +17,7 @@ class SanityChecker:
         team_name: str,
         workspace_name: str,
         project_name: str,
-        verbose: bool = True,
+        verbose: bool = False,
     ):
         self.verbose = verbose
         self.sly_api = None
@@ -159,9 +159,6 @@ class SanityChecker:
 
                 # Iterate over images in batch
                 for image in annotations:
-                    if image.image_name != "amz_02447.png":
-                        continue
-
                     # We use this object to update the labels. All checkers share the same instance.
                     updated_annotation = sly.Annotation.from_json(
                         image.annotation, self.project_meta
