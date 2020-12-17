@@ -43,6 +43,7 @@ setup(
         "matplotlib>=3.0.0",
         "screeninfo",
         "networkx",
+        "requests",
     ],
     extras_require={
         "sly": [

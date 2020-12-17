@@ -9,6 +9,7 @@ from watermark.click_watermark import watermark
 from similarity_scorer.click_similarity_scorer import similarity_scorer
 from collect_stats.click_collect_stats import collect_stats
 from viewers.viewers import viewers
+from sanity_checker.click_sanity_checker import sanity_checker
 
 
 class Tools(object):
@@ -20,7 +21,7 @@ class Tools(object):
         self.debug = debug
 
 
-@click.group()
+@click.group(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option("--tools-home", envvar="FSOCO_TOOLS_HOME", default=".")
 @click.option("--debug/--no-debug", default=False, envvar="FSOCO_TOOLS_DEBUG")
 @click.pass_context
@@ -49,6 +50,7 @@ fsoco.add_command(watermark)
 fsoco.add_command(similarity_scorer)
 fsoco.add_command(collect_stats)
 fsoco.add_command(viewers)
+fsoco.add_command(sanity_checker)
 
 
 if __name__ == "__main__":
