@@ -30,6 +30,16 @@ class LabelChecker(ABC):
         pass
 
     @staticmethod
+    def _delete_label(label: dict):
+        # Search for this label in the updated_annotations object
+        for candidate_label in LabelChecker.updated_annotation.labels:
+            if candidate_label.geometry.sly_id == label["id"]:
+                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
+                    candidate_label
+                )
+                break
+
+    @staticmethod
     def _update_issue_tag(label: dict, tag_text: str, found_issue: bool):
         if found_issue:
             LabelChecker._add_issue_tag(label, tag_text)
@@ -60,7 +70,7 @@ class LabelChecker(ABC):
         if not LabelChecker._is_issue_tagged(label, tag_text):
             return
 
-        # Search for all of these label and delete them
+        # Search for this label in the updated_annotations object
         for candidate_label in LabelChecker.updated_annotation.labels:
             if candidate_label.geometry.sly_id == label["id"]:
                 tagged_label = label_delete_tag(

@@ -22,19 +22,27 @@ class SegmentationChecker(LabelChecker):
         )
 
         is_ok = True
-        is_ok &= not self._is_small_label(label, minimum_area=10)
+        is_ok &= not self._is_small_label(
+            label, minimum_area=10, delete_threshold_area=5
+        )
         is_ok &= not self._is_overlapping_label(label)
         return is_ok
 
-    def _is_small_label(self, label: dict, minimum_area: int):
+    def _is_small_label(
+        self, label: dict, minimum_area: int, delete_threshold_area: int = -1
+    ):
         is_small_label = np.sum(label["mask"]) < minimum_area
+        removed_label = np.sum(label["mask"]) < delete_threshold_area
 
-        self._update_issue_tag(label, "Small label", is_small_label)
+        if removed_label:
+            self._delete_label(label)
+        else:
+            self._update_issue_tag(label, "Small label", is_small_label)
 
         if self.verbose and is_small_label:
-            Logger.log_info_alt(
-                f'{self.image_name} | segmentation | small label ({np.sum(label["mask"])} < {minimum_area})'
-            )
+            log_text = f'{self.image_name} | segmentation | small label ({np.sum(label["mask"])} < {minimum_area})'
+            log_text += " --> removed" if removed_label else ""
+            Logger.log_info_alt(log_text)
         return is_small_label
 
     def _is_overlapping_label(self, label: dict):
