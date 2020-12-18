@@ -13,7 +13,8 @@ class SegmentationChecker(LabelChecker):
         self.image_mask = np.zeros((image_height, image_width), dtype=np.int)
 
     def run(self, label: dict):
-        assert label["geometryType"] == "bitmap"
+        if label["geometryType"] != "bitmap":
+            raise ValueError(f"Wrong label type: {label['geometryType']}")
 
         # Create numpy array from bitmap
         label["mask"] = sly.geometry.bitmap.Bitmap.base64_2_data(

@@ -237,9 +237,10 @@ class SanityChecker:
                             )
 
                     if update_image:
-                        assert id(bounding_box_checker.updated_annotation) == id(
+                        if id(bounding_box_checker.updated_annotation) != id(
                             segmentation_checker.updated_annotation
-                        )
+                        ):
+                            raise RuntimeError("Memory addresses do not match.")
                         updated_annotations["image_ids"].append(image.image_id)
                         updated_annotations["annotations"].append(
                             bounding_box_checker.updated_annotation

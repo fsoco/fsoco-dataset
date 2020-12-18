@@ -43,11 +43,13 @@ class LabelChecker(ABC):
             return
 
         # Search for this label in the updated_annotations object
-        for i, l in enumerate(LabelChecker.updated_annotation.labels):
-            if l.geometry.sly_id == label["id"]:
-                tagged_label = l.add_tag(LabelChecker._create_issue_tag(tag_text))
+        for candidate_label in LabelChecker.updated_annotation.labels:
+            if candidate_label.geometry.sly_id == label["id"]:
+                tagged_label = candidate_label.add_tag(
+                    LabelChecker._create_issue_tag(tag_text)
+                )
                 LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    l
+                    candidate_label
                 ).add_label(
                     tagged_label
                 )
@@ -59,13 +61,13 @@ class LabelChecker(ABC):
             return
 
         # Search for all of these label and delete them
-        for i, l in enumerate(LabelChecker.updated_annotation.labels):
-            if l.geometry.sly_id == label["id"]:
+        for candidate_label in LabelChecker.updated_annotation.labels:
+            if candidate_label.geometry.sly_id == label["id"]:
                 tagged_label = label_delete_tag(
-                    l, LabelChecker._create_issue_tag(tag_text)
+                    candidate_label, LabelChecker._create_issue_tag(tag_text)
                 )
                 LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    l
+                    candidate_label
                 ).add_label(
                     tagged_label
                 )
