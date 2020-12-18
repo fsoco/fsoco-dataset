@@ -24,4 +24,4 @@ jobs:
           pip install --editable .[sly]
 
       - name: Run sanity checks
-        run: fsoco sanity-checker -t "fsoco" -w "Image donations" -p "FSB Racing Team" -p "Einstein Motorsport" --token ${{secret.SLY_TOKEN}} --verbose --dry_run
+        run: fsoco sanity-checker -h
