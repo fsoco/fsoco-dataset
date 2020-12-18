@@ -27,7 +27,7 @@ class SanityChecker:
         self.sly_team = None
         self.sly_workspace = None
         self.sly_projects = []
-        self.sly_project_metas = []
+        self.sly_project_metas = {}  # The key is the respective project name
         self.datasets = {}  # The key is the respective project name
         self.jobs = []
         self.job_statistics = {}
@@ -62,8 +62,8 @@ class SanityChecker:
         return string
 
     def run(self):
-        for project, project_meta in zip(self.sly_projects, self.sly_project_metas):
-            self._run_project(project, project_meta)
+        for project in self.sly_projects:
+            self._run_project(project, self.sly_project_metas[project.name])
 
     def _initialize_supervisely(
         self,
@@ -116,7 +116,9 @@ class SanityChecker:
             project_meta_json = safe_request(
                 self.sly_api.project.get_meta, sly_project.id
             )
-            self.sly_project_metas.append(sly.ProjectMeta.from_json(project_meta_json))
+            self.sly_project_metas[sly_project.name] = sly.ProjectMeta.from_json(
+                project_meta_json
+            )
 
             # Initialize datasets of this project
             self.datasets[sly_project.name] = []
