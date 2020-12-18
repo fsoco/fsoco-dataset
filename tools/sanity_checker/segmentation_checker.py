@@ -12,6 +12,10 @@ class SegmentationChecker(LabelChecker):
         # We use this to check for overlapping labels within an image
         self.image_mask = np.zeros((image_height, image_width), dtype=np.int)
 
+        # We use these numbers to check for labels reaching into the watermark
+        self.image_height = image_height
+        self.image_width = image_width
+
     def run(self, label: dict):
         if label["geometryType"] != "bitmap":
             raise ValueError(f"Wrong label type: {label['geometryType']}")
@@ -26,6 +30,9 @@ class SegmentationChecker(LabelChecker):
             label, minimum_area=10, delete_threshold_area=5
         )
         is_ok &= not self._is_overlapping_label(label)
+        is_ok &= not self._is_outside_image_frame(
+            label, image_border_size=140, fix_issue=True
+        )
         return is_ok
 
     def _is_small_label(
@@ -62,3 +69,28 @@ class SegmentationChecker(LabelChecker):
         if self.verbose and is_overlapping_label:
             Logger.log_info_alt(f"{self.image_name} | segmentation | overlapping label")
         return is_overlapping_label
+
+    def _is_outside_image_frame(
+        self, label: dict, image_border_size: int, fix_issue: bool = False
+    ):
+        # Check if the label reaches into the black border (watermark)
+
+        mask = label["mask"]
+        origin = label["bitmap"]["origin"]
+        min_x, max_x = origin[0], origin[0] + mask.shape[1]  # width
+        min_y, max_y = origin[1], origin[1] + mask.shape[0]  # height
+
+        is_outside_image_frame = False
+        is_outside_image_frame &= min_x < image_border_size
+        is_outside_image_frame &= max_x > self.image_width - image_border_size - 1
+        is_outside_image_frame &= min_y < image_border_size
+        is_outside_image_frame &= max_y > self.image_height - image_border_size - 1
+
+        if not fix_issue:
+            self._update_issue_tag(label, "Reached watermark", is_outside_image_frame)
+
+        if self.verbose and is_outside_image_frame:
+            log_text = f"{self.image_name} | segmentation | reached watermark"
+            log_text += " --> fixed" if fix_issue else ""
+            Logger.log_info_alt(log_text)
+        return is_outside_image_frame
