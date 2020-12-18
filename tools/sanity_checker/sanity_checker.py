@@ -7,7 +7,7 @@ from tqdm import tqdm
 from similarity_scorer.utils.logger import Logger
 from .bounding_box_checker import BoundingBoxChecker
 from .segmentation_checker import SegmentationChecker
-from .utils import safe_request
+from .utils import safe_request, extract_geometry_type_from_job_name
 
 
 class SanityChecker:
@@ -54,7 +54,7 @@ class SanityChecker:
         max_length_line = 0
         max_length_job_name = max([len(job_name) for job_name in self.job_statistics])
         for job_name, job_statistics in self.job_statistics.items():
-            new_line = f'{job_name.ljust(max_length_job_name)} | number of issues = {job_statistics["numberIssues"]}\n'
+            new_line = f'{job_name.ljust(max_length_job_name)} | discovered issues = {job_statistics["numberIssues"]}\n'
             string += new_line
             max_length_line = max(max_length_line, len(new_line))
         max_length_line -= 1  # Subtract new line break \n
@@ -146,15 +146,7 @@ class SanityChecker:
             )  # Query assigned images
 
             # ToDo: Workaround because the API does not fill out the field 'classes_to_label'
-            if "Bounding Boxes" in job.name:
-                geometry_type = "rectangle"
-            elif "Segmentation" in job.name:
-                geometry_type = "bitmap"
-            else:
-                geometry_type = ""
-                Logger.log_warn(
-                    f"Cannot determine geometry type from job name: {job.name}"
-                )
+            geometry_type = extract_geometry_type_from_job_name(job.name)
 
             # Use CamelCase to match the API's convention when creating JSON dictionaries
             self.job_statistics[job.name] = {
