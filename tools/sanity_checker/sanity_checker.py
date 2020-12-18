@@ -1,4 +1,5 @@
 import sys
+from typing import Union
 
 import supervisely_lib as sly
 from tqdm import tqdm
@@ -16,18 +17,18 @@ class SanityChecker:
         server_token: str,
         team_name: str,
         workspace_name: str,
-        project_name: str,
+        project_name: Union[tuple, str],
         dry_run: bool = False,
         verbose: bool = False,
     ):
         self.dry_run = dry_run
         self.verbose = verbose
         self.sly_api = None
-        self.team = None
-        self.workspace = None
-        self.project = None
-        self.project_meta = None
-        self.datasets = []
+        self.sly_team = None
+        self.sly_workspace = None
+        self.sly_projects = []
+        self.sly_project_metas = []
+        self.datasets = {}  # The key is the respective project name
         self.jobs = []
         self.job_statistics = {}
 
@@ -41,7 +42,7 @@ class SanityChecker:
         self._initialize_supervisely(
             server_address, server_token, team_name, workspace_name, project_name
         )
-        self._initialize_datasets()
+        # self._initialize_datasets()
         self._initialize_jobs()
 
     def __del__(self):
@@ -61,8 +62,8 @@ class SanityChecker:
         return string
 
     def run(self):
-        for dataset in self.datasets:
-            self._run_dataset(dataset)
+        for project, project_meta in zip(self.sly_projects, self.sly_project_metas):
+            self._run_project(project, project_meta)
 
     def _initialize_supervisely(
         self,
@@ -70,55 +71,71 @@ class SanityChecker:
         server_token: str,
         team_name: str,
         workspace_name: str,
-        project_name: str,
+        project_names: Union[tuple, str],
     ):
+        # From now on, only assume project_name to be a tuple
+        if isinstance(project_names, str):
+            project_names = (project_names,)
+
         self.sly_api = sly.Api(server_address, server_token)
 
-        self.team = safe_request(self.sly_api.team.get_info_by_name, team_name)
-        if self.team is None:
+        self.sly_team = safe_request(self.sly_api.team.get_info_by_name, team_name)
+        if self.sly_team is None:
             Logger.log_error(f"Team {team_name} not found.")
             sys.exit(-1)
         else:
-            Logger.log_info(f"Team: id={self.team.id}, name={self.team.name}")
+            Logger.log_info(f"Team: id={self.sly_team.id}, name={self.sly_team.name}")
 
-        self.workspace = safe_request(
-            self.sly_api.workspace.get_info_by_name, self.team.id, workspace_name
+        self.sly_workspace = safe_request(
+            self.sly_api.workspace.get_info_by_name, self.sly_team.id, workspace_name
         )
-        if self.workspace is None:
+        if self.sly_workspace is None:
             Logger.log_error(f"Workspace {workspace_name} not found.")
             sys.exit(-1)
         else:
             Logger.log_info(
-                f"Workspace: id={self.workspace.id}, name={self.workspace.name}"
+                f"Workspace: id={self.sly_workspace.id}, name={self.sly_workspace.name}"
             )
 
-        self.project = safe_request(
-            self.sly_api.project.get_info_by_name, self.workspace.id, project_name
-        )
-        if self.project is None:
-            Logger.log_error(f"Project {project_name} not found.")
-            sys.exit(-1)
-        else:
-            Logger.log_info(f"Project: id={self.project.id}, name={self.project.name}")
+        for project_name in project_names:
+            sly_project = safe_request(
+                self.sly_api.project.get_info_by_name,
+                self.sly_workspace.id,
+                project_name,
+            )
+            if sly_project is None:
+                Logger.log_error(f"Project {project_name} not found.")
+                sys.exit(-1)
+            else:
+                Logger.log_info(
+                    f"Project: id={sly_project.id}, name={sly_project.name}"
+                )
+                self.sly_projects.append(sly_project)
 
-        # This is used in several calls to the API, e.g., creating objects from JSON representation.
-        project_meta_json = safe_request(self.sly_api.project.get_meta, self.project.id)
-        self.project_meta = sly.ProjectMeta.from_json(project_meta_json)
+            # This is used in several calls to the API, e.g., creating objects from JSON representation.
+            project_meta_json = safe_request(
+                self.sly_api.project.get_meta, sly_project.id
+            )
+            self.sly_project_metas.append(sly.ProjectMeta.from_json(project_meta_json))
 
-    def _initialize_datasets(self):
-        for dataset in safe_request(self.sly_api.dataset.get_list, self.project.id):
-            Logger.log_info(f"Dataset: id={dataset.id}, name={dataset.name}")
-            self.datasets.append(dataset)
+            # Initialize datasets of this project
+            self.datasets[sly_project.name] = []
+            for dataset in safe_request(self.sly_api.dataset.get_list, sly_project.id):
+                Logger.log_info(f"Dataset: id={dataset.id}, name={dataset.name}")
+                self.datasets[sly_project.name].append(dataset)
 
     def _initialize_jobs(self):
         # We have to query the jobs twice since the Supervisely API does not provide the entities (assigned images) in
         #  the first API call "get_list()"
         # Fun fact: the functionality has only been added due to our feature request and broke their repo multiple times
         jobs = []
-        for dataset in self.datasets:
-            jobs += safe_request(
-                self.sly_api.labeling_job.get_list, self.team.id, dataset_id=dataset.id
-            )
+        for project in self.sly_projects:
+            for dataset in self.datasets[project.name]:
+                jobs += safe_request(
+                    self.sly_api.labeling_job.get_list,
+                    self.sly_team.id,
+                    dataset_id=dataset.id,
+                )
 
         for job in jobs:
             Logger.log_info(f"Job: id={job.id}, name={job.name}")
@@ -155,12 +172,17 @@ class SanityChecker:
                     job_names.append(job.name)
         return job_names
 
-    def _run_dataset(self, dataset):
+    def _run_project(self, project, project_meta):
+        for dataset in self.datasets[project.name]:
+            self._run_dataset(dataset, project_meta, project.name)
+
+    def _run_dataset(self, dataset, project_meta, project_name=""):
         # These are all images in the dataset
         images = safe_request(self.sly_api.image.get_list, dataset.id)
 
         with tqdm(
-            total=len(images), desc=f"Processing dataset: {dataset.name}"
+            total=len(images),
+            desc=f"Processing dataset: {project_name + ' - ' if project_name else ''}{dataset.name}",
         ) as pbar:
             # Batch images to reduce the number of API calls
             for batch in sly.batched(images, batch_size=10):
@@ -174,7 +196,7 @@ class SanityChecker:
                 for image in annotations:
                     # We use this object to update the labels. All checkers share the same instance.
                     updated_annotation = sly.Annotation.from_json(
-                        image.annotation, self.project_meta
+                        image.annotation, project_meta
                     )
                     bounding_box_checker = BoundingBoxChecker(
                         image.image_name, updated_annotation, self.verbose

@@ -1,22 +1,47 @@
 import click
 
-from .sanity_checker import SanityChecker
 from similarity_scorer.utils.logger import Logger
+from .sanity_checker import SanityChecker
 
 
 @click.command()
-@click.argument("team_name", type=str)
-@click.argument("workspace_name", type=str)
-@click.argument("project_name", type=str)
 @click.option(
-    "--token", "server_token", type=str, help="Secret token to access Supervisely."
+    "--team_name",
+    "-t",
+    type=str,
+    required=True,
+    help="Specify the Supervisely team name.",
 )
-@click.option("--dry_run", is_flag=True, help="Do not update the label on Supervisely.")
-@click.option("--verbose", is_flag=True, help="Print discovered issues.")
+@click.option(
+    "--workspace_name",
+    "-w",
+    type=str,
+    required=True,
+    help="Specify the Supervisely workspace name.",
+)
+@click.option(
+    "--project_name",
+    "-p",
+    type=str,
+    required=True,
+    multiple=True,
+    help="Specify a Supervisely project name. You can use this flag multiple times.",
+)
+@click.option(
+    "--token",
+    "server_token",
+    type=str,
+    required=True,
+    help="Secret token to access Supervisely.",
+)
+@click.option(
+    "--dry_run", is_flag=True, help="Do not update the labels on Supervisely."
+)
+@click.option("--verbose", is_flag=True, help="Print all discovered issues.")
 def sanity_checker(
     team_name: str,
     workspace_name: str,
-    project_name: str,
+    project_name: tuple,
     server_token: str,
     dry_run: bool,
     verbose: bool,
