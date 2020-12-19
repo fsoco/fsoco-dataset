@@ -30,6 +30,7 @@ class SegmentationChecker(LabelChecker):
             label, minimum_area=10, delete_threshold_area=5
         )
         is_ok &= not self._is_outside_image_frame(label, image_border_size=140)
+        is_ok &= not self._is_ghost_bounding_box(label)
         is_ok &= not self._is_overlapping_label(label)
         return is_ok
 
@@ -50,6 +51,8 @@ class SegmentationChecker(LabelChecker):
             log_text = f'{self.image_name} | segmentation | small label ({np.sum(label["mask"])} < {minimum_area})'
             log_text += " --> removed" if removed_label else ""
             Logger.log_info_alt(log_text)
+        if removed_label:
+            is_small_label = False
         return is_small_label
 
     def _is_overlapping_label(self, label: dict):
@@ -93,13 +96,7 @@ class SegmentationChecker(LabelChecker):
             mask[: image_border_size - min_y, :] = False
             mask[self.image_height - image_border_size - min_y :, :] = False
             label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(mask)
-            updated_label = sly.Label.from_json(label, self.project_meta)
-            self._update_label(updated_label)
-            # Update label object for later checks
-            label = updated_label.to_json()
-            label["mask"] = sly.geometry.bitmap.Bitmap.base64_2_data(
-                label["bitmap"]["data"]
-            )
+            self._update_bitmap_data(label)
             # Remove issue tag if it previously existed
             self._delete_issue_tag(label, "Inside watermark")
 
@@ -107,4 +104,38 @@ class SegmentationChecker(LabelChecker):
             log_text = f"{self.image_name} | segmentation | inside watermark"
             log_text += " --> fixed" if self.apply_auto_fixes else ""
             Logger.log_info_alt(log_text)
+        if self.apply_auto_fixes:
+            is_outside_image_frame = False
         return is_outside_image_frame
+
+    def _is_ghost_bounding_box(self, label: dict):
+        # Sometimes the inferred bounding box is larger than the actual mask
+
+        # We just convert the mask back to the encrypted version and check for differences
+        data = sly.geometry.bitmap.Bitmap.data_2_base64(label["mask"])
+        is_ghost_bounding_box = label["bitmap"]["data"] != data
+
+        if not self.apply_auto_fixes:
+            self._update_issue_tag(label, "Ghost bounding box", is_ghost_bounding_box)
+        elif is_ghost_bounding_box:
+            label["bitmap"]["data"] = data
+            self._update_bitmap_data(label)
+            # Remove issue tag if it previously existed
+            self._delete_issue_tag(label, "Ghost bounding box")
+
+        if self.verbose and is_ghost_bounding_box:
+            log_text = f"{self.image_name} | segmentation | ghost bounding box"
+            log_text += " --> fixed" if self.apply_auto_fixes else ""
+            Logger.log_info_alt(log_text)
+        if self.apply_auto_fixes:
+            is_ghost_bounding_box = False
+        return is_ghost_bounding_box
+
+    def _update_bitmap_data(self, label: dict):
+        updated_label = sly.Label.from_json(label, self.project_meta)
+        self._update_label(updated_label)
+        # Update label object for later checks
+        label = updated_label.to_json()
+        label["mask"] = sly.geometry.bitmap.Bitmap.base64_2_data(
+            label["bitmap"]["data"]
+        )
