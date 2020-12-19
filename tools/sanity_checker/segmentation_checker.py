@@ -29,9 +29,7 @@ class SegmentationChecker(LabelChecker):
         is_ok &= not self._is_small_label(
             label, minimum_area=10, delete_threshold_area=5
         )
-        is_ok &= not self._is_outside_image_frame(
-            label, image_border_size=140, fix_issue=True
-        )
+        is_ok &= not self._is_outside_image_frame(label, image_border_size=140)
         is_ok &= not self._is_overlapping_label(label)
         return is_ok
 
@@ -39,7 +37,9 @@ class SegmentationChecker(LabelChecker):
         self, label: dict, minimum_area: int, delete_threshold_area: int = -1
     ):
         is_small_label = np.sum(label["mask"]) < minimum_area
-        removed_label = np.sum(label["mask"]) < delete_threshold_area
+        removed_label = (
+            np.sum(label["mask"]) < delete_threshold_area and self.apply_auto_fixes
+        )
 
         if removed_label:
             self._delete_label(label)
@@ -70,27 +70,41 @@ class SegmentationChecker(LabelChecker):
             Logger.log_info_alt(f"{self.image_name} | segmentation | overlapping label")
         return is_overlapping_label
 
-    def _is_outside_image_frame(
-        self, label: dict, image_border_size: int, fix_issue: bool = False
-    ):
+    def _is_outside_image_frame(self, label: dict, image_border_size: int):
         # Check if the label reaches into the black border (watermark)
 
-        mask = label["mask"]
+        mask = label["mask"].copy()
         origin = label["bitmap"]["origin"]
         min_x, max_x = origin[0], origin[0] + mask.shape[1]  # width
         min_y, max_y = origin[1], origin[1] + mask.shape[0]  # height
 
         is_outside_image_frame = False
-        is_outside_image_frame &= min_x < image_border_size
-        is_outside_image_frame &= max_x > self.image_width - image_border_size - 1
-        is_outside_image_frame &= min_y < image_border_size
-        is_outside_image_frame &= max_y > self.image_height - image_border_size - 1
+        is_outside_image_frame |= min_x < image_border_size
+        is_outside_image_frame |= max_x > self.image_width - image_border_size
+        is_outside_image_frame |= min_y < image_border_size
+        is_outside_image_frame |= max_y > self.image_height - image_border_size
 
-        if not fix_issue:
-            self._update_issue_tag(label, "Reached watermark", is_outside_image_frame)
+        if not self.apply_auto_fixes:
+            self._update_issue_tag(label, "Inside watermark", is_outside_image_frame)
+        elif is_outside_image_frame:
+            # Remove annotated pixels outside the main image, i.e., inside the watermark
+            mask[:, : image_border_size - min_x] = False
+            mask[:, self.image_width - image_border_size - min_x :] = False
+            mask[: image_border_size - min_y, :] = False
+            mask[self.image_height - image_border_size - min_y :, :] = False
+            label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(mask)
+            updated_label = sly.Label.from_json(label, self.project_meta)
+            self._update_label(updated_label)
+            # Update label object for later checks
+            label = updated_label.to_json()
+            label["mask"] = sly.geometry.bitmap.Bitmap.base64_2_data(
+                label["bitmap"]["data"]
+            )
+            # Remove issue tag if it previously existed
+            self._delete_issue_tag(label, "Inside watermark")
 
         if self.verbose and is_outside_image_frame:
-            log_text = f"{self.image_name} | segmentation | reached watermark"
-            log_text += " --> fixed" if fix_issue else ""
+            log_text = f"{self.image_name} | segmentation | inside watermark"
+            log_text += " --> fixed" if self.apply_auto_fixes else ""
             Logger.log_info_alt(log_text)
         return is_outside_image_frame

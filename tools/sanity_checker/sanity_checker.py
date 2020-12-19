@@ -223,13 +223,19 @@ class SanityChecker:
                         image.annotation, project_meta
                     )
                     bounding_box_checker = BoundingBoxChecker(
-                        image.image_name, updated_annotation, self.verbose
+                        image.image_name,
+                        project_meta,
+                        updated_annotation,
+                        not self.dry_run,
+                        self.verbose,
                     )
                     segmentation_checker = SegmentationChecker(
                         image.annotation["size"]["height"],
                         image.annotation["size"]["width"],
                         image.image_name,
+                        project_meta,
                         updated_annotation,
+                        not self.dry_run,
                         self.verbose,
                     )
                     bounding_box_job_names = self._get_image_job_names(
@@ -245,7 +251,6 @@ class SanityChecker:
                         # We do not convert to a SLY object since it is easier to operate with the JSON dictionary
                         if label["geometryType"] == "rectangle":
                             if not bounding_box_checker.run(label):
-                                update_image = True
                                 if bounding_box_job_names:
                                     for job_name in bounding_box_job_names:
                                         self.job_statistics[job_name][
@@ -255,9 +260,9 @@ class SanityChecker:
                                     self._found_issue_in_jobless_image(
                                         project_name, dataset.name, "rectangle"
                                     )
+                            update_image = bounding_box_checker.is_annotation_updated
                         elif label["geometryType"] == "bitmap":
                             if not segmentation_checker.run(label):
-                                update_image = True
                                 if segmentation_job_names:
                                     for job_name in segmentation_job_names:
                                         self.job_statistics[job_name][
@@ -267,6 +272,7 @@ class SanityChecker:
                                     self._found_issue_in_jobless_image(
                                         project_name, dataset.name, "bitmap"
                                     )
+                            update_image = segmentation_checker.is_annotation_updated
                         else:
                             Logger.log_warn(
                                 f"Found unsupported geometry type: {label['geometryType']}"
