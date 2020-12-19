@@ -29,10 +29,10 @@ class SegmentationChecker(LabelChecker):
         is_ok &= not self._is_small_label(
             label, minimum_area=10, delete_threshold_area=5
         )
-        is_ok &= not self._is_overlapping_label(label)
         is_ok &= not self._is_outside_image_frame(
             label, image_border_size=140, fix_issue=True
         )
+        is_ok &= not self._is_overlapping_label(label)
         return is_ok
 
     def _is_small_label(

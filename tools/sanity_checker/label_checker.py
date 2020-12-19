@@ -19,6 +19,10 @@ class LabelChecker(ABC):
     # All implemented checker share the same object as a single image could contain different label types
     updated_annotation = None
 
+    issue_tag_meta = sly.TagMeta(
+        name="issue", value_type=sly.TagValueType.ANY_STRING, color=[255, 0, 0]
+    )
+
     def __init__(self, image_name: str, updated_annotation, verbose: bool = False):
         super().__init__()
         self.image_name = image_name
@@ -56,7 +60,7 @@ class LabelChecker(ABC):
         for candidate_label in LabelChecker.updated_annotation.labels:
             if candidate_label.geometry.sly_id == label["id"]:
                 tagged_label = candidate_label.add_tag(
-                    LabelChecker._create_issue_tag(tag_text)
+                    sly.Tag(meta=LabelChecker.issue_tag_meta, value=tag_text)
                 )
                 LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
                     candidate_label
@@ -74,7 +78,8 @@ class LabelChecker(ABC):
         for candidate_label in LabelChecker.updated_annotation.labels:
             if candidate_label.geometry.sly_id == label["id"]:
                 tagged_label = label_delete_tag(
-                    candidate_label, LabelChecker._create_issue_tag(tag_text)
+                    candidate_label,
+                    sly.Tag(meta=LabelChecker.issue_tag_meta, value=tag_text),
                 )
                 LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
                     candidate_label
@@ -89,11 +94,3 @@ class LabelChecker(ABC):
             if tag["name"] == "Issue" and tag["value"] == tag_text:
                 return True
         return False
-
-    @staticmethod
-    def _create_issue_tag(tag_text: str):
-        issue_tag_meta = sly.TagMeta(
-            name="Issue", value_type=sly.TagValueType.ANY_STRING
-        )
-        issue_tag = sly.Tag(meta=issue_tag_meta, value=tag_text)
-        return issue_tag

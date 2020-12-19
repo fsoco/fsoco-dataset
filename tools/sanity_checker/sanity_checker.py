@@ -6,6 +6,7 @@ from tqdm import tqdm
 
 from similarity_scorer.utils.logger import Logger
 from .bounding_box_checker import BoundingBoxChecker
+from .label_checker import LabelChecker
 from .segmentation_checker import SegmentationChecker
 from .utils import safe_request, extract_geometry_type_from_job_name
 
@@ -30,7 +31,9 @@ class SanityChecker:
         self.sly_project_metas = {}  # The key is the respective project name
         self.datasets = {}  # The key is the respective project name
         self.jobs = []
-        self.job_statistics = {}
+        self.job_statistics = (
+            {}
+        )  # The key is the respective job name or a pseudo-job name
 
         if self.dry_run:
             Logger.log_warn("This is a DRYRUN, i.e., tags will not be uploaded.")
@@ -51,7 +54,9 @@ class SanityChecker:
     def __str__(self):
         string = ""
         max_length_line = 0
-        max_length_job_name = max([len(job_name) for job_name in self.job_statistics])
+        max_length_job_name = max(
+            [len(job_name) for job_name in self.job_statistics] + [0]
+        )
         for job_name, job_statistics in self.job_statistics.items():
             new_line = f'{job_name.ljust(max_length_job_name)} | discovered issues = {job_statistics["numberIssues"]}\n'
             string += new_line
@@ -118,6 +123,19 @@ class SanityChecker:
             self.sly_project_metas[sly_project.name] = sly.ProjectMeta.from_json(
                 project_meta_json
             )
+
+            # Add "Issue" tag if it does not exist yet
+            if LabelChecker.issue_tag_meta.name not in [
+                tag["name"] for tag in project_meta_json["tags"]
+            ]:
+                self.sly_project_metas[sly_project.name] = self.sly_project_metas[
+                    sly_project.name
+                ].add_tag_meta(LabelChecker.issue_tag_meta)
+                safe_request(
+                    self.sly_api.project.update_meta,
+                    sly_project.id,
+                    self.sly_project_metas[sly_project.name].to_json(),
+                )
 
             # Initialize datasets of this project
             self.datasets[sly_project.name] = []
