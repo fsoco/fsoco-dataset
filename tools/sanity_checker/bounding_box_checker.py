@@ -23,6 +23,7 @@ class BoundingBoxChecker(LabelChecker):
             label, minimum_area=25, delete_threshold_area=10
         )
         is_ok &= not self._is_outside_image_frame(label, image_border_size=140)
+        is_ok &= not self._is_distorted_box(label, minimum_ratio=0.9, maximum_ratio=2.5)
         return is_ok
 
     def _is_small_label(
@@ -47,11 +48,11 @@ class BoundingBoxChecker(LabelChecker):
     def _is_outside_image_frame(self, label: dict, image_border_size: int):
         # Check if the label reaches into the black border (watermark)
 
-        corners = label["points"]["exterior"]
-        min_x = min(corners[0][0], corners[1][0])
-        max_x = max(corners[0][0], corners[1][0])
-        min_y = min(corners[0][1], corners[1][1])
-        max_y = max(corners[0][1], corners[1][1])
+        corner_points = label["points"]["exterior"]
+        min_x = min(corner_points[0][0], corner_points[1][0])
+        max_x = max(corner_points[0][0], corner_points[1][0])
+        min_y = min(corner_points[0][1], corner_points[1][1])
+        max_y = max(corner_points[0][1], corner_points[1][1])
 
         is_outside_image_frame = False
         is_outside_image_frame |= min_x < image_border_size
@@ -81,6 +82,31 @@ class BoundingBoxChecker(LabelChecker):
         if self.apply_auto_fixes:
             is_outside_image_frame = False
         return is_outside_image_frame
+
+    def _is_distorted_box(
+        self, label: dict, minimum_ratio: float, maximum_ratio: float
+    ):
+        # maximum_ratio: height to width
+        # The reason for a distorted box could be that the box covers multiple labels
+
+        corner_points = label["points"]["exterior"]
+        box_width = np.abs(corner_points[0][0] - corner_points[1][0])
+        box_height = np.abs(corner_points[0][1] - corner_points[1][1])
+        ratio = box_height / box_width
+        greater_max_ratio = ratio > maximum_ratio
+        smaller_min_ratio = ratio < minimum_ratio
+        is_distorted_box = greater_max_ratio or smaller_min_ratio
+
+        self._update_issue_tag(label, "Suspicious aspect ratio", is_distorted_box)
+
+        if self.verbose and is_distorted_box:
+            log_text = f"{self.image_name} | bounding box | aspect ratio ({np.round(ratio, 1)} "
+            if greater_max_ratio:
+                log_text += f"> {maximum_ratio})"
+            elif smaller_min_ratio:
+                log_text += f"< {minimum_ratio})"
+            Logger.log_info_alt(log_text)
+        return is_distorted_box
 
     def _update_rectangle_data(self, label: dict):
         updated_label = sly.Label.from_json(label, self.project_meta)
