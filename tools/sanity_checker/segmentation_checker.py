@@ -35,7 +35,7 @@ class SegmentationChecker(LabelChecker):
         is_ok &= not self._is_ghost_bounding_box(label)
         is_ok &= not self._is_overlapping_label(label)
         is_ok &= not self._is_distorted_box(
-            label, maximum_ratio=2.5
+            label, minimum_ratio=0.9, maximum_ratio=2.5
         )  # Should be after ghost_box check
         return is_ok
 
@@ -138,20 +138,27 @@ class SegmentationChecker(LabelChecker):
             is_ghost_bounding_box = False
         return is_ghost_bounding_box
 
-    def _is_distorted_box(self, label: dict, maximum_ratio: float):
+    def _is_distorted_box(
+        self, label: dict, minimum_ratio: float, maximum_ratio: float
+    ):
         # maximum_ratio: height to width
         # The reasons for a distorted box could be that the mask covers multiple labels or
         #  there are some pixels that have been accidentally labeled but are separated
 
         ratio = label["mask"].shape[0] / label["mask"].shape[1]
-        is_distorted_box = ratio > maximum_ratio
+        greater_max_ratio = ratio > maximum_ratio
+        smaller_min_ratio = ratio < minimum_ratio
+        is_distorted_box = greater_max_ratio or smaller_min_ratio
 
         self._update_issue_tag(label, "Suspicious aspect ratio", is_distorted_box)
 
         if self.verbose and is_distorted_box:
-            Logger.log_info_alt(
-                f"{self.image_name} | segmentation | aspect ratio ({np.round(ratio, 1)} > {maximum_ratio})"
-            )
+            log_text = f"{self.image_name} | segmentation | aspect ratio ({np.round(ratio, 1)} "
+            if greater_max_ratio:
+                log_text += f"> {maximum_ratio})"
+            elif smaller_min_ratio:
+                log_text += f"< {minimum_ratio})"
+            Logger.log_info_alt(log_text)
         return is_distorted_box
 
     def _update_bitmap_data(self, label: dict):
