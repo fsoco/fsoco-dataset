@@ -224,15 +224,17 @@ class SanityChecker:
                     )
                     bounding_box_checker = BoundingBoxChecker(
                         image.image_name,
+                        image.annotation["size"]["height"],
+                        image.annotation["size"]["width"],
                         project_meta,
                         updated_annotation,
                         not self.dry_run,
                         self.verbose,
                     )
                     segmentation_checker = SegmentationChecker(
+                        image.image_name,
                         image.annotation["size"]["height"],
                         image.annotation["size"]["width"],
-                        image.image_name,
                         project_meta,
                         updated_annotation,
                         not self.dry_run,

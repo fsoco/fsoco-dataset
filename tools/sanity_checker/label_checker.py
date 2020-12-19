@@ -27,6 +27,8 @@ class LabelChecker(ABC):
     def __init__(
         self,
         image_name: str,
+        image_height: int,
+        image_width: int,
         project_meta,
         updated_annotation,
         apply_auto_fixes: bool,
@@ -39,6 +41,10 @@ class LabelChecker(ABC):
         self.verbose = verbose
         LabelChecker.updated_annotation = updated_annotation
         LabelChecker.is_annotation_updated = False
+
+        # We use these numbers to check for labels reaching into the watermark
+        self.image_height = image_height
+        self.image_width = image_width
 
     @abstractmethod
     def run(self, label: dict) -> bool:
