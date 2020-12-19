@@ -18,7 +18,9 @@ class SegmentationChecker(LabelChecker):
 
     def run(self, label: dict):
         if label["geometryType"] != "bitmap":
-            raise ValueError(f"Wrong label type: {label['geometryType']}")
+            raise ValueError(
+                f"Wrong label type: {label['geometryType']}. Expected: bitmap."
+            )
 
         # Create numpy array from bitmap
         label["mask"] = sly.geometry.bitmap.Bitmap.base64_2_data(
@@ -32,30 +34,35 @@ class SegmentationChecker(LabelChecker):
         is_ok &= not self._is_outside_image_frame(label, image_border_size=140)
         is_ok &= not self._is_ghost_bounding_box(label)
         is_ok &= not self._is_overlapping_label(label)
+        is_ok &= not self._is_distorted_box(
+            label, maximum_ratio=2.5
+        )  # Should be after ghost_box check
         return is_ok
 
     def _is_small_label(
         self, label: dict, minimum_area: int, delete_threshold_area: int = -1
     ):
         is_small_label = np.sum(label["mask"]) < minimum_area
-        removed_label = (
+        remove_label = (
             np.sum(label["mask"]) < delete_threshold_area and self.apply_auto_fixes
         )
 
-        if removed_label:
+        if remove_label:
             self._delete_label(label)
         else:
             self._update_issue_tag(label, "Small label", is_small_label)
 
         if self.verbose and is_small_label:
             log_text = f'{self.image_name} | segmentation | small label ({np.sum(label["mask"])} < {minimum_area})'
-            log_text += " --> removed" if removed_label else ""
+            log_text += " --> removed" if remove_label else ""
             Logger.log_info_alt(log_text)
-        if removed_label:
+        if remove_label:
             is_small_label = False
         return is_small_label
 
     def _is_overlapping_label(self, label: dict):
+        # Check if a single pixel belongs to multiple instance masks
+
         mask = label["mask"]
         origin = label["bitmap"]["origin"]
         self.image_mask[
@@ -130,6 +137,22 @@ class SegmentationChecker(LabelChecker):
         if self.apply_auto_fixes:
             is_ghost_bounding_box = False
         return is_ghost_bounding_box
+
+    def _is_distorted_box(self, label: dict, maximum_ratio: float):
+        # maximum_ratio: height to width
+        # The reasons for a distorted box could be that the mask covers multiple labels or
+        #  there are some pixels that have been accidentally labeled but are separated
+
+        ratio = label["mask"].shape[0] / label["mask"].shape[1]
+        is_distorted_box = ratio > maximum_ratio
+
+        self._update_issue_tag(label, "Suspicious aspect ratio", is_distorted_box)
+
+        if self.verbose and is_distorted_box:
+            Logger.log_info_alt(
+                f"{self.image_name} | segmentation | aspect ratio ({np.round(ratio, 1)} > {maximum_ratio})"
+            )
+        return is_distorted_box
 
     def _update_bitmap_data(self, label: dict):
         updated_label = sly.Label.from_json(label, self.project_meta)

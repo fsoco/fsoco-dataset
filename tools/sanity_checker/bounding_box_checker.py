@@ -7,7 +7,9 @@ from .label_checker import LabelChecker
 class BoundingBoxChecker(LabelChecker):
     def run(self, label: dict):
         if label["geometryType"] != "rectangle":
-            raise ValueError(f"Wrong label type: {label['geometryType']}")
+            raise ValueError(
+                f"Wrong label type: {label['geometryType']}. Expected: rectangle."
+            )
 
         # Compute area of bounding box
         corner_points = label["points"]["exterior"]
