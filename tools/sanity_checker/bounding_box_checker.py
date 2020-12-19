@@ -18,16 +18,26 @@ class BoundingBoxChecker(LabelChecker):
         )
 
         is_ok = True
-        is_ok &= not self._is_small_label(label, minimum_area=10)
+        is_ok &= not self._is_small_label(
+            label, minimum_area=25, delete_threshold_area=10
+        )
         return is_ok
 
-    def _is_small_label(self, label: dict, minimum_area: int):
+    def _is_small_label(
+        self, label: dict, minimum_area: int, delete_threshold_area: int = -1
+    ):
         is_small_label = label["area"] < minimum_area
+        remove_label = label["area"] < delete_threshold_area and self.apply_auto_fixes
 
-        self._update_issue_tag(label, "Small label", is_small_label)
+        if remove_label:
+            self._delete_label(label)
+        else:
+            self._update_issue_tag(label, "Small label", is_small_label)
 
         if self.verbose and is_small_label:
-            Logger.log_info_alt(
-                f'{self.image_name} | bounding box | small label ({label["area"]} < {minimum_area})'
-            )
+            log_text = f'{self.image_name} | bounding box | small label ({label["area"]} < {minimum_area})'
+            log_text += " --> removed" if remove_label else ""
+            Logger.log_info_alt(log_text)
+        if remove_label:
+            is_small_label = False
         return is_small_label
