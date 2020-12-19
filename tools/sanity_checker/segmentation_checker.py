@@ -1,20 +1,17 @@
 import numpy as np
 import supervisely_lib as sly
+from scipy import ndimage
 
 from similarity_scorer.utils.logger import Logger
 from .label_checker import LabelChecker
 
 
 class SegmentationChecker(LabelChecker):
-    def __init__(self, image_height: int, image_width: int, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # We use this to check for overlapping labels within an image
-        self.image_mask = np.zeros((image_height, image_width), dtype=np.int)
-
-        # We use these numbers to check for labels reaching into the watermark
-        self.image_height = image_height
-        self.image_width = image_width
+        self.image_mask = np.zeros((self.image_height, self.image_width), dtype=np.int)
 
     def run(self, label: dict):
         if label["geometryType"] != "bitmap":
@@ -33,6 +30,7 @@ class SegmentationChecker(LabelChecker):
         )
         is_ok &= not self._is_outside_image_frame(label, image_border_size=140)
         is_ok &= not self._is_ghost_bounding_box(label)
+        is_ok &= not self._is_perforated(label)
         is_ok &= not self._is_overlapping_label(label)
         is_ok &= not self._is_distorted_box(
             label, minimum_ratio=0.9, maximum_ratio=2.5
@@ -160,6 +158,31 @@ class SegmentationChecker(LabelChecker):
                 log_text += f"< {minimum_ratio})"
             Logger.log_info_alt(log_text)
         return is_distorted_box
+
+    def _is_perforated(self, label: dict):
+        # Check for holes in the segmentation mask
+
+        # Fill holes, if there are any. This will only change true holes.
+        updated_mask = ndimage.binary_fill_holes(label["mask"])
+        is_perforated = np.any(updated_mask != label["mask"])
+
+        if not self.apply_auto_fixes:
+            self._update_issue_tag(label, "Perforated label", is_perforated)
+        elif is_perforated:
+            label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
+                updated_mask
+            )
+            self._update_bitmap_data(label)
+            # Remove issue tag if it previously existed
+            self._delete_issue_tag(label, "Perforated label")
+
+        self._update_issue_tag(label, "Perforated label", is_perforated)
+
+        if self.verbose and is_perforated:
+            log_text = f"{self.image_name} | segmentation | perforated label"
+            log_text += " --> fixed" if self.apply_auto_fixes else ""
+            Logger.log_info_alt(log_text)
+        return is_perforated
 
     def _update_bitmap_data(self, label: dict):
         updated_label = sly.Label.from_json(label, self.project_meta)

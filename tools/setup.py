@@ -36,6 +36,7 @@ setup(
         "click>=7.0.0",
         "pyyaml>=5.0.0",
         "numpy>=1.17.2",
+        "scipy>=1.5.1",
         "sklearn",
         "torch>=1.4.0",
         "img2vec_pytorch",
