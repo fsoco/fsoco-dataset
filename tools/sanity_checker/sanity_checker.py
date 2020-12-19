@@ -42,7 +42,6 @@ class SanityChecker:
         self._initialize_supervisely(
             server_address, server_token, team_name, workspace_name, project_name
         )
-        # self._initialize_datasets()
         self._initialize_jobs()
 
     def __del__(self):
@@ -166,17 +165,30 @@ class SanityChecker:
                     job_names.append(job.name)
         return job_names
 
+    def _found_issue_in_jobless_image(
+        self, project_name: str, dataset_name: str, geometry_type: str
+    ):
+        # Create pseudo job for "project - dataset - geometry" to account for images that are not assigned to any job
+        pseudo_job_name = f"{project_name} - {dataset_name} - {geometry_type}"
+        if pseudo_job_name not in self.job_statistics.keys():
+            # Use CamelCase to match the API's convention when creating JSON dictionaries
+            self.job_statistics[pseudo_job_name] = {
+                "geometryType": geometry_type,
+                "numberIssues": 0,
+            }
+        self.job_statistics[pseudo_job_name]["numberIssues"] += 1
+
     def _run_project(self, project, project_meta):
         for dataset in self.datasets[project.name]:
             self._run_dataset(dataset, project_meta, project.name)
 
-    def _run_dataset(self, dataset, project_meta, project_name=""):
+    def _run_dataset(self, dataset, project_meta, project_name: str):
         # These are all images in the dataset
         images = safe_request(self.sly_api.image.get_list, dataset.id)
 
         with tqdm(
             total=len(images),
-            desc=f"Processing dataset: {project_name + ' - ' if project_name else ''}{dataset.name}",
+            desc=f"Processing dataset: {project_name} - {dataset.name}",
         ) as pbar:
             # Batch images to reduce the number of API calls
             for batch in sly.batched(images, batch_size=10):
@@ -216,13 +228,27 @@ class SanityChecker:
                         if label["geometryType"] == "rectangle":
                             if not bounding_box_checker.run(label):
                                 update_image = True
-                                for job_name in bounding_box_job_names:
-                                    self.job_statistics[job_name]["numberIssues"] += 1
+                                if bounding_box_job_names:
+                                    for job_name in bounding_box_job_names:
+                                        self.job_statistics[job_name][
+                                            "numberIssues"
+                                        ] += 1
+                                else:
+                                    self._found_issue_in_jobless_image(
+                                        project_name, dataset.name, "rectangle"
+                                    )
                         elif label["geometryType"] == "bitmap":
                             if not segmentation_checker.run(label):
                                 update_image = True
-                                for job_name in segmentation_job_names:
-                                    self.job_statistics[job_name]["numberIssues"] += 1
+                                if segmentation_job_names:
+                                    for job_name in segmentation_job_names:
+                                        self.job_statistics[job_name][
+                                            "numberIssues"
+                                        ] += 1
+                                else:
+                                    self._found_issue_in_jobless_image(
+                                        project_name, dataset.name, "bitmap"
+                                    )
                         else:
                             Logger.log_warn(
                                 f"Found unsupported geometry type: {label['geometryType']}"
