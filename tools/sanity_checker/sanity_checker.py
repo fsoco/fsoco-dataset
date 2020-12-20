@@ -52,6 +52,8 @@ class SanityChecker:
             Logger.log_warn("This was a DRYRUN, i.e., tags have not been uploaded.")
 
     def __str__(self):
+        if not self.job_statistics:
+            return ""
         string = ""
         max_length_line = 0
         max_length_job_name = max(
@@ -62,7 +64,12 @@ class SanityChecker:
             string += new_line
             max_length_line = max(max_length_line, len(new_line))
         max_length_line -= 1  # Subtract new line break \n
-        string = "-" * max_length_line + "\n" + string + "-" * max_length_line
+        string = "-" * max_length_line + "\n" + string + "-" * max_length_line + "\n"
+        string += (
+            " " * max_length_job_name
+            + f" | total issues = {sum([job['numberIssues'] for job in self.job_statistics.values()])}\n"
+        )
+        string += "-" * max_length_line
         return string
 
     def run(self):
@@ -209,7 +216,7 @@ class SanityChecker:
             desc=f"Processing dataset: {project_name} - {dataset.name}",
         ) as pbar:
             # Batch images to reduce the number of API calls
-            for batch in sly.batched(images, batch_size=10):
+            for batch in sly.batched(images, batch_size=50):
                 image_ids = [image.id for image in batch]
                 annotations = safe_request(
                     self.sly_api.annotation.download_batch, dataset.id, image_ids

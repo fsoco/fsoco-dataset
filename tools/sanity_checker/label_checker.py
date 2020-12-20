@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Optional
 
 import supervisely_lib as sly
 from supervisely_lib.annotation.tag_collection import TagCollection
@@ -45,6 +46,9 @@ class LabelChecker(ABC):
         # We use these numbers to check for labels reaching into the watermark
         self.image_height = image_height
         self.image_width = image_width
+
+        # The checks run on this object
+        self.label: Optional[dict] = None
 
     @abstractmethod
     def run(self, label: dict) -> bool:
