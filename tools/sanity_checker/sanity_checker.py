@@ -1,5 +1,7 @@
 import sys
 from typing import Union
+from pathlib import Path
+import json
 
 import supervisely_lib as sly
 from tqdm import tqdm
@@ -75,6 +77,11 @@ class SanityChecker:
     def run(self):
         for project in self.sly_projects:
             self._run_project(project, self.sly_project_metas[project.name])
+
+    def save_results(self, filename: Path):
+        with open(filename, "w") as f:
+            json.dump(self.job_statistics, f, indent=2)
+        Logger.log_info(f"Saved results to file: {filename.absolute()}")
 
     def _initialize_supervisely(
         self,

@@ -1,4 +1,5 @@
 import click
+from pathlib import Path
 
 from similarity_scorer.utils.logger import Logger
 from .sanity_checker import SanityChecker
@@ -35,6 +36,13 @@ from .sanity_checker import SanityChecker
     help="Secret token to access Supervisely.",
 )
 @click.option(
+    "--results_path",
+    type=click.Path(exists=False),
+    default=None,
+    help="Save the results as JSON in the specified folder."
+    + " It will overwrite existing logs.",
+)
+@click.option(
     "--dry_run", is_flag=True, help="Do not update the labels on Supervisely."
 )
 @click.option("--verbose", is_flag=True, help="Print all discovered issues.")
@@ -43,6 +51,7 @@ def sanity_checker(
     workspace_name: str,
     project_name: tuple,
     server_token: str,
+    results_path: str,
     dry_run: bool,
     verbose: bool,
 ):
@@ -64,6 +73,14 @@ def sanity_checker(
     checker.run()
     Logger.log_info("Sanity checks finished with the following results.")
     print(checker)
+
+    if results_path is not None:
+        results_path = Path(results_path)
+        results_filename = results_path / "sanity_checker.json"
+        if not results_path.exists():
+            results_path.mkdir(parents=True)
+            Logger.log_info(f"Created results directory: {results_path.absolute()}")
+        checker.save_results(results_filename)
 
 
 if __name__ == "__main__":
