@@ -76,7 +76,7 @@ def sanity_checker(
 
     if results_path is not None:
         results_path = Path(results_path)
-        results_filename = results_path / "sanity_checker.json"
+        results_filename = results_path / "sanity_checks.json"
         if not results_path.exists():
             results_path.mkdir(parents=True)
             Logger.log_info(f"Created results directory: {results_path.absolute()}")
