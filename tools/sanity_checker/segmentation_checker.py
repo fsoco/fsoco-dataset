@@ -31,6 +31,7 @@ class SegmentationChecker(LabelChecker):
         is_ok &= not self._is_outside_image_frame(image_border_size=140)
         is_ok &= not self._is_ghost_bounding_box()
         is_ok &= not self._is_perforated()
+        is_ok &= not self._is_separated(number_pixels=15)
         is_ok &= not self._is_overlapping_label()
         is_ok &= not self._is_distorted_box(
             minimum_ratio=0.5, maximum_ratio=3.0
@@ -187,6 +188,37 @@ class SegmentationChecker(LabelChecker):
         if self.apply_auto_fixes:
             is_perforated = False
         return is_perforated
+
+    def _is_separated(self, number_pixels: int):
+        # Check for pixels separated from the main mask
+
+        is_separated = False
+        labeled_array, num_features = ndimage.measurements.label(self.label["mask"])
+        if num_features > 1:
+            updated_mask = self.label["mask"].copy()
+            for patch_number in range(1, num_features + 1):
+                patch_size = labeled_array[labeled_array == patch_number].size
+                if patch_size < number_pixels:
+                    is_separated = True
+                    updated_mask[labeled_array == patch_number] = False
+
+        if not self.apply_auto_fixes:
+            self._update_issue_tag(self.label, "Separated label", is_separated)
+        elif is_separated:
+            self.label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
+                updated_mask
+            )
+            self._update_bitmap_data()
+            # Remove issue tag if it previously existed
+            self._delete_issue_tag(self.label, "Separated label")
+
+        if self.verbose and is_separated:
+            log_text = f"{self.image_name} | segmentation | separated label"
+            log_text += " --> fixed" if self.apply_auto_fixes else ""
+            Logger.log_info_alt(log_text)
+        if self.apply_auto_fixes:
+            is_separated = False
+        return is_separated
 
     def _update_bitmap_data(self):
         updated_label = sly.Label.from_json(self.label, self.project_meta)
