@@ -24,7 +24,7 @@ jobs:
           pip install --editable .[sly]
 
       - name: Run sanity checks
-        run: fsoco sanity-checker -t "fsoco" -w "Image donations" -p "BME watermarked" -p "FSB Racing Team" -p "Einstein Motorsport" --token ${{secrets.SLY_TOKEN}} --results_path "results" --verbose --dry_run
+        run: fsoco sanity-checker ${{secrets.SANITY_CHECKS_TEAMS}} --token ${{secrets.SLY_TOKEN}} --results_path "results" --dry_run
 
       - name: Upload results
         uses: actions/upload-artifact@v2
