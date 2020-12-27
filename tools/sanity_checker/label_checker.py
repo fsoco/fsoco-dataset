@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional
+import functools
 
 import supervisely_lib as sly
 from supervisely_lib.annotation.tag_collection import TagCollection
@@ -14,6 +15,17 @@ def label_delete_tag(label, tag):
         if label_tag.meta.name != tag.meta.name or label_tag.value != tag.value:
             retained_tags.append(label_tag)
     return label.clone(tags=TagCollection(items=retained_tags))
+
+
+def check_label_existence(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        # A previous check delete the label. Thus, fallback to returning no issue.
+        if self.label is None:
+            return False
+        return func(self, *args, **kwargs)
+
+    return wrapper
 
 
 class LabelChecker(ABC):

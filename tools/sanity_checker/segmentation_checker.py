@@ -3,7 +3,7 @@ import supervisely_lib as sly
 from scipy import ndimage
 
 from similarity_scorer.utils.logger import Logger
-from .label_checker import LabelChecker
+from .label_checker import LabelChecker, check_label_existence
 
 
 class SegmentationChecker(LabelChecker):
@@ -41,6 +41,7 @@ class SegmentationChecker(LabelChecker):
         )  # Should be after ghost_box check
         return is_ok
 
+    @check_label_existence
     def _is_small_label(self, minimum_area: int, delete_threshold_area: int = -1):
         is_small_label = np.sum(self.label["mask"]) < minimum_area
         remove_label = (
@@ -58,8 +59,10 @@ class SegmentationChecker(LabelChecker):
             Logger.log_info_alt(log_text)
         if remove_label:
             is_small_label = False
+            self.label = None
         return is_small_label
 
+    @check_label_existence
     def _is_overlapping_label(self):
         # Check if a single pixel belongs to multiple instance masks
 
@@ -80,6 +83,7 @@ class SegmentationChecker(LabelChecker):
             Logger.log_info_alt(f"{self.image_name} | segmentation | overlapping label")
         return is_overlapping_label
 
+    @check_label_existence
     def _is_outside_image_frame(self, image_border_size: int):
         # Check if the label reaches into the black border (watermark)
 
@@ -119,6 +123,7 @@ class SegmentationChecker(LabelChecker):
             is_outside_image_frame = False
         return is_outside_image_frame
 
+    @check_label_existence
     def _is_ghost_bounding_box(self):
         # Sometimes the inferred bounding box is larger than the actual mask
 
@@ -144,6 +149,7 @@ class SegmentationChecker(LabelChecker):
             is_ghost_bounding_box = False
         return is_ghost_bounding_box
 
+    @check_label_existence
     def _is_distorted_box(self, minimum_ratio: float, maximum_ratio: float):
         # maximum_ratio: height to width
         # The reasons for a distorted box could be that the mask covers multiple labels or
@@ -165,6 +171,7 @@ class SegmentationChecker(LabelChecker):
             Logger.log_info_alt(log_text)
         return is_distorted_box
 
+    @check_label_existence
     def _is_perforated(self):
         # Check for holes in the segmentation mask
 
@@ -192,9 +199,11 @@ class SegmentationChecker(LabelChecker):
             is_perforated = False
         return is_perforated
 
+    @check_label_existence
     def _is_separated(self, number_pixels: int):
         # Check for pixels separated from the main mask
 
+        remove_label = False
         is_separated = False
         labeled_array, num_features = ndimage.measurements.label(self.label["mask"])
         if num_features > 1:
@@ -208,12 +217,18 @@ class SegmentationChecker(LabelChecker):
         if not self.apply_auto_fixes:
             self._update_issue_tag(self.label, "Separated label", is_separated)
         elif is_separated:
-            self.label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
-                updated_mask
-            )
-            self._update_bitmap_data()
-            # Remove issue tag if it previously existed
-            self._delete_issue_tag(self.label, "Separated label")
+            # All image patches comprised less than the minimum number of pixels
+            if not np.sum(updated_mask):
+                remove_label = True
+            else:
+                self.label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
+                    updated_mask
+                )
+                self._update_bitmap_data()
+                # Remove issue tag if it previously existed
+                self._delete_issue_tag(self.label, "Separated label")
+        if remove_label:
+            self._delete_label(self.label)
 
         if self.verbose and is_separated:
             log_text = f"{self.image_name} | segmentation | separated label"
@@ -221,6 +236,8 @@ class SegmentationChecker(LabelChecker):
             Logger.log_info_alt(log_text)
         if self.apply_auto_fixes:
             is_separated = False
+        if remove_label:
+            self.label = None
         return is_separated
 
     def _update_bitmap_data(self):

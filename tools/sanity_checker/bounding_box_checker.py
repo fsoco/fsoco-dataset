@@ -2,7 +2,7 @@ import numpy as np
 import supervisely_lib as sly
 
 from similarity_scorer.utils.logger import Logger
-from .label_checker import LabelChecker
+from .label_checker import LabelChecker, check_label_existence
 
 
 class BoundingBoxChecker(LabelChecker):
@@ -29,6 +29,7 @@ class BoundingBoxChecker(LabelChecker):
         is_ok &= not self._is_distorted_box(minimum_ratio=0.5, maximum_ratio=3.0)
         return is_ok
 
+    @check_label_existence
     def _is_small_label(self, minimum_area: int, delete_threshold_area: int = -1):
         is_small_label = self.label["area"] < minimum_area
         remove_label = (
@@ -46,8 +47,10 @@ class BoundingBoxChecker(LabelChecker):
             Logger.log_info_alt(log_text)
         if remove_label:
             is_small_label = False
+            self.label = None
         return is_small_label
 
+    @check_label_existence
     def _is_outside_image_frame(self, image_border_size: int):
         # Check if the label reaches into the black border (watermark)
 
@@ -88,6 +91,7 @@ class BoundingBoxChecker(LabelChecker):
             is_outside_image_frame = False
         return is_outside_image_frame
 
+    @check_label_existence
     def _is_distorted_box(self, minimum_ratio: float, maximum_ratio: float):
         # maximum_ratio: height to width
         # The reason for a distorted box could be that the box covers multiple labels
