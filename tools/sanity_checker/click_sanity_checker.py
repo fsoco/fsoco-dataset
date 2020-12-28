@@ -26,7 +26,7 @@ from .sanity_checker import SanityChecker
     type=str,
     required=True,
     multiple=True,
-    help="Specify a Supervisely project name. You can use this flag multiple times.",
+    help="Specify a Supervisely project name. You can use this option multiple times.",
 )
 @click.option(
     "--token",
@@ -34,6 +34,15 @@ from .sanity_checker import SanityChecker
     type=str,
     required=True,
     help="Secret token to access Supervisely.",
+)
+@click.option(
+    "--label_type",
+    "-l",
+    type=click.Choice(["bitmap", "rectangle"], case_sensitive=False),
+    default=("bitmap", "rectangle"),
+    multiple=True,
+    help="If specified, only labels of this type will be checked."
+    + " You can use this option multiple times",
 )
 @click.option(
     "--results_path",
@@ -51,6 +60,7 @@ def sanity_checker(
     workspace_name: str,
     project_name: tuple,
     server_token: str,
+    label_type: tuple,
     results_path: str,
     dry_run: bool,
     verbose: bool,
@@ -67,6 +77,7 @@ def sanity_checker(
         team_name,
         workspace_name,
         project_name,
+        label_type,
         dry_run,
         verbose,
     )

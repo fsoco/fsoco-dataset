@@ -21,11 +21,13 @@ class SanityChecker:
         team_name: str,
         workspace_name: str,
         project_name: Union[tuple, str],
+        label_type: tuple,
         dry_run: bool = False,
         verbose: bool = False,
     ):
         self.dry_run = dry_run
         self.verbose = verbose
+        self.label_types_to_check = label_type
         self.sly_api = None
         self.sly_team = None
         self.sly_workspace = None
@@ -293,6 +295,8 @@ class SanityChecker:
 
                     # Iterate over labels in current image
                     for label in image.annotation["objects"]:
+                        if not label["geometryType"] in self.label_types_to_check:
+                            continue
                         # We do not convert to a SLY object since it is easier to operate with the JSON dictionary
                         if label["geometryType"] == "rectangle":
                             bounding_box_checker.run(label)
