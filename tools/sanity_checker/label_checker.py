@@ -103,7 +103,7 @@ class LabelChecker(ABC):
     @staticmethod
     def _add_issue_tag(label: dict, tag_text: str):
         # Do not tag multiple times
-        if LabelChecker._is_issue_tagged(label, tag_text):
+        if LabelChecker.is_issue_tagged(label, tag_text):
             return
 
         # Search for this label in the updated_annotations object
@@ -122,7 +122,7 @@ class LabelChecker(ABC):
 
     @staticmethod
     def _delete_issue_tag(label: dict, tag_text: str):
-        if not LabelChecker._is_issue_tagged(label, tag_text):
+        if not LabelChecker.is_issue_tagged(label, tag_text):
             return
 
         # Search for this label in the updated_annotations object
@@ -141,17 +141,17 @@ class LabelChecker(ABC):
                 break
 
     @staticmethod
-    def _is_issue_tagged(label: dict, tag_text: str):
+    def is_issue_tagged(label: dict, tag_text: Optional[str] = None):
         for tag in label["tags"]:
-            if (
-                tag["name"] == LabelChecker.issue_tag_meta.name
-                and tag["value"] == tag_text
-            ):
-                return True
+            if tag["name"] == LabelChecker.issue_tag_meta.name:
+                if tag_text is None:
+                    return True
+                elif tag["value"] == tag_text:
+                    return True
         return False
 
     @staticmethod
-    def _is_resolved_tagged(label: dict):
+    def is_resolved_tagged(label: dict):
         for tag in label["tags"]:
             if tag["name"] == LabelChecker.resolved_tag_meta.name:
                 return True

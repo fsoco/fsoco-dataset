@@ -61,15 +61,28 @@ class SanityChecker:
         max_length_job_name = max(
             [len(job_name) for job_name in self.job_statistics] + [0]
         )
+        total_labels = str(
+            sum([job["number_labels"] for job in self.job_statistics.values()])
+        )
+        total_issues = str(
+            sum([job["number_issues"] for job in self.job_statistics.values()])
+        )
+        labels_just = len(total_labels)
+        issues_just = len(total_issues)
         for job_name, job_statistics in self.job_statistics.items():
-            new_line = f'{job_name.ljust(max_length_job_name)} | discovered issues = {job_statistics["numberIssues"]}\n'
+            new_line = (
+                f"{job_name.ljust(max_length_job_name)}"
+                + f" | labels = {str(job_statistics['number_labels']).rjust(labels_just)}"
+                + f" | issues = {str(job_statistics['number_issues']).rjust(issues_just)}\n"
+            )
             string += new_line
             max_length_line = max(max_length_line, len(new_line))
         max_length_line -= 1  # Subtract new line break \n
         string = "-" * max_length_line + "\n" + string + "-" * max_length_line + "\n"
         string += (
             " " * max_length_job_name
-            + f" | total issues = {sum([job['numberIssues'] for job in self.job_statistics.values()])}\n"
+            + f" | labels = {total_labels.rjust(labels_just)}"
+            + f" | issues = {total_issues.rjust(issues_just)}\n"
         )
         string += "-" * max_length_line
         return string
@@ -190,10 +203,10 @@ class SanityChecker:
             # ToDo: Workaround because the API does not fill out the field 'classes_to_label'
             geometry_type = extract_geometry_type_from_job_name(job.name)
 
-            # Use CamelCase to match the API's convention when creating JSON dictionaries
             self.job_statistics[job.name] = {
-                "geometryType": geometry_type,
-                "numberIssues": 0,
+                "geometry_type": geometry_type,
+                "number_labels": 0,
+                "number_issues": 0,
             }
 
     def _get_image_job_names(self, image_name: str, geometry_type: str) -> list:
@@ -203,23 +216,29 @@ class SanityChecker:
             for job_image in job.entities:
                 if (
                     job_image["name"] == image_name
-                    and self.job_statistics[job.name]["geometryType"] == geometry_type
+                    and self.job_statistics[job.name]["geometry_type"] == geometry_type
                 ):
                     job_names.append(job.name)
         return job_names
 
-    def _found_issue_in_jobless_image(
-        self, project_name: str, dataset_name: str, geometry_type: str
+    def _found_label_in_jobless_image(
+        self,
+        project_name: str,
+        dataset_name: str,
+        geometry_type: str,
+        found_issue: bool = False,
     ):
         # Create pseudo job for "project - dataset - geometry" to account for images that are not assigned to any job
         pseudo_job_name = f"{project_name} - {dataset_name} - {geometry_type}"
         if pseudo_job_name not in self.job_statistics.keys():
-            # Use CamelCase to match the API's convention when creating JSON dictionaries
             self.job_statistics[pseudo_job_name] = {
-                "geometryType": geometry_type,
-                "numberIssues": 0,
+                "geometry_type": geometry_type,
+                "number_labels": 0,
+                "number_issues": 0,
             }
-        self.job_statistics[pseudo_job_name]["numberIssues"] += 1
+        self.job_statistics[pseudo_job_name]["number_labels"] += 1
+        if found_issue:
+            self.job_statistics[pseudo_job_name]["number_issues"] += 1
 
     def _run_project(self, project, project_meta):
         for dataset in self.datasets[project.name]:
@@ -272,48 +291,64 @@ class SanityChecker:
                         image.image_name, "bitmap"
                     )
 
-                    update_image = False
                     # Iterate over labels in current image
                     for label in image.annotation["objects"]:
                         # We do not convert to a SLY object since it is easier to operate with the JSON dictionary
                         if label["geometryType"] == "rectangle":
-                            if not bounding_box_checker.run(label):
-                                if bounding_box_job_names:
-                                    for job_name in bounding_box_job_names:
-                                        self.job_statistics[job_name][
-                                            "numberIssues"
-                                        ] += 1
-                                else:
-                                    self._found_issue_in_jobless_image(
-                                        project_name, dataset.name, "rectangle"
-                                    )
-                            update_image = bounding_box_checker.is_annotation_updated
+                            bounding_box_checker.run(label)
                         elif label["geometryType"] == "bitmap":
-                            if not segmentation_checker.run(label):
-                                if segmentation_job_names:
-                                    for job_name in segmentation_job_names:
-                                        self.job_statistics[job_name][
-                                            "numberIssues"
-                                        ] += 1
-                                else:
-                                    self._found_issue_in_jobless_image(
-                                        project_name, dataset.name, "bitmap"
-                                    )
-                            update_image = segmentation_checker.is_annotation_updated
+                            segmentation_checker.run(label)
                         else:
                             Logger.log_warn(
                                 f"Found unsupported geometry type: {label['geometryType']}"
                             )
 
-                    if update_image:
-                        if id(bounding_box_checker.updated_annotation) != id(
-                            segmentation_checker.updated_annotation
-                        ):
-                            raise RuntimeError("Memory addresses do not match.")
+                    # Assertion that the memory still matches
+                    if id(bounding_box_checker.updated_annotation) != id(
+                        segmentation_checker.updated_annotation
+                    ) or id(bounding_box_checker.updated_annotation) != id(
+                        LabelChecker.updated_annotation
+                    ):
+                        raise RuntimeError("Memory addresses do not match.")
+
+                    # One of the label checkers changed the labels
+                    if (
+                        bounding_box_checker.is_annotation_updated
+                        or segmentation_checker.is_annotation_updated
+                    ):
                         updated_annotations["image_ids"].append(image.image_id)
                         updated_annotations["annotations"].append(
-                            bounding_box_checker.updated_annotation
+                            LabelChecker.updated_annotation
                         )
+
+                    # Count number of issues and labels in this image
+                    for label in LabelChecker.updated_annotation.to_json()["objects"]:
+                        found_issue = LabelChecker.is_issue_tagged(
+                            label
+                        ) and not LabelChecker.is_resolved_tagged(label)
+                        if label["geometryType"] == "rectangle":
+                            if bounding_box_job_names:
+                                for job_name in bounding_box_job_names:
+                                    self.job_statistics[job_name]["number_labels"] += 1
+                                    self.job_statistics[job_name][
+                                        "number_issues"
+                                    ] += int(found_issue)
+                            else:
+                                self._found_label_in_jobless_image(
+                                    project_name, dataset.name, "rectangle", found_issue
+                                )
+                        elif label["geometryType"] == "bitmap":
+                            if segmentation_job_names:
+                                for job_name in segmentation_job_names:
+                                    self.job_statistics[job_name]["number_labels"] += 1
+                                    self.job_statistics[job_name][
+                                        "number_issues"
+                                    ] += int(found_issue)
+                            else:
+                                self._found_label_in_jobless_image(
+                                    project_name, dataset.name, "bitmap", found_issue
+                                )
+
                     pbar.update(1)
 
                 # Upload all annotations in the current batch if there are any
