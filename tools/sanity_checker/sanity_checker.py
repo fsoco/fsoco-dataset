@@ -323,6 +323,8 @@ class SanityChecker:
 
                     # Count number of issues and labels in this image
                     for label in LabelChecker.updated_annotation.to_json()["objects"]:
+                        if "unknown" in label["classTitle"]:
+                            continue
                         found_issue = LabelChecker.is_issue_tagged(
                             label
                         ) and not LabelChecker.is_resolved_tagged(label)
