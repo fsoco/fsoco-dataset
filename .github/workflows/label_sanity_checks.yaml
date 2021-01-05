@@ -23,10 +23,14 @@ jobs:
         working-directory: ./tools
         run: |
           pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
           pip install --editable .[sly]
 
       - name: Run sanity checks
         run: fsoco sanity-checker ${{secrets.SANITY_CHECKS_TEAMS}} --token ${{secrets.SLY_TOKEN}} --results_path "results"
+
+      - name: Run Webpage Tests
+        run: pytest docs/_tests/
 
       - name: Upload results
         uses: actions/upload-artifact@v2
