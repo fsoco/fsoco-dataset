@@ -14,4 +14,4 @@ We would like to thank all participating teams for helping us to accelerate the 
 {% include contributors.html images="teams/ampera_ufsc.png,teams/umsae.png,teams/racetech.png" links="https://amperaracing.com,https://www.umsae.com, https://racetech-racingteam.de" column=3 %}
 {% include contributors.html images="teams/rennstall_esslingen.png,teams/tu_wien_racing.png,teams/epfl_racing.png" links="https://rennstall-esslingen.de, https://www.tuwienracing.at, https://epflracingteam.ch" column=3 %}
 {% include contributors.html images="teams/iit_bombay_racing.png,teams/aristurtle.png,teams/penn_electric_racing.png" links="https://www.iitbracing.org, https://www.aristurtle.gr, https://www.pennelectricracing.com" column=3 %}
-{% include contributors.html images="teams/einstein_motorsport.png,teams/blank.png,teams/blank.png" links="https://einstein-motorsport.com" column=3 %}
+{% include contributors.html images="teams/einstein_motorsport.png,teams/ug_racing.png,teams/blank.png" links="https://einstein-motorsport.com, https://ugracing.co.uk" column=3 %}
