@@ -10,10 +10,14 @@ from markdown import markdown as md2html
 # Files to update stats
 FILES = ["overview_stats.html", "../README.md"]
 box_stats_url = "https://drive.google.com/u/1/uc?id=1Om1iwSnJrJ1o_U9UGouVXuzWhkHYVEXf&export=download"
+img_stats_url = "https://drive.google.com/u/1/uc?id=1OtPr1xZR6Ntt_XOYHymzlh2_fedrqO5c&export=download"
 seg_stats_url = "https://drive.google.com/u/1/uc?id=1GOaH3itz7FaNXsH0PGFqRmlCqdlqJ3bd&export=download"
+seg_img_stats_url = "https://drive.google.com/u/1/uc?id=1nuZVEVeBw6F9pC7mhdw3mSnpm5POomgx&export=download"
 
 temp_box_df = "temp_box_stats.df"
+temp_img_df = "temp_img_stats.df"
 temp_seg_df = "temp_seg_stats.df"
+temp_seg_img_stats = "temp_seg_img_stats.df"
 
 
 def update_stats_badges(md_paths: [str], stats: dict):
@@ -116,16 +120,20 @@ def main():
     logging.info(f"Updating stats in the following files: {relative_paths}.")
 
     download_gdrive_df(box_stats_url, temp_box_df)
+    download_gdrive_df(img_stats_url, temp_img_df)
     download_gdrive_df(seg_stats_url, temp_seg_df)
+    download_gdrive_df(seg_img_stats_url, temp_seg_img_stats)
 
     box_stats_df = pd.read_pickle(temp_box_df)
+    img_stats_df = pd.read_pickle(temp_img_df)
     seg_stats_df = pd.read_pickle(temp_seg_df)
+    seg_img_stats_df = pd.read_pickle(temp_seg_img_stats)
 
     # The keys match the id's of the span tags to be filled
     stats = {
-        "num_bbox_images": len(pd.unique(box_stats_df["ann_file"])),
+        "num_bbox_images": len(img_stats_df),
         "num_bbox_cones": len(box_stats_df),
-        "num_seg_images": len(pd.unique(seg_stats_df["ann_file"])),
+        "num_seg_images": len(seg_img_stats_df),
         "num_seg_cones": len(seg_stats_df),
     }
     stats["avg_bbox_per_img"] = stats["num_bbox_cones"] / stats["num_bbox_images"]
@@ -143,7 +151,9 @@ def main():
     update_span_stats_pages([relative_paths[0]], stats)
 
     os.remove(temp_box_df)
+    os.remove(temp_img_df)
     os.remove(temp_seg_df)
+    os.remove(temp_seg_img_stats)
 
 
 if __name__ == "__main__":
