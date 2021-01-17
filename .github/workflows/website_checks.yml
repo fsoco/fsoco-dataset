@@ -1,0 +1,29 @@
+name: Website checks
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+
+jobs:
+  label_sanity_checks:
+    runs-on: ubuntu-18.04
+    env:
+      SANITY_CHECKS_TEAMS: ${{secrets.SANITY_CHECKS_TEAMS}}
+      
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.6'
+
+      - name: Install dependencies
+        working-directory: ./docs
+        run: |
+          pip install pytest
+      - name: Run website checks
+        run: pytest _tests/

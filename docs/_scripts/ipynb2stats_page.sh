@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -e
 which jupyter >/dev/null || (echo "Couldn't find jupyter." && echo "Please make sure you've activated the correct virtual environment." && exit 1)
 
 if [[ ! "$1" || "$1" == "-h" || "$1" == "--help" ]]; then
