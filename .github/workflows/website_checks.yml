@@ -23,7 +23,8 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./docs
-        run: |
-          pip install pytest
+        run: pip install pytest
+      
       - name: Run website checks
+        working-directory: ./docs
         run: pytest _tests/
