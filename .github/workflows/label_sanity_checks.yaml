@@ -29,11 +29,6 @@ jobs:
       - name: Run sanity checks
         run: fsoco sanity-checker ${{secrets.SANITY_CHECKS_TEAMS}} --token ${{secrets.SLY_TOKEN}} --results_path "results"
 
-      - name: Run Webpage Tests
-        env:
-          SANITY_CHECKS_TEAMS: ${{secrets.SANITY_CHECKS_TEAMS}}
-        run: pytest docs/_tests/
-
       - name: Upload results
         uses: actions/upload-artifact@v2
         with:
