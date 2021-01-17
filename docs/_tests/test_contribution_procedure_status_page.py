@@ -17,7 +17,6 @@ def get_teams_from_env_var():
 def test_google_app_script_response():
     session = HTMLSession()
     teams = get_teams_from_env_var()
-    print(teams)
     responses = []
     for team in teams:
         logging.info(f"Getting page for {team}")
@@ -30,4 +29,6 @@ def test_google_app_script_response():
     response_status = [
         True if response.find("Success") >= 0 else False for response in responses
     ]
-    assert all(response_status)
+    assert all(response_status), [
+        team_name for team_name, res in zip(teams, response_status) if not res
+    ]
