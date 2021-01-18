@@ -23,7 +23,6 @@ jobs:
         working-directory: ./tools
         run: |
           pip install --upgrade pip setuptools wheel
-          pip install -r requirements.txt
           pip install --editable .[sly]
 
       - name: Run sanity checks
