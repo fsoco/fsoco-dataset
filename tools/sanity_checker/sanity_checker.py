@@ -22,6 +22,7 @@ class SanityChecker:
         workspace_name: str,
         project_name: Union[Tuple[str, ...], str],
         label_type: Tuple[str, ...],
+        projects_whitelisted: bool = True,
         dry_run: bool = False,
         verbose: bool = False,
     ):
@@ -49,7 +50,7 @@ class SanityChecker:
         self._initialize_supervisely(
             server_address, server_token, team_name, workspace_name
         )
-        self._initialize_projects(project_name)
+        self._initialize_projects(project_name, projects_whitelisted)
         self._initialize_jobs()
 
     def __del__(self):
@@ -126,19 +127,23 @@ class SanityChecker:
                 f"Workspace: id={self.sly_workspace.id}, name={self.sly_workspace.name}"
             )
 
-    def _initialize_projects(self, project_names: Union[Tuple[str, ...], str]):
+    def _initialize_projects(
+        self, project_names: Union[Tuple[str, ...], str], projects_whitelisted: bool
+    ):
         # From now on, only assume project_name to be a tuple
         if isinstance(project_names, str):
             project_names = (project_names,)
 
-        # No project names have been specified. Thus, all projects in the given workspace are queried.
-        if not project_names:
-            project_names = []
+        # No project names have been whitelisted.
+        # Thus, all projects in the given workspace are queried except of the blacklisted ones.
+        if not project_names or not projects_whitelisted:
+            _project_names = []
             for project in safe_request(
                 self.sly_api.project.get_list, self.sly_workspace.id
             ):
-                project_names.append(project.name)
-            project_names = tuple(project_names)
+                if not projects_whitelisted and project.name not in project_names:
+                    _project_names.append(project.name)
+            project_names = tuple(_project_names)
 
         for project_name in project_names:
             sly_project = safe_request(
