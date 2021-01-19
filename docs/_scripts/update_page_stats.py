@@ -22,9 +22,9 @@ temp_seg_img_stats = "temp_seg_img_stats.df"
 
 def update_stats_badges(md_paths: [str], stats: dict):
     """
-        Updates shield.io image tags according to stats and saves the changed Markdown files.
-        Matches the tags to be updated by their id attributes.
-        The id is equivalent to the stats dictionary key, whose value is used for updating.
+    Updates shield.io image tags according to stats and saves the changed Markdown files.
+    Matches the tags to be updated by their id attributes.
+    The id is equivalent to the stats dictionary key, whose value is used for updating.
     """
     updated_soups = []
     for md_path in md_paths:
@@ -66,9 +66,9 @@ def update_stats_badges(md_paths: [str], stats: dict):
 
 def update_span_stats_pages(html_paths: [str], stats: dict):
     """
-        Updates _includes files that contain stats and saves the changed HTML files.
-        Matches span tags with id attributes to the stats dict.
-        Only updates if the id matches a key in the stats dict.
+    Updates _includes files that contain stats and saves the changed HTML files.
+    Matches span tags with id attributes to the stats dict.
+    Only updates if the id matches a key in the stats dict.
     """
     updated_soups = []
     for html_path in html_paths:

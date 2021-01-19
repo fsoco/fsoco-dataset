@@ -32,4 +32,3 @@ prepped_html = repr(nb_html.body)
 
 with open(args.output_file, "w") as slides_file:
     slides_file.write(prepped_html)
-
