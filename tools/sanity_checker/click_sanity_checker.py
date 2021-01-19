@@ -1,5 +1,6 @@
 import click
 from pathlib import Path
+from typing import Tuple
 
 from similarity_scorer.utils.logger import Logger
 from .sanity_checker import SanityChecker
@@ -24,7 +25,6 @@ from .sanity_checker import SanityChecker
     "--project_name",
     "-p",
     type=str,
-    required=True,
     multiple=True,
     help="Specify a Supervisely project name. You can use this option multiple times.",
 )
@@ -58,9 +58,9 @@ from .sanity_checker import SanityChecker
 def sanity_checker(
     team_name: str,
     workspace_name: str,
-    project_name: tuple,
+    project_name: Tuple[str, ...],
     server_token: str,
-    label_type: tuple,
+    label_type: Tuple[str, ...],
     results_path: str,
     dry_run: bool,
     verbose: bool,

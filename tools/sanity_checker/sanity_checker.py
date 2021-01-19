@@ -1,5 +1,5 @@
 import sys
-from typing import Union
+from typing import Union, Tuple
 from pathlib import Path
 import json
 
@@ -20,8 +20,8 @@ class SanityChecker:
         server_token: str,
         team_name: str,
         workspace_name: str,
-        project_name: Union[tuple, str],
-        label_type: tuple,
+        project_name: Union[Tuple[str, ...], str],
+        label_type: Tuple[str, ...],
         dry_run: bool = False,
         verbose: bool = False,
     ):
@@ -47,8 +47,9 @@ class SanityChecker:
             )
 
         self._initialize_supervisely(
-            server_address, server_token, team_name, workspace_name, project_name
+            server_address, server_token, team_name, workspace_name
         )
+        self._initialize_projects(project_name)
         self._initialize_jobs()
 
     def __del__(self):
@@ -104,12 +105,7 @@ class SanityChecker:
         server_token: str,
         team_name: str,
         workspace_name: str,
-        project_names: Union[tuple, str],
     ):
-        # From now on, only assume project_name to be a tuple
-        if isinstance(project_names, str):
-            project_names = (project_names,)
-
         self.sly_api = sly.Api(server_address, server_token)
 
         self.sly_team = safe_request(self.sly_api.team.get_info_by_name, team_name)
@@ -129,6 +125,20 @@ class SanityChecker:
             Logger.log_info(
                 f"Workspace: id={self.sly_workspace.id}, name={self.sly_workspace.name}"
             )
+
+    def _initialize_projects(self, project_names: Union[Tuple[str, ...], str]):
+        # From now on, only assume project_name to be a tuple
+        if isinstance(project_names, str):
+            project_names = (project_names,)
+
+        # No project names have been specified. Thus, all projects in the given workspace are queried.
+        if not project_names:
+            project_names = []
+            for project in safe_request(
+                self.sly_api.project.get_list, self.sly_workspace.id
+            ):
+                project_names.append(project.name)
+            project_names = tuple(project_names)
 
         for project_name in project_names:
             sly_project = safe_request(
