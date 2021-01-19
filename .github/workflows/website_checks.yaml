@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  label_sanity_checks:
+  contribution_status_page:
     runs-on: ubuntu-18.04
     env:
       SANITY_CHECKS_TEAMS: ${{secrets.SANITY_CHECKS_TEAMS}}
