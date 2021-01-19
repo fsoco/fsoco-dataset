@@ -3,13 +3,14 @@ import logging
 from requests_html import HTMLSession
 
 GAPPS_URL = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-ZnoJ4iRGvvJyIXZ2h4buI5MWLTL/exec"
+IGNORE = ["Donations", "BME watermarked"]
 
 
 def get_teams_from_env_var():
     teams = os.environ.get("SANITY_CHECKS_TEAMS", " -p fsoco").split(" -p ")[1:]
     teams = [team.replace('"', "") for team in teams]
     # Filter project names in old format
-    teams = [team for team in teams if not team == "BME watermarked"]
+    teams = [team for team in teams if team not in IGNORE]
     logging.info(teams)
     return teams
 
