@@ -8,7 +8,7 @@ from supervisely_lib.annotation.tag_collection import TagCollection
 
 # ToDo: This is how it should be done if the API would support it
 # tagged_label = l.delete_tag(issue_tag)
-# Adapted from annotation.py
+# This is how we have to do it. It's adapted from annotation.py
 def label_delete_tag(label, tag):
     retained_tags = []
     for label_tag in label.tags.items():
@@ -20,7 +20,7 @@ def label_delete_tag(label, tag):
 def check_label_existence(func):
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
-        # A previous check delete the label. Thus, fallback to returning no issue.
+        # A previous check deleted the label. Thus, fallback to returning no issue.
         if self.label is None:
             return False
         return func(self, *args, **kwargs)
@@ -74,8 +74,8 @@ class LabelChecker(ABC):
         # Search for this label in the updated_annotations object
         for candidate_label in LabelChecker.updated_annotation.labels:
             if candidate_label.geometry.sly_id == label["id"]:
-                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    candidate_label
+                LabelChecker.updated_annotation = (
+                    LabelChecker.updated_annotation.delete_label(candidate_label)
                 )
                 LabelChecker.is_annotation_updated = True
                 break
@@ -85,10 +85,10 @@ class LabelChecker(ABC):
         # Search for this label in the updated_annotations object
         for candidate_label in LabelChecker.updated_annotation.labels:
             if candidate_label.geometry.sly_id == updated_label.geometry.sly_id:
-                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    candidate_label
-                ).add_label(
-                    updated_label
+                LabelChecker.updated_annotation = (
+                    LabelChecker.updated_annotation.delete_label(
+                        candidate_label
+                    ).add_label(updated_label)
                 )
                 LabelChecker.is_annotation_updated = True
                 break
@@ -112,10 +112,10 @@ class LabelChecker(ABC):
                 updated_label = candidate_label.add_tag(
                     sly.Tag(meta=LabelChecker.issue_tag_meta, value=tag_text)
                 )
-                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    candidate_label
-                ).add_label(
-                    updated_label
+                LabelChecker.updated_annotation = (
+                    LabelChecker.updated_annotation.delete_label(
+                        candidate_label
+                    ).add_label(updated_label)
                 )
                 LabelChecker.is_annotation_updated = True
                 break
@@ -132,10 +132,10 @@ class LabelChecker(ABC):
                     candidate_label,
                     sly.Tag(meta=LabelChecker.issue_tag_meta, value=tag_text),
                 )
-                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    candidate_label
-                ).add_label(
-                    updated_label
+                LabelChecker.updated_annotation = (
+                    LabelChecker.updated_annotation.delete_label(
+                        candidate_label
+                    ).add_label(updated_label)
                 )
                 LabelChecker.is_annotation_updated = True
                 break

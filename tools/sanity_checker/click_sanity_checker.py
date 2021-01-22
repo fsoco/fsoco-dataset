@@ -66,8 +66,8 @@ def sanity_checker(
     verbose: bool,
 ):
     """
-        The tools runs sanity checks on the labels on the Supervisely server.
-        It supports both bounding boxes and instance segmentation.
+    The tools runs sanity checks on the labels on the Supervisely server.
+    It supports both bounding boxes and instance segmentation.
     """
     server_address: str = "https://app.supervise.ly"
 

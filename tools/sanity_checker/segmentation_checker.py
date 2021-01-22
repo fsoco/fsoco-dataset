@@ -108,12 +108,16 @@ class SegmentationChecker(LabelChecker):
             mask[:, self.image_width - image_border_size - min_x :] = False
             mask[: image_border_size - min_y, :] = False
             mask[self.image_height - image_border_size - min_y :, :] = False
-            self.label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
-                mask
-            )
-            self._update_bitmap_data()
-            # Remove issue tag if it previously existed
-            self._delete_issue_tag(self.label, "Inside watermark")
+            # If all pixels were outside the main image, we delete the entire label
+            if not np.any(mask):
+                self._delete_label(self.label)
+            else:
+                self.label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
+                    mask
+                )
+                self._update_bitmap_data()
+                # Remove issue tag if it previously existed
+                self._delete_issue_tag(self.label, "Inside watermark")
 
         if self.verbose and is_outside_image_frame:
             log_text = f"{self.image_name} | segmentation | inside watermark"
