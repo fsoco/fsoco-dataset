@@ -141,7 +141,9 @@ class SanityChecker:
             for project in safe_request(
                 self.sly_api.project.get_list, self.sly_workspace.id
             ):
-                if not projects_whitelisted and project.name not in project_names:
+                if not project_names or (
+                    not projects_whitelisted and project.name not in project_names
+                ):
                     _project_names.append(project.name)
             project_names = tuple(_project_names)
 
