@@ -5,6 +5,7 @@ import requests
 from requests_html import HTMLSession
 
 GAPPS_URL = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-ZnoJ4iRGvvJyIXZ2h4buI5MWLTL/exec"
+IGNORE = ["BME watermarked", "Donations"]
 
 
 def get_teams():
@@ -20,14 +21,9 @@ def get_teams():
     r_teams = requests.get(
         "https://app.supervise.ly/public/api/v3/teams.list", headers=headers
     )
-    try:
-        team_id = next(
-            team["id"]
-            for team in r_teams.json()["entities"]
-            if team["name"] == sly_team
-        )
-    except StopIteration:
-        print(sly_team, [team["name"] for team in r_teams.json()["entities"]])
+    team_id = next(
+        team["id"] for team in r_teams.json()["entities"] if team["name"] == sly_team
+    )
     r_ws = requests.get(
         "https://app.supervise.ly/public/api/v3/workspaces.list",
         params={"teamId": team_id},
@@ -52,6 +48,7 @@ def get_teams():
             if project["name"] in env_teams
         ]
     logging.info(teams)
+    teams = [team for team in teams if team not in IGNORE]
     return teams
 
 
