@@ -39,6 +39,7 @@ from .sanity_checker import SanityChecker
     "server_token",
     type=str,
     required=True,
+    envvar="SLY_TOKEN",
     help="Secret token to access Supervisely.",
 )
 @click.option(
