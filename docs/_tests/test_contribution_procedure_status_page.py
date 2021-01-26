@@ -9,8 +9,8 @@ GAPPS_URL = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-Zno
 
 def get_teams():
     s = os.environ.get("SANITY_CHECKS_TEAMS")
-    sly_team = re.match(r".*-t\s(?P<team>\S+)", s).group("team")
-    sly_ws = re.match(r".*-w\s(?P<ws>\S+\s\S+)", s).group("ws")
+    sly_team = re.match(r".*-t\s(?P<team>\S+)", s).group("team").strip('"')
+    sly_ws = re.match(r".*-w\s(?P<ws>\S+\s\S+)", s).group("ws").strip('"')
     env_teams = [
         match.group("team") for match in re.finditer(r"\s*-p\s(?<team>\".*?\"|\S+)", s)
     ]
