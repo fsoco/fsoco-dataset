@@ -1,23 +1,51 @@
 import os
 import logging
+import regex as re
+import requests
 from requests_html import HTMLSession
 
 GAPPS_URL = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-ZnoJ4iRGvvJyIXZ2h4buI5MWLTL/exec"
-IGNORE = ["Donations", "BME watermarked"]
 
 
-def get_teams_from_env_var():
-    teams = os.environ.get("SANITY_CHECKS_TEAMS", " -p fsoco").split(" -p ")[1:]
-    teams = [team.replace('"', "") for team in teams]
-    # Filter project names in old format
-    teams = [team for team in teams if team not in IGNORE]
+def get_teams():
+    s = os.environ.get("SANITY_CHECKS_TEAMS")
+    sly_team = re.match(r".*(?P<team>-t\s\S+)", s).group("team")
+    sly_ws = re.match(r".*(?P<ws>-w\s\S+\s\S+)", s).group("ws")
+    env_teams = [
+        team.strip() for team in re.findall(r"(-p[\s\S+]+)\s", s)[0].split("-p ")
+    ]
+    blacklist = bool(re.match("--blacklist", s))
+    header = {"x-api-key": os.environ.get("SLY_TOKEN")}
+    r_teams = requests.get(
+        "https://app.supervise.ly/public/api/v3/teams.list", header=header
+    )
+    team_id = next(
+        team["id"] for team in r_teams.json()["entities"] if team["name"] == sly_team
+    )
+    r_ws = requests.get(
+        "https://app.supervise.ly/public/api/v3/workspaces.list",
+        params={"teamId": team_id},
+        header=header,
+    )
+    ws_id = next(ws["id"] for ws in r_ws.json()["entities"] if ws["name"] == sly_ws)
+    r_projects = requests.get(
+        "https://app.supervise.ly/public/api/v3/projects.list",
+        params={"workspaceId": ws_id},
+        header=header,
+    )
+    if blacklist:
+        teams = [
+            team for team in r_projects.json()["entities"] if team not in env_teams
+        ]
+    else:
+        teams = [team for team in r_projects.json()["entities"] if team in env_teams]
     logging.info(teams)
     return teams
 
 
 def test_google_app_script_response():
     session = HTMLSession()
-    teams = get_teams_from_env_var()
+    teams = get_teams()
     responses = []
     for team in teams:
         logging.info(f"Getting page for {team}")
