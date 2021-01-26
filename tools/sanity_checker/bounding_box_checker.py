@@ -26,7 +26,9 @@ class BoundingBoxChecker(LabelChecker):
         is_ok = True
         is_ok &= not self._is_small_label(minimum_area=20, delete_threshold_area=10)
         is_ok &= not self._is_outside_image_frame(image_border_size=140)
-        is_ok &= not self._is_distorted_box(minimum_ratio=0.5, maximum_ratio=3.0)
+        is_ok &= not self._is_distorted_box(
+            minimum_ratio=0.5, maximum_ratio=3.0, skip_if_truncated=True
+        )
         return is_ok
 
     @check_label_existence
@@ -92,9 +94,14 @@ class BoundingBoxChecker(LabelChecker):
         return is_outside_image_frame
 
     @check_label_existence
-    def _is_distorted_box(self, minimum_ratio: float, maximum_ratio: float):
+    def _is_distorted_box(
+        self, minimum_ratio: float, maximum_ratio: float, skip_if_truncated: bool
+    ):
         # maximum_ratio: height to width
         # The reason for a distorted box could be that the box covers multiple labels
+
+        if skip_if_truncated and self.is_tagged(self.label, "truncated"):
+            return False
 
         corner_points = self.label["points"]["exterior"]
         box_width = np.abs(corner_points[0][0] - corner_points[1][0])
