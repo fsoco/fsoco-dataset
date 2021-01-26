@@ -9,12 +9,12 @@ GAPPS_URL = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-Zno
 
 def get_teams():
     s = os.environ.get("SANITY_CHECKS_TEAMS")
-    sly_team = re.match(r".*(?P<team>-t\s\S+)", s).group("team")
-    sly_ws = re.match(r".*(?P<ws>-w\s\S+\s\S+)", s).group("ws")
+    sly_team = re.match(r".*-t\s(?P<team>\S+)", s).group("team")
+    sly_ws = re.match(r".*-w\s(?P<ws>\S+\s\S+)", s).group("ws")
     env_teams = [
         team.strip() for team in re.findall(r"(-p[\s\S+]+)\s", s)[0].split("-p ")
     ]
-    blacklist = bool(re.match("--blacklist", s))
+    blacklist = bool(re.match(r".*--blacklist", s))
     headers = {"x-api-key": os.environ.get("SLY_TOKEN")}
     r_teams = requests.get(
         "https://app.supervise.ly/public/api/v3/teams.list", headers=headers
@@ -35,10 +35,16 @@ def get_teams():
     )
     if blacklist:
         teams = [
-            team for team in r_projects.json()["entities"] if team not in env_teams
+            project["name"]
+            for project in r_projects.json()["entities"]
+            if project not in env_teams
         ]
     else:
-        teams = [team for team in r_projects.json()["entities"] if team in env_teams]
+        teams = [
+            project["name"]
+            for project in r_projects.json()["entities"]
+            if project in env_teams
+        ]
     logging.info(teams)
     return teams
 
