@@ -1,6 +1,6 @@
+import functools
 from abc import ABC, abstractmethod
 from typing import Optional
-import functools
 
 import supervisely_lib as sly
 from supervisely_lib.annotation.tag_collection import TagCollection
@@ -141,18 +141,40 @@ class LabelChecker(ABC):
                 break
 
     @staticmethod
-    def is_issue_tagged(label: dict, tag_text: Optional[str] = None):
+    def is_issue_tagged(label: dict, tag_text: Optional[str] = None) -> bool:
+        return LabelChecker.is_tagged(
+            label,
+            LabelChecker.issue_tag_meta.name,
+            LabelChecker.issue_tag_meta.value_type,
+            tag_text,
+        )
+
+    @staticmethod
+    def is_resolved_tagged(label: dict) -> bool:
+        return LabelChecker.is_tagged(
+            label,
+            LabelChecker.resolved_tag_meta.name,
+            LabelChecker.resolved_tag_meta.value_type,
+        )
+
+    @staticmethod
+    def is_tagged(
+        label: dict,
+        tag_name: str,
+        tag_value_type: sly.TagValueType = sly.TagValueType.NONE,
+        tag_text: Optional[str] = None,
+    ) -> bool:
         for tag in label["tags"]:
-            if tag["name"] == LabelChecker.issue_tag_meta.name:
+            if tag_value_type == sly.TagValueType.NONE:
+                if tag["name"] == tag_name:
+                    return True
+            elif tag_value_type == sly.TagValueType.ANY_STRING:
                 if tag_text is None:
                     return True
                 elif tag["value"] == tag_text:
                     return True
-        return False
-
-    @staticmethod
-    def is_resolved_tagged(label: dict):
-        for tag in label["tags"]:
-            if tag["name"] == LabelChecker.resolved_tag_meta.name:
-                return True
+                else:
+                    continue
+            else:
+                raise NotImplementedError
         return False
