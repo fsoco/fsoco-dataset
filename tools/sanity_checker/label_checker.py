@@ -1,6 +1,6 @@
 import functools
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Optional, Dict, Any
 
 import supervisely_lib as sly
 from supervisely_lib.annotation.tag_collection import TagCollection
@@ -141,7 +141,7 @@ class LabelChecker(ABC):
                 break
 
     @staticmethod
-    def is_issue_tagged(label: dict, tag_text: Optional[str] = None) -> bool:
+    def is_issue_tagged(label: Dict[str, Any], tag_text: Optional[str] = None) -> bool:
         return LabelChecker.is_tagged(
             label,
             LabelChecker.issue_tag_meta.name,
@@ -150,7 +150,7 @@ class LabelChecker(ABC):
         )
 
     @staticmethod
-    def is_resolved_tagged(label: dict) -> bool:
+    def is_resolved_tagged(label: Dict[str, Any]) -> bool:
         return LabelChecker.is_tagged(
             label,
             LabelChecker.resolved_tag_meta.name,
@@ -159,7 +159,7 @@ class LabelChecker(ABC):
 
     @staticmethod
     def is_tagged(
-        label: dict,
+        label: Dict[str, Any],
         tag_name: str,
         tag_value_type: sly.TagValueType = sly.TagValueType.NONE,
         tag_text: Optional[str] = None,
