@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       SANITY_CHECKS_TEAMS: ${{secrets.SANITY_CHECKS_TEAMS}}
+      SLY_TOKEN: ${{secrets.SLY_TOKEN}}
       
     steps:
       - name: Check out repository
