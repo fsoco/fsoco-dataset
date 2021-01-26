@@ -43,13 +43,13 @@ def get_teams():
         teams = [
             project["name"]
             for project in r_projects.json()["entities"]
-            if project not in env_teams
+            if project["name"] not in env_teams
         ]
     else:
         teams = [
             project["name"]
             for project in r_projects.json()["entities"]
-            if project in env_teams
+            if project["name"] in env_teams
         ]
     logging.info(teams)
     return teams
