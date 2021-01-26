@@ -8,6 +8,7 @@ from tqdm import tqdm
 
 from similarity_scorer.utils.logger import Logger
 from .bounding_box_checker import BoundingBoxChecker
+from .image_checker import ImageChecker
 from .label_checker import LabelChecker
 from .segmentation_checker import SegmentationChecker
 from .utils import safe_request, extract_geometry_type_from_job_name
@@ -285,6 +286,13 @@ class SanityChecker:
                     updated_annotation = sly.Annotation.from_json(
                         image.annotation, project_meta
                     )
+                    image_checker = ImageChecker(
+                        image.image_name,
+                        project_meta,
+                        updated_annotation,
+                        not self.dry_run,
+                        self.verbose,
+                    )
                     bounding_box_checker = BoundingBoxChecker(
                         image.image_name,
                         image.annotation["size"]["height"],
@@ -310,8 +318,12 @@ class SanityChecker:
                         image.image_name, "bitmap"
                     )
 
+                    # Run image-level checks
+                    image_checker.run(image.annotation["tags"])
+
                     # Iterate over labels in current image
                     for label in image.annotation["objects"]:
+                        break
                         if not label["geometryType"] in self.label_types_to_check:
                             continue
                         # We do not convert to a SLY object since it is easier to operate with the JSON dictionary

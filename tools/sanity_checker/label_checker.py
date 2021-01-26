@@ -1,6 +1,6 @@
-import functools
 from abc import ABC, abstractmethod
 from typing import Optional, Dict, Any
+import functools
 
 import supervisely_lib as sly
 from supervisely_lib.annotation.tag_collection import TagCollection
@@ -63,14 +63,14 @@ class LabelChecker(ABC):
         self.image_width = image_width
 
         # The checks run on this object
-        self.label: Optional[dict] = None
+        self.label: Optional[Dict[str, Any]] = None
 
     @abstractmethod
-    def run(self, label: dict) -> bool:
+    def run(self, label: Dict[str, Any]) -> bool:
         pass
 
     @staticmethod
-    def _delete_label(label: dict):
+    def _delete_label(label: Dict[str, Any]):
         # Search for this label in the updated_annotations object
         for candidate_label in LabelChecker.updated_annotation.labels:
             if candidate_label.geometry.sly_id == label["id"]:
@@ -94,14 +94,14 @@ class LabelChecker(ABC):
                 break
 
     @staticmethod
-    def _update_issue_tag(label: dict, tag_text: str, found_issue: bool):
+    def _update_issue_tag(label: Dict[str, Any], tag_text: str, found_issue: bool):
         if found_issue:
             LabelChecker._add_issue_tag(label, tag_text)
         else:
             LabelChecker._delete_issue_tag(label, tag_text)
 
     @staticmethod
-    def _add_issue_tag(label: dict, tag_text: str):
+    def _add_issue_tag(label: Dict[str, Any], tag_text: str):
         # Do not tag multiple times
         if LabelChecker.is_issue_tagged(label, tag_text):
             return
@@ -121,7 +121,7 @@ class LabelChecker(ABC):
                 break
 
     @staticmethod
-    def _delete_issue_tag(label: dict, tag_text: str):
+    def _delete_issue_tag(label: Dict[str, Any], tag_text: str):
         if not LabelChecker.is_issue_tagged(label, tag_text):
             return
 
