@@ -12,7 +12,8 @@ def get_teams():
     sly_team = re.match(r".*-t\s(?P<team>\S+)", s).group("team").strip('"')
     sly_ws = re.match(r".*-w\s(?P<ws>\S+\s\S+)", s).group("ws").strip('"')
     env_teams = [
-        match.group("team") for match in re.finditer(r"\s*-p\s(?<team>\".*?\"|\S+)", s)
+        match.group("team").strip('"')
+        for match in re.finditer(r"\s*-p\s(?<team>\".*?\"|\S+)", s)
     ]
     blacklist = bool(re.match(r".*--blacklist", s))
     headers = {"x-api-key": os.environ.get("SLY_TOKEN")}
