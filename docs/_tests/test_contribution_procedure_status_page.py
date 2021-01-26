@@ -19,9 +19,14 @@ def get_teams():
     r_teams = requests.get(
         "https://app.supervise.ly/public/api/v3/teams.list", headers=headers
     )
-    team_id = next(
-        team["id"] for team in r_teams.json()["entities"] if team["name"] == sly_team
-    )
+    try:
+        team_id = next(
+            team["id"]
+            for team in r_teams.json()["entities"]
+            if team["name"] == sly_team
+        )
+    except StopIteration:
+        print(sly_team, [team["name"] for team in r_teams.json()["entities"]])
     r_ws = requests.get(
         "https://app.supervise.ly/public/api/v3/workspaces.list",
         params={"teamId": team_id},
