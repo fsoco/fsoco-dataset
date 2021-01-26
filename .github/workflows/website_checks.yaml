@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./docs
-        run: pip install pytest requests_html
+        run: pip install pytest requests_html regex
       
       - name: Run website checks
         working-directory: ./docs
