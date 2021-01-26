@@ -15,9 +15,9 @@ def get_teams():
         team.strip() for team in re.findall(r"(-p[\s\S+]+)\s", s)[0].split("-p ")
     ]
     blacklist = bool(re.match("--blacklist", s))
-    header = {"x-api-key": os.environ.get("SLY_TOKEN")}
+    headers = {"x-api-key": os.environ.get("SLY_TOKEN")}
     r_teams = requests.get(
-        "https://app.supervise.ly/public/api/v3/teams.list", header=header
+        "https://app.supervise.ly/public/api/v3/teams.list", headers=headers
     )
     team_id = next(
         team["id"] for team in r_teams.json()["entities"] if team["name"] == sly_team
@@ -25,13 +25,13 @@ def get_teams():
     r_ws = requests.get(
         "https://app.supervise.ly/public/api/v3/workspaces.list",
         params={"teamId": team_id},
-        header=header,
+        headers=headers,
     )
     ws_id = next(ws["id"] for ws in r_ws.json()["entities"] if ws["name"] == sly_ws)
     r_projects = requests.get(
         "https://app.supervise.ly/public/api/v3/projects.list",
         params={"workspaceId": ws_id},
-        header=header,
+        headers=headers,
     )
     if blacklist:
         teams = [
