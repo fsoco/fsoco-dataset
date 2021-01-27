@@ -8,6 +8,7 @@ from tqdm import tqdm
 
 from similarity_scorer.utils.logger import Logger
 from .bounding_box_checker import BoundingBoxChecker
+from .checker import Checker
 from .image_checker import ImageChecker
 from .label_checker import LabelChecker
 from .segmentation_checker import SegmentationChecker
@@ -288,9 +289,8 @@ class SanityChecker:
                     )
                     image_checker = ImageChecker(
                         image.image_name,
-                        project_meta,
                         updated_annotation,
-                        not self.dry_run,
+                        True,
                         self.verbose,
                     )
                     bounding_box_checker = BoundingBoxChecker(
@@ -319,7 +319,7 @@ class SanityChecker:
                     )
 
                     # Run image-level checks
-                    image_checker.run(image.annotation["tags"])
+                    image_checker.run()
 
                     # Iterate over labels in current image
                     for label in image.annotation["objects"]:
@@ -337,21 +337,21 @@ class SanityChecker:
                             )
 
                     # Assertion that the memory still matches
-                    if id(bounding_box_checker.updated_annotation) != id(
-                        segmentation_checker.updated_annotation
-                    ) or id(bounding_box_checker.updated_annotation) != id(
-                        LabelChecker.updated_annotation
+                    if (
+                        id(Checker.updated_annotation)
+                        != id(image_checker.updated_annotation)
+                        or id(Checker.updated_annotation)
+                        != id(bounding_box_checker.updated_annotation)
+                        or id(Checker.updated_annotation)
+                        != id(segmentation_checker.updated_annotation)
                     ):
                         raise RuntimeError("Memory addresses do not match.")
 
-                    # One of the label checkers changed the labels
-                    if (
-                        bounding_box_checker.is_annotation_updated
-                        or segmentation_checker.is_annotation_updated
-                    ):
+                    # One of the checkers changed the annotation (image tags or labels)
+                    if Checker.is_annotation_updated and not self.dry_run:
                         updated_annotations["image_ids"].append(image.image_id)
                         updated_annotations["annotations"].append(
-                            LabelChecker.updated_annotation
+                            Checker.updated_annotation
                         )
 
                     # Count number of issues and labels in this image
