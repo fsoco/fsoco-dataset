@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       SANITY_CHECKS_TEAMS: ${{secrets.SANITY_CHECKS_TEAMS}}
+      SLY_TOKEN: ${{secrets.SLY_TOKEN}}
       
     steps:
       - name: Check out repository
@@ -23,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./docs
-        run: pip install pytest requests_html
+        run: pip install pytest requests_html regex
       
       - name: Run website checks
         working-directory: ./docs
