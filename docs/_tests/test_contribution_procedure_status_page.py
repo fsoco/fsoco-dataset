@@ -1,6 +1,6 @@
 import os
+import shlex
 import logging
-import regex as re
 import requests
 from requests_html import HTMLSession
 
@@ -10,13 +10,13 @@ IGNORE = ["BME watermarked", "Donations"]
 
 def get_teams():
     s = os.environ.get("SANITY_CHECKS_TEAMS")
-    sly_team = re.match(r".*-t\s(?P<team>\S+)", s).group("team").strip('"')
-    sly_ws = re.match(r".*-w\s(?P<ws>\S+\s\S+)", s).group("ws").strip('"')
+    args = shlex.split(s)
+    sly_team = args[args.index("-t") + 1]
+    sly_ws = args[args.index("-w") + 1]
     env_teams = [
-        match.group("team").strip('"')
-        for match in re.finditer(r"\s*-p\s(?<team>\".*?\"|\S+)", s)
+        args[idx + 1] for idx, arg in enumerate(args) if arg in ["-p", "--project"]
     ]
-    blacklist = bool(re.match(r".*--blacklist", s))
+    blacklist = "--blacklist" in args
     headers = {"x-api-key": os.environ.get("SLY_TOKEN")}
     r_teams = requests.get(
         "https://app.supervise.ly/public/api/v3/teams.list", headers=headers
