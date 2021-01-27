@@ -3,18 +3,19 @@ import shlex
 import logging
 import requests
 from requests_html import HTMLSession
+from typing import List
 
 GAPPS_URL = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-ZnoJ4iRGvvJyIXZ2h4buI5MWLTL/exec"
 IGNORE = ["BME watermarked", "Donations"]
 
 
-def get_teams():
+def get_teams() -> List[str]:
     s = os.environ.get("SANITY_CHECKS_TEAMS")
     args = shlex.split(s)
-    sly_team = args[args.index("-t") + 1]
-    sly_ws = args[args.index("-w") + 1]
+    sly_team = args[_list_index(args, ["--team_name", "-t"]) + 1]
+    sly_ws = args[_list_index(args, ["--workspace_name", "-w"]) + 1]
     env_teams = [
-        args[idx + 1] for idx, arg in enumerate(args) if arg in ["-p", "--project"]
+        args[idx + 1] for idx, arg in enumerate(args) if arg in ["--project_name", "-p"]
     ]
     blacklist = "--blacklist" in args
     headers = {"x-api-key": os.environ.get("SLY_TOKEN")}
@@ -70,3 +71,19 @@ def test_google_app_script_response():
     assert all(response_status), [
         team_name for team_name, res in zip(teams, response_status) if not res
     ]
+
+
+def _list_index(list_: list, elements: List[str]) -> int:
+    """
+    This function is an extension to the string method index() returning the
+    first occurence of any of the given elements.
+
+    Example:
+    list_ = ['-t', 'team_A', '-w', 'workspace_A', '--team', 'team_B']
+    ret = _list_index(list_, ['--team', '-t'])
+    # ret = 0
+    """
+    for i, s in enumerate(list_):
+        if s in elements:
+            return i
+    raise ValueError("None of the elements is in the list.")
