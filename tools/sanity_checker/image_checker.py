@@ -20,7 +20,7 @@ class ImageChecker(Checker):
     ):
         super().__init__(image_name, updated_annotation, apply_auto_fixes, verbose)
 
-    def run(self) -> bool:
+    def run(self) -> bool:  # pylint: disable=arguments-differ
         is_ok = True
         is_ok &= self._is_wrongly_tagged(ImageChecker.ILLEGAL_TAGS)
         return is_ok

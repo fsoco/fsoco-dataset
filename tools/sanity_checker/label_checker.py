@@ -60,7 +60,7 @@ class LabelChecker(Checker):
         self.label: Optional[Dict[str, Any]] = None
 
     @abstractmethod
-    def run(self, label: Dict[str, Any]) -> bool:
+    def run(self, label: Dict[str, Any]) -> bool:  # pylint: disable=arguments-differ
         raise NotImplementedError
 
     @staticmethod
