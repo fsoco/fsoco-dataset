@@ -290,7 +290,7 @@ class SanityChecker:
                     image_checker = ImageChecker(
                         image.image_name,
                         updated_annotation,
-                        True,
+                        not self.dry_run,
                         self.verbose,
                     )
                     bounding_box_checker = BoundingBoxChecker(
@@ -323,7 +323,6 @@ class SanityChecker:
 
                     # Iterate over labels in current image
                     for label in image.annotation["objects"]:
-                        break
                         if not label["geometryType"] in self.label_types_to_check:
                             continue
                         # We do not convert to a SLY object since it is easier to operate with the JSON dictionary
@@ -348,7 +347,7 @@ class SanityChecker:
                         raise RuntimeError("Memory addresses do not match.")
 
                     # One of the checkers changed the annotation (image tags or labels)
-                    if Checker.is_annotation_updated and not self.dry_run:
+                    if Checker.is_annotation_updated:
                         updated_annotations["image_ids"].append(image.image_id)
                         updated_annotations["annotations"].append(
                             Checker.updated_annotation
