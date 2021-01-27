@@ -79,7 +79,12 @@ def iterate_dataset(
     samples_by_tags = defaultdict(list)  # TRAIN: [img_1, img2, ..]
 
     convert_func = partial(
-        handle_image, dataset, images_dir, anns_dir, project, remove_watermark,
+        handle_image,
+        dataset,
+        images_dir,
+        anns_dir,
+        project,
+        remove_watermark,
     )
 
     with Pool() as p:
@@ -164,7 +169,11 @@ def handle_image(
             ymax -= FSOCO_IMPORT_BORDER_THICKNESS
 
         writer.addObject(
-            name=obj_class.name, xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax,
+            name=obj_class.name,
+            xmin=xmin,
+            ymin=ymin,
+            xmax=xmax,
+            ymax=ymax,
         )
 
     writer.save(pascal_ann_path)

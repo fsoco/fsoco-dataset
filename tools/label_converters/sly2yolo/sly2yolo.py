@@ -188,7 +188,11 @@ def convert_label(
 
                         darknet_label.write(
                             "{} {} {} {} {}\n".format(
-                                class_id, norm_x, norm_y, norm_bb_width, norm_bb_height,
+                                class_id,
+                                norm_x,
+                                norm_y,
+                                norm_bb_width,
+                                norm_bb_height,
                             )
                         )
                     except RuntimeWarning as e:

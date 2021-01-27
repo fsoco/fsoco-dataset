@@ -74,8 +74,8 @@ class LabelChecker(ABC):
         # Search for this label in the updated_annotations object
         for candidate_label in LabelChecker.updated_annotation.labels:
             if candidate_label.geometry.sly_id == label["id"]:
-                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    candidate_label
+                LabelChecker.updated_annotation = (
+                    LabelChecker.updated_annotation.delete_label(candidate_label)
                 )
                 LabelChecker.is_annotation_updated = True
                 break
@@ -85,10 +85,10 @@ class LabelChecker(ABC):
         # Search for this label in the updated_annotations object
         for candidate_label in LabelChecker.updated_annotation.labels:
             if candidate_label.geometry.sly_id == updated_label.geometry.sly_id:
-                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    candidate_label
-                ).add_label(
-                    updated_label
+                LabelChecker.updated_annotation = (
+                    LabelChecker.updated_annotation.delete_label(
+                        candidate_label
+                    ).add_label(updated_label)
                 )
                 LabelChecker.is_annotation_updated = True
                 break
@@ -112,10 +112,10 @@ class LabelChecker(ABC):
                 updated_label = candidate_label.add_tag(
                     sly.Tag(meta=LabelChecker.issue_tag_meta, value=tag_text)
                 )
-                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    candidate_label
-                ).add_label(
-                    updated_label
+                LabelChecker.updated_annotation = (
+                    LabelChecker.updated_annotation.delete_label(
+                        candidate_label
+                    ).add_label(updated_label)
                 )
                 LabelChecker.is_annotation_updated = True
                 break
@@ -132,10 +132,10 @@ class LabelChecker(ABC):
                     candidate_label,
                     sly.Tag(meta=LabelChecker.issue_tag_meta, value=tag_text),
                 )
-                LabelChecker.updated_annotation = LabelChecker.updated_annotation.delete_label(
-                    candidate_label
-                ).add_label(
-                    updated_label
+                LabelChecker.updated_annotation = (
+                    LabelChecker.updated_annotation.delete_label(
+                        candidate_label
+                    ).add_label(updated_label)
                 )
                 LabelChecker.is_annotation_updated = True
                 break
