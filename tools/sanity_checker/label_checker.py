@@ -153,16 +153,16 @@ class LabelChecker(Checker):
         tag_text: Optional[str] = None,
     ) -> bool:
         for tag in label["tags"]:
-            if tag_value_type == sly.TagValueType.NONE:
-                if tag["name"] == tag_name:
+            if tag["name"] == tag_name:
+                if tag_value_type == sly.TagValueType.NONE:
                     return True
-            elif tag_value_type == sly.TagValueType.ANY_STRING:
-                if tag_text is None:
-                    return True
-                elif tag["value"] == tag_text:
-                    return True
+                elif tag_value_type == sly.TagValueType.ANY_STRING:
+                    if tag_text is None:
+                        return True
+                    elif "value" in tag.keys() and tag["value"] == tag_text:
+                        return True
+                    else:
+                        continue
                 else:
-                    continue
-            else:
-                raise NotImplementedError
+                    raise NotImplementedError
         return False
