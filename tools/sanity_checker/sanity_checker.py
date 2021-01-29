@@ -1,5 +1,5 @@
 import sys
-from typing import Union, Tuple
+from typing import Union, Tuple, List
 from pathlib import Path
 import json
 
@@ -230,7 +230,7 @@ class SanityChecker:
                 "number_issues": 0,
             }
 
-    def _get_image_job_names(self, image_name: str, geometry_type: str) -> list:
+    def _get_image_job_names(self, image_name: str, geometry_type: str) -> List[str]:
         # The image could be in multiple jobs. Also, filter for the requested label type.
         job_names = []
         for job in self.jobs:
@@ -317,6 +317,25 @@ class SanityChecker:
                     segmentation_job_names = self._get_image_job_names(
                         image.image_name, "bitmap"
                     )
+
+                    if (
+                        project_name == "Donations"
+                        and bounding_box_job_names
+                        and not (
+                            "MAD" in bounding_box_job_names[0]
+                            or "UG" in bounding_box_job_names[0]
+                        )
+                    ):
+                        bounding_box_job_names = []
+                    if (
+                        project_name == "Donations"
+                        and segmentation_job_names
+                        and not (
+                            "MAD" in segmentation_job_names[0]
+                            or "UG" in segmentation_job_names[0]
+                        )
+                    ):
+                        segmentation_job_names = []
 
                     # Run image-level checks
                     image_checker.run()
