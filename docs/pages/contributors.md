@@ -16,3 +16,4 @@ We would like to thank all participating teams for helping us to accelerate the 
 {% include contributors.html images="teams/iit_bombay_racing.png,teams/aristurtle.png,teams/penn_electric_racing.png" links="https://www.iitbracing.org, https://www.aristurtle.gr, https://www.pennelectricracing.com" column=3 %}
 {% include contributors.html images="teams/einstein_motorsport.png,teams/ug_racing.png,teams/bme.png" links="https://einstein-motorsport.com, https://ugracing.co.uk, http://frt.bme.hu/" column=3 %}
 {% include contributors.html images="teams/mad.png,teams/unicamp.png,teams/ugatu.png" links="https://www.madformulateam.com, https://www.unicamperacing.com, https://vk.com/ugatuteam" column=3 %}
+{% include contributors.html images="teams/fsb.png,teams/blank.png,teams/blank.png" links="https://www.fsb-racing.com" column=3 %}
