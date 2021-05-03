@@ -25,10 +25,10 @@ setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     install_requires=[
         "opencv-python<4.0.0,>=3.4.1",
         "tqdm>=4.0.0",

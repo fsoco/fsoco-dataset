@@ -3,8 +3,8 @@
 Create a new Python venv with your tool of choice. We'll be using Anaconda in this brief instruction.
 
 ```shell script
-# Create new environment with Python 3.6
-conda create -n fsoco-tools python=3.6
+# Create new environment with Python 3.7
+conda create -n fsoco-tools python=3.7
 
 # Activate created environment
 conda activate fsoco-tools
