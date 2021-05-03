@@ -2,13 +2,13 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
 -   repo: https://github.com/psf/black
-    rev: stable
+    rev: 21.4b2
     hooks:
     - id: black
       language_version: python3.6
       args: [tools/]
 -   repo: https://gitlab.com/pycqa/flake8
-    rev: 3.7.9
+    rev: 3.9.1
     hooks:
     - id: flake8
       args: [tools/]
