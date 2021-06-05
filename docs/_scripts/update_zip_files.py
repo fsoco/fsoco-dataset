@@ -86,6 +86,7 @@ def upload_zipfile(zipfile_name: str, drive_folder_id: str):
         file_drive = file_drive[0]
     prev_revision_id = file_drive.get("headRevisionId", "")
 
+    print(f"Uploading zip file: {zipfile_name}")
     file_drive.SetContentFile(zipfile_name)
     file_drive.Upload()
 
@@ -95,24 +96,44 @@ def upload_zipfile(zipfile_name: str, drive_folder_id: str):
 def main(sly_token: str, download_path: str):
     sly_team = "fsoco private"
     sly_workspace = "FSOCO"
-    sly_projects = {
-        "Bounding_Boxes-train": {"zipfile": "fsoco_bounding_boxes_train.zip"},
-        "Bounding_Boxes-test": {"zipfile": "fsoco_bounding_boxes_test.zip"},
-        "Segmentation": {"zipfile": "fsoco_segmentation_train.zip"},
+    projects = {
+        "bboxes_train": {
+            "sly_project": "Bounding_Boxes-train",
+            "zipfile": "fsoco_bounding_boxes_train.zip",
+        },
+        "bboxes_test": {
+            "sly_project": "Bounding_Boxes-test",
+            "zipfile": "fsoco_bounding_boxes_test.zip",
+        },
+        "segmentation_train": {
+            "sly_project": "Segmentation",
+            "zipfile": "fsoco_segmentation_train.zip",
+        },
+        "segmentation_early_adopters": {
+            "sly_project": "Segmentation",
+            "zipfile": "fsoco_segmentation_early_adopters.zip",
+            "dataset_blacklist": ["tuwr", "fsb"],
+        },
     }
-    drive_folder_id = "185NGDyUdzmx5B3pqfxNMns6q1c9C0_76"
+    drive_folder_id = "1P0TiljS1RCaqdbKGFqju2W4_Drxd-_GI"
 
-    for sly_project, sly_project_config in sly_projects.items():
-        if sly_project != "Bounding_Boxes-test":
-            continue
+    for project_config in projects.values():
         os.makedirs(download_path)
 
-        download_dataset(sly_token, sly_team, sly_workspace, sly_project, download_path)
-        zip_dataset(download_path, sly_project_config["zipfile"])
-        upload_zipfile(sly_project_config["zipfile"], drive_folder_id)
+        download_dataset(
+            sly_token,
+            sly_team,
+            sly_workspace,
+            project_config["sly_project"],
+            download_path,
+        )
+        zip_dataset(download_path, project_config["zipfile"])
+        upload_zipfile(project_config["zipfile"], drive_folder_id)
 
-        os.remove(sly_project_config["zipfile"])
+        os.remove(project_config["zipfile"])
         shutil.rmtree(download_path)
+
+        print("-" * 40)
 
 
 if __name__ == "__main__":
