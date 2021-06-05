@@ -5,7 +5,7 @@ import os
 import supervisely_lib as sly
 from typing import List
 from tqdm import tqdm
-from zipfile import ZipFile
+import zipfile
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 import shutil
@@ -48,7 +48,7 @@ def zip_dataset(project_dir: str, zipfile_name: str, dataset_blacklist: List[str
 
     number_files = sum([len(files) for r, d, files in os.walk(download_path)])
     with tqdm(total=number_files, desc="Zipping dataset", unit="files") as pbar:
-        with ZipFile(zipfile_name, "w") as zip_obj:
+        with zipfile.ZipFile(zipfile_name, "w", zipfile.ZIP_DEFLATED) as zip_obj:
             for foldername, subfolders, filenames in os.walk(project_dir):
                 for filename in filenames:
                     file_path = os.path.join(foldername, filename)
