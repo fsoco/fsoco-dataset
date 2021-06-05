@@ -11,4 +11,4 @@ scipy==1.5.2
 requests
 lxml
 PyDrive
-httplib2==0.15.0
+httplib2==0.19.0
