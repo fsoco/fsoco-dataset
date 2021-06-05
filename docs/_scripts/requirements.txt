@@ -10,4 +10,5 @@ matplotlib==3.3.2
 scipy==1.5.2
 requests
 lxml
-
+PyDrive
+httplib2==0.15.0
