@@ -127,7 +127,8 @@ def main(sly_token: str, download_path: str):
             project_config["sly_project"],
             download_path,
         )
-        zip_dataset(download_path, project_config["zipfile"])
+        dataset_blacklist = project_config.get("dataset_blacklist", [])
+        zip_dataset(download_path, project_config["zipfile"], dataset_blacklist)
         upload_zipfile(project_config["zipfile"], drive_folder_id)
 
         os.remove(project_config["zipfile"])
