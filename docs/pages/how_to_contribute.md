@@ -55,7 +55,7 @@ They are based on the experience with the first version of FSOCO.
 
 > **Note**
 > <br>
-> If you are interested in testing panoptic segmentation for your autonomous pipeline but do not want to commit to a full scale submission yet, please contact us for other options.
+> If you are interested in testing [panoptic segmentation](https://medium.com/@danielmechea/what-is-panoptic-segmentation-and-why-you-should-care-7f6c953d2a6a "Opens in a new tab."){:target="_blank"} for your autonomous pipeline but do not want to commit to a full scale submission yet, please contact us for other options.
 
 > **Tips and Tricks**
 > <br>
