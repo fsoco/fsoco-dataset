@@ -18,4 +18,4 @@ We would like to thank all participating teams for helping us to accelerate the 
 {% include contributors.html images="teams/mad.png,teams/unicamp.png,teams/ugatu.png" links="https://www.madformulateam.com, https://www.unicamperacing.com, https://vk.com/ugatuteam" column=3 %}
 {% include contributors.html images="teams/fsb.png,teams/wfm.png,teams/bauman.png" links="https://www.fsb-racing.com, https://uwformulamotorsports.com, https://baumanracing.ru/en/" column=3 %}
 {% include contributors.html images="teams/ka_raceing.png,teams/gfr.png,teams/asurt.png" links="https://www.ka-raceing.de, http://www.global-formula-racing.com, https://asurt.org" column=3 %}
-{% include contributors.html images="teams/dynamis_prc.png,teams/dtusdc.png,teams/blank.png" links="https://www.dynamisprc.com/, http://www.defianz-dtusdc.com/" column=3 %}
+{% include contributors.html images="teams/dynamis_prc.png,teams/dtusdc.png,teams/orion.png" links="https://www.dynamisprc.com/, http://www.defianz-dtusdc.com/, http://orion-racing.com" column=3 %}
