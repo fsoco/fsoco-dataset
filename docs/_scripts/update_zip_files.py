@@ -112,7 +112,7 @@ def main(sly_token: str, download_path: str):
         "segmentation_early_adopters": {
             "sly_project": "Segmentation",
             "zipfile": "fsoco_segmentation_early_adopters.zip",
-            "dataset_blacklist": ["tuwr", "fsb"],
+            "dataset_blacklist": ["tuwr", "fsb", "orion"],
         },
     }
     drive_folder_id = "1P0TiljS1RCaqdbKGFqju2W4_Drxd-_GI"
