@@ -105,15 +105,15 @@ def main(sly_token: str, download_path: str):
             "sly_project": "Bounding_Boxes-test",
             "zipfile": "fsoco_bounding_boxes_test.zip",
         },
-        "segmentation_train": {
-            "sly_project": "Segmentation",
-            "zipfile": "fsoco_segmentation_train.zip",
-        },
-        "segmentation_early_adopters": {
-            "sly_project": "Segmentation",
-            "zipfile": "fsoco_segmentation_early_adopters.zip",
-            "dataset_blacklist": ["tuwr", "fsb", "orion", "msm"],
-        },
+#         "segmentation_train": {
+#             "sly_project": "Segmentation",
+#             "zipfile": "fsoco_segmentation_train.zip",
+#         },
+#         "segmentation_early_adopters": {
+#             "sly_project": "Segmentation",
+#             "zipfile": "fsoco_segmentation_early_adopters.zip",
+#             "dataset_blacklist": ["tuwr", "fsb", "orion", "msm"],
+#         },
     }
     drive_folder_id = "1P0TiljS1RCaqdbKGFqju2W4_Drxd-_GI"
 
@@ -129,9 +129,9 @@ def main(sly_token: str, download_path: str):
         )
         dataset_blacklist = project_config.get("dataset_blacklist", [])
         zip_dataset(download_path, project_config["zipfile"], dataset_blacklist)
-        upload_zipfile(project_config["zipfile"], drive_folder_id)
+        # upload_zipfile(project_config["zipfile"], drive_folder_id)
 
-        os.remove(project_config["zipfile"])
+        # os.remove(project_config["zipfile"])
         shutil.rmtree(download_path)
 
         print("-" * 40)
