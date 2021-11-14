@@ -21,4 +21,4 @@ We would like to thank all participating teams for helping us to accelerate the 
 {% include contributors.html images="teams/dynamis_prc.png,teams/dtusdc.png,teams/orion.png" links="https://www.dynamisprc.com/, http://www.defianz-dtusdc.com/, http://orion-racing.com" column=3 %}
 {% include contributors.html images="teams/ecurie_aix.png,teams/frt.png,teams/manchester_stinger_motorsports.png" links="https://ecurie-aix.de/, http://www.firenzerace.it/, http://formulastudentuom.com/index.php/msm-ai/" column=3 %}
 {% include contributors.html images="teams/uop.png,teams/fsbizkaia.png,teams/kth.png" links="http://uopracing.com/, https://www.fsbizkaia.com/, https://www.kthformulastudent.se/" column=3 %}
-{% include contributors.html images="teams/baltic.png,teams/unipg.png,teams/blank.png" links="https://balticracing.hochschule-stralsund.de/, http://www.racingteam.unipg.it/" column=3 %}
+{% include contributors.html images="teams/baltic.png,teams/unipg.png,teams/ugent.png" links="https://balticracing.hochschule-stralsund.de/, http://www.racingteam.unipg.it/, https://ugentracing.be/" column=3 %}
