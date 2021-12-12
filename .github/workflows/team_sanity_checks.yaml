@@ -1,0 +1,35 @@
+name: Label sanity checks - team trigger
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [run_checks]
+
+jobs:
+  label_sanity_checks:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install dependencies
+        working-directory: ./tools
+        run: |
+          pip install --upgrade pip setuptools wheel
+          pip install --editable .[sly]
+
+      - name: Run sanity checks
+        run: fsoco sanity-checker -t ${{github.event.client_payload.team}} -w ${{github.event.client_payload.workspace}} -p  ${{github.event.client_payload.project}} --token ${{secrets.SLY_TOKEN}}
+
+#      - name: Upload results
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: sanity_checks
+#          path: ./results/sanity_checks.json
+#          retention-days: 10
