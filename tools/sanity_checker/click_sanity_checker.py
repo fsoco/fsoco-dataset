@@ -55,8 +55,9 @@ from .sanity_checker import SanityChecker
     "--results_path",
     type=click.Path(exists=False),
     default=None,
-    help="Save the results as JSON in the specified folder."
-    + " It will overwrite existing logs.",
+    help="Save the results as 'sanity_checks.json' in the specified folder."
+    + " If the path to a JSON file is given, this file will be used instead."
+    + " Any existing logs will be overwritten.",
 )
 @click.option(
     "--dry_run", is_flag=True, help="Do not update the labels on Supervisely."
@@ -96,11 +97,14 @@ def sanity_checker(
 
     if results_path is not None:
         results_path = Path(results_path)
-        results_filename = results_path / "sanity_checks.json"
-        if not results_path.exists():
-            results_path.mkdir(parents=True)
-            Logger.log_info(f"Created results directory: {results_path.absolute()}")
-        checker.save_results(results_filename)
+        if "json" not in str(results_path):
+            results_path = results_path / "sanity_checks.json"
+        if not results_path.parent.exists():
+            results_path.parent.mkdir(parents=True)
+            Logger.log_info(
+                f"Created results directory: {results_path.parent.absolute()}"
+            )
+        checker.save_results(results_path)
 
 
 if __name__ == "__main__":
