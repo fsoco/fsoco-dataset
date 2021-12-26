@@ -4,7 +4,7 @@ title: Contributors
 permalink: /contributors/
 feature-img: assets/img/fsg/HD/fsg_blue_orange_cones.jpg
 feature-img-credits: Photo ©FSG Klein
-order: 5
+order: 6
 ---
 
 FSOCO is only possible due to the contributions of the Formula Student Driverless community.

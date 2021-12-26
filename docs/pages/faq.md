@@ -4,7 +4,7 @@ title: FAQ
 permalink: /faq/
 feature-img: assets/img/fsg/HD/fsg_high_voltage.jpg
 feature-img-credits: Photo ©FSG Rankin
-order: 6
+order: 7
 ---
 
 ## Frequently Asked Questions
@@ -59,7 +59,7 @@ Further help can be found [here](https://docs.supervise.ly/customization/agents 
 
 <details>
 <summary markdown="span">Who are you?</summary>
-We are Niclas from AMZ Driverless, David from Munich Motorsport, and Michael from Fast Forest.
+We are Niclas from AMZ Driverless, David from Munich Motorsport, and Michael from Fast Forest *(now, we are all alumni)*.
 In early 2020 we saw the need to re-design the concept of the original version of FSOCO, maintained by Munich Motorsport.
 In the following months and countless video calls, we came up with our labeling guidelines, designed this website, and developed tools to get you started.
 Having backgrounds in different teams, we see FSOCO as a project *"for the DV community, from the DV community"*.  

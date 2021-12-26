@@ -4,7 +4,7 @@ title: Contact us
 permalink: /contact_us/
 feature-img: assets/img/fsg/HD/fsg_laptop.jpg
 feature-img-credits: Photo ©FSG Sturm
-order: 7
+order: 8
 ---
 
 > We are currently restructuring our internal workflow and hence do not accept new requests. We will be back in **January 2022**.

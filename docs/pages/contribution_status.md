@@ -1,12 +1,10 @@
 ---
 layout: page
-title: "Contribution Status"
+title: "Contribution status"
 permalink: /contribution_status
-feature-img: assets/img/fsg/HD/fsg_laptop.jpg
-feature-img-credits: Photo ©FSG Sturm
-slides: false
-hide: false
-bootstrap: false
+feature-img: assets/img/fsg/raw/fsg_inspection.jpg
+feature-img-credits: Photo ©FSG Wintermantel
+order: 5
 ---
 <style>
     iframe{
@@ -14,20 +12,28 @@ bootstrap: false
         width: 100%;
         height: 700px;
     }
+    button{
+        background-color: #337AB7;
+        color: white;
+        padding: 3px 5px;
+    }
 </style>
 
-<h1>Contribution Status Page</h1>
+### Contribution status
 
-Please enter the same email address you used for the contribution procedure contact form.
-This should be the address that has received an automatic response from us to confirm the successful submission of the form.
+On this page, you can:<br>
+1) check the current status of all labeling tasks assigned to your team.<br>
+2) trigger a couple of automated tests on these jobs.
+
+To identify, please enter the same email address that your team used to submit the contribution request.
 
 <form id="my_form" target="_status_iframe">
-    <label for="email">Email:</label>
+    <label for="email"><b>Email:</b></label>
     <input id="email" type="email" name="email" required/>
-    <br/>
-    <br/>
-    <button type="submit" id="task_overview" value="task_overview">Show task overview</button>
-    <button type="submit" id="sanity_checks" value="sanity_checks">Run sanity checks</button>
+    <br>
+    <br>
+    <button type="submit" id="task_overview" value="task_overview">Show task status</button>
+    <button type="submit" id="sanity_checks" value="sanity_checks">Run checks</button>
 </form>
 
 > **Note**
@@ -36,8 +42,11 @@ This should be the address that has received an automatic response from us to co
 > Additionally, if you experience issues and receive a "Sorry, unable to open the file at present." Google Drive error, either log out of all your Google Accounts or open this page in incognito mode.
 
 <h3 id="loading_text" style="display:none;">Loading...</h3>
+<div id="sanity_checks_container" style="display:none;">
+    <iframe name="_checks_iframe" id="sanity_checks_iframe"></iframe>
+</div>
 <div id="contrib_procedure_container" style="display:none;">
-  <iframe name="_status_iframe" id="contribution_procedure_status"></iframe>
+  <iframe name="_status_iframe" id="contribution_status_iframe"></iframe>
   <h3>Job Status Legend</h3>
   <table id="job_status_legend">
       <thead>
@@ -66,6 +75,7 @@ This should be the address that has received an automatic response from us to co
 </div>
 
 
+
 <script>
 document.forms[0].onsubmit = function(event) {
     event.preventDefault() // Cancel form submission
@@ -73,12 +83,13 @@ document.forms[0].onsubmit = function(event) {
     var button_type = document.activeElement['value']
     // Hide position container
     document.getElementById("contrib_procedure_container").style.display = "none"
+    document.getElementById("sanity_checks_container").style.display = "none"
     // Show loading text
     document.getElementById("loading_text").style.display = "block"
     var team_email = document.getElementById("email").value;
-    // Set iframe target to HTML waiting position web app response
-    var iframe = document.getElementById("contribution_procedure_status")
     if (button_type == "task_overview") {
+        // Set iframe target to HTML waiting position web app response
+        var iframe = document.getElementById("contribution_status_iframe")
         var  url = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-ZnoJ4iRGvvJyIXZ2h4buI5MWLTL/exec" + "?email=" + team_email
         iframe.src = url
         iframe.onload = function() {
@@ -89,28 +100,31 @@ document.forms[0].onsubmit = function(event) {
             document.getElementById("contrib_procedure_container").style.display = "block"
         }
     } else if (button_type == "sanity_checks") {
+        // Set iframe target to HTML waiting position web app response
+        var iframe = document.getElementById("sanity_checks_iframe")
         var url = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec" + "?email=" + team_email
         iframe.src = url
         iframe.onload = function() {
-            //iframe.style.height = iframe.contentWindow.document.body.offsetHeight + 'px'
+            // iframe.style.height = iframe.contentWindow.document.body.offsetHeight + 'px'
             // Hide loading text
             document.getElementById("loading_text").style.display = "none"
             // Show position container
-            document.getElementById("contrib_procedure_container").style.display = "block"
+            document.getElementById("sanity_checks_container").style.display = "block"
         }
     }
 }
 
-// Handle parameters for pre-filled contribution status page
-window.onload = function () {
-    // Check iframe src
-    if (iframe = document.getElementById("contribution_procedure_status").src == "") {
-        (new URL(window.location.href)).searchParams.forEach(
-            (val, param) => document.getElementsByName(param).forEach(
-            (el) => el.value = val)
-        );
-        // Submit form if there is pre-filled input
-        document.getElementById("task_overview").click()
-    };
-};
+// ToDo: Re-activate this functionality
+// // Handle parameters for pre-filled contribution status page
+// window.onload = function () {
+//     // Check iframe src
+//     if (iframe = document.getElementById("contribution_status_iframe").src == "") {
+//         (new URL(window.location.href)).searchParams.forEach(
+//             (val, param) => document.getElementsByName(param).forEach(
+//             (el) => el.value = val)
+//         );
+//         // Submit form if there is pre-filled input
+//         document.getElementById("task_overview").click()
+//     };
+// };
 </script>

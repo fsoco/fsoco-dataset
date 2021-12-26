@@ -32,4 +32,4 @@ jobs:
         with:
           name: sanity_checks
           path: ./results/sanity_checks.json
-          retention-days: 10
+          retention-days: 5
