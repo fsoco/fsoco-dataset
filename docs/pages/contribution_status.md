@@ -1,10 +1,10 @@
 ---
 layout: page
-title: "Contribution status"
-permalink: /contribution_status
+title: "Login"
+permalink: /login
 feature-img: assets/img/fsg/raw/fsg_inspection.jpg
 feature-img-credits: Photo ©FSG Wintermantel
-order: 5
+order: 7
 ---
 <style>
     iframe{
@@ -19,11 +19,12 @@ order: 5
     }
 </style>
 
-### Contribution status
+### Manage my contribution
 
 On this page, you can:<br>
 1) check the current status of all labeling tasks assigned to your team.<br>
-2) trigger a couple of automated tests on these jobs.
+2) trigger a couple of automated tests on these jobs.<br>
+3) show the download links of the FSOCO dataset.
 
 To identify, please enter the same email address that your team used to submit the contribution request.
 
@@ -34,6 +35,7 @@ To identify, please enter the same email address that your team used to submit t
     <br>
     <button type="submit" id="task_overview" value="task_overview">Show task status</button>
     <button type="submit" id="sanity_checks" value="sanity_checks">Run checks</button>
+    <button type="submit" id="dataset_url" value="dataset_url">Show link to dataset</button>
 </form>
 
 > **Note**
@@ -42,8 +44,8 @@ To identify, please enter the same email address that your team used to submit t
 > Additionally, if you experience issues and receive a "Sorry, unable to open the file at present." Google Drive error, either log out of all your Google Accounts or open this page in incognito mode.
 
 <h3 id="loading_text" style="display:none;">Loading...</h3>
-<div id="sanity_checks_container" style="display:none;">
-    <iframe name="_checks_iframe" id="sanity_checks_iframe"></iframe>
+<div id="blanko_container" style="display:none;">
+    <iframe name="_checks_iframe" id="blanko_iframe"></iframe>
 </div>
 <div id="contrib_procedure_container" style="display:none;">
   <iframe name="_status_iframe" id="contribution_status_iframe"></iframe>
@@ -83,14 +85,14 @@ document.forms[0].onsubmit = function(event) {
     var button_type = document.activeElement['value']
     // Hide position container
     document.getElementById("contrib_procedure_container").style.display = "none"
-    document.getElementById("sanity_checks_container").style.display = "none"
+    document.getElementById("blanko_container").style.display = "none"
     // Show loading text
     document.getElementById("loading_text").style.display = "block"
     var team_email = document.getElementById("email").value;
     if (button_type == "task_overview") {
         // Set iframe target to HTML waiting position web app response
         var iframe = document.getElementById("contribution_status_iframe")
-        var  url = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-ZnoJ4iRGvvJyIXZ2h4buI5MWLTL/exec" + "?email=" + team_email
+        var url = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec" + "?email=" + team_email + "&what=get_job_status"
         iframe.src = url
         iframe.onload = function() {
             //iframe.style.height = iframe.contentWindow.document.body.offsetHeight + 'px'
@@ -99,17 +101,22 @@ document.forms[0].onsubmit = function(event) {
             // Show position container
             document.getElementById("contrib_procedure_container").style.display = "block"
         }
-    } else if (button_type == "sanity_checks") {
+    } else {
+        var iframe = document.getElementById("blanko_iframe")
+        var url = ""
+        if (button_type == "sanity_checks") { 
+            url = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec" + "?email=" + team_email + "&what=run_checks"
+        } else if (button_type == "dataset_url") {
+            url = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec" + "?email=" + team_email + "&what=get_dataset_url"
+        }
         // Set iframe target to HTML waiting position web app response
-        var iframe = document.getElementById("sanity_checks_iframe")
-        var url = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec" + "?email=" + team_email
         iframe.src = url
         iframe.onload = function() {
             // iframe.style.height = iframe.contentWindow.document.body.offsetHeight + 'px'
             // Hide loading text
             document.getElementById("loading_text").style.display = "none"
             // Show position container
-            document.getElementById("sanity_checks_container").style.display = "block"
+            document.getElementById("blanko_container").style.display = "block"
         }
     }
 }
