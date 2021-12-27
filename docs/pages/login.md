@@ -22,9 +22,10 @@ order: 7
 ### Manage my contribution
 
 On this page, you can:<br>
-1) check the current status of all labeling tasks assigned to your team.<br>
-2) trigger a couple of automated tests on these jobs.<br>
-3) show the download links of the FSOCO dataset.
+1) get an estimate of your current position on our waiting list.<br>
+2) check the current status of all labeling tasks assigned to your team.<br>
+3) trigger a couple of automated tests on these jobs.<br>
+4) show the download links of the FSOCO dataset *(access is granted after a successful contribution)*.
 
 To identify, please enter the same email address that your team used to submit the contribution request.
 
@@ -33,8 +34,14 @@ To identify, please enter the same email address that your team used to submit t
     <input id="email" type="email" name="email" required/>
     <br>
     <br>
+    On waiting list: 
+    <button type="submit" id="waiting_list" value="waiting_list">Show position</button>
+    <br>
+    In contribution process: 
     <button type="submit" id="task_overview" value="task_overview">Show task status</button>
     <button type="submit" id="sanity_checks" value="sanity_checks">Run checks</button>
+    <br>
+    Contributor: 
     <button type="submit" id="dataset_url" value="dataset_url">Show link to dataset</button>
 </form>
 
@@ -45,7 +52,7 @@ To identify, please enter the same email address that your team used to submit t
 
 <h3 id="loading_text" style="display:none;">Loading...</h3>
 <div id="blanko_container" style="display:none;">
-    <iframe name="_checks_iframe" id="blanko_iframe"></iframe>
+    <iframe name="_checks_iframe" id="blanko_iframe" style="height: 400px"></iframe>
 </div>
 <div id="contrib_procedure_container" style="display:none;">
   <iframe name="_status_iframe" id="contribution_status_iframe"></iframe>
@@ -108,6 +115,8 @@ document.forms[0].onsubmit = function(event) {
             url = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec" + "?email=" + team_email + "&what=run_checks"
         } else if (button_type == "dataset_url") {
             url = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec" + "?email=" + team_email + "&what=get_dataset_url"
+        } else if (button_type == "waiting_list") {
+            url = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec" + "?email=" + team_email + "&what=get_waiting_list"
         }
         // Set iframe target to HTML waiting position web app response
         iframe.src = url
