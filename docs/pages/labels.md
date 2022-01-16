@@ -67,18 +67,18 @@ The steps to take are the following:
 - Confirm the segmentation instance (Shortcut: BACKSPACE)
   - Note that if you forget to perform both confirm steps above, you will end up with several cones within one object/mask.
 
-[Polyfill video tutorial]({{ "assets/img/labels/2022-01-16_seg-polyfill.gif" | relative_url}})
+![Polyfill video tutorial]({{ "assets/img/labels/2022-01-16_seg-polyfill.gif" | relative_url}})
 
-When creating segmentation masks, a common mistake is to mistakenly add several single instances in one Supervisely object.
+When creating segmentation masks, a common mistake is to add several single instances in one Supervisely object.
 To preempt this, you can quickly check if all instances are correctly separated by using the random instance color keyboard shortcut: SHIFT+H.
 Supervisely will then assign a random color to each instance, making it easy to recognize connected ones.
 By pressing SHIFT+H again, the regular colors assigned to each class will be rendered again.
 
-[Same class cones that are adjacent]({{ "assets/img/labels/2022-01-16_seg-rnd-colors-shift-H.gif" | relative_url}})
+![Same class cones that are adjacent]({{ "assets/img/labels/2022-01-16_seg-rnd-colors-shift-H.gif" | relative_url}})
 
 Note that you can use the "Cut tool" in the segmentation toolbox to quickly gain single instances if their masks aren't overlapping.
 
-[Disjunct instance masks but in the same object]({{ "assets/img/labels/2022-01-16_seg-find-connected-instances.gif" | relative_url}})
+![Disjunct instance masks but in the same object]({{ "assets/img/labels/2022-01-16_seg-find-cut-connected-instances.gif" | relative_url}})
 
 **Overall**
 
@@ -89,7 +89,7 @@ This can be done by taking the following steps:
 - Click on an object
 - Toggle the unselected objects' visibility (Shortcut: CTRL+H)
 
-[Easily adjust or label truncated cones.]({{ "assets/img/labels/2022-01-16_bbox-hide-others-ctrl-H.gif" | relative_url}})
+![Easily adjust or label truncated cones.]({{ "assets/img/labels/2022-01-16_bbox-hide-others-ctrl-H.gif" | relative_url}})
 
 ### Well labeled images
 
