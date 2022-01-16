@@ -54,6 +54,43 @@ Tags are the same for bounding boxes and segmentation annotations.
 |**Label cones that are knocked over** and tag them as *knocked_over*.<br>Cones could be knocked-over on purpose, e.g., FSG uses them to separate the track from the preparation area, or because the car touched them in a previous lap. Either way, depending on your setup you might want to filter them out.| <img src="https://i.ibb.co/LRKkB6D/box-knocked-over.png" width="200"/> <img src="https://i.ibb.co/BK1nHbq/segmentation-knocked-over.png" width="200"/> |
 |Tag cones that have stickers, e.g., FSG, or whose tape has been removed. Tag them as *sticker_band_removed*.<br>Make sure to only add this tag if you can read the sticker and not only because you know that this image has been taken at FSG. That is, tag the upper cone but do not tag the lower cone.| <img src="https://i.ibb.co/DVSCTt1/tag-sticker-do.png" width="200"/> <img src="https://i.ibb.co/wMhCBS4/tag-sticker-dont.png" width="200"/> |
 
+### Tips & Tricks (Supervisely)
+
+**Segmentation**
+
+Using Supervisely's polyfill tool greatly increases the labeling speed for segmenation masks. 
+The steps to take are the following:
+- Start a new segmentation instance with the brush tool (Shortcut: 9)
+- Choose the polyfill tool
+- Create the bounding polygon by left-clicking and, possibly, adjusting control points afterwards
+- Confirm the polygon (Shortcut: BACKSPACE)
+- Confirm the segmentation instance (Shortcut: BACKSPACE)
+  - Note that if you forget to perform both confirm steps above, you will end up with several cones within one object/mask.
+
+[Polyfill video tutorial]({{ "assets/img/labels/2022-01-16_seg-polyfill.gif" | relative_url}})
+
+When creating segmentation masks, a common mistake is to mistakenly add several single instances in one Supervisely object.
+To preempt this, you can quickly check if all instances are correctly separated by using the random instance color keyboard shortcut: SHIFT+H.
+Supervisely will then assign a random color to each instance, making it easy to recognize connected ones.
+By pressing SHIFT+H again, the regular colors assigned to each class will be rendered again.
+
+[Same class cones that are adjacent]({{ "assets/img/labels/2022-01-16_seg-rnd-colors-shift-H.gif" | relative_url}})
+
+Note that you can use the "Cut tool" in the segmentation toolbox to quickly gain single instances if their masks aren't overlapping.
+
+[Disjunct instance masks but in the same object]({{ "assets/img/labels/2022-01-16_seg-find-connected-instances.gif" | relative_url}})
+
+**Overall**
+
+When dealing with truncated cones, it might be hard to recognize what exactly should be labeled when occluded by other bounding boxes or segmentation masks.
+To better be able to label a single object, you can hide all objects that aren't currently selected with CTRL+H.
+This can be done by taking the following steps:
+- Choose the selection tool (Shortcut: 2)
+- Click on an object
+- Toggle the unselected objects' visibility (Shortcut: CTRL+H)
+
+[Easily adjust or label truncated cones.]({{ "assets/img/labels/2022-01-16_bbox-hide-others-ctrl-H.gif" | relative_url}})
+
 ### Well labeled images
 
 #### Bounding Boxes
