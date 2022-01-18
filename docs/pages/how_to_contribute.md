@@ -4,7 +4,7 @@ title: How to contribute?
 permalink: /how_to_contribute/
 feature-img: assets/img/fsg/HD/fsg_cones_in_jail.jpg
 feature-img-credits: Photo ©FSG Schulz
-order: 4
+order: 5
 ---
 
 ## How to contribute?
