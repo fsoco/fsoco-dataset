@@ -25,17 +25,16 @@ Henceforth, other events have adapted the driverless class and the self-driving 
 
 
 ### Citation
-If you use the FSOCO dataset in your research, please cite our [arXiv preprint](https://arxiv.org/abs/2012.07139):
+If you use the FSOCO dataset in your research, please cite our [paper](https://arxiv.org/abs/2012.07139):
 {% raw %}
 <pre>
-<code class="language bibtex" style="font-size: .75em">@misc{fsoco2020,
-      title={{FSOCO}: The Formula Student Objects in Context Dataset},
-      author={David Dodel and Michael Schötz and Niclas Vödisch},
-      year={2020},
-      eprint={2012.07139},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      note={arXiv preprint \href{https://arxiv.org/abs/2012.07139}{arXiv:2012.07139}, Dec 2020}
+<code class="language bibtex" style="font-size: .75em">@article{fsoco_2022,
+  title={FSOCO: The Formula Student Objects in Context Dataset},
+  author={V{\"o}disch, Niclas and Dodel, David and Sch{\"o}tz, Michael},
+  journal={SAE International Journal of Connected and Automated Vehicles},
+  volume={5},
+  number={12-05-01-0003},
+  year={2022}
 }</code>
 </pre>
 {% endraw %}

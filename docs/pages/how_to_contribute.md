@@ -50,30 +50,6 @@ They are based on the experience with the first version of FSOCO.
 2. Not contain images, where one can identify people and license plates without their (owners) explicit permission.
 3. Comply with the contribution policy above.
 
-[//]: # (* Your team's **bounding box** contribution should:  )
-
-[//]: # (  1. Contain at least 2,500 official cones, e.g., 250 images with 10 cones/image &#40;approx. labeling effort of 15h for one person&#41;. *Please let us know if the time is entirely off for you.*  )
-
-[//]: # (  2. Consist of approx. 50% images showing on-board data of rules-compliant tracks &#40;acceleration, skidpad, autocross&#41;.  )
-
-[//]: # (  3. Not contain images, where one can identify people and license plates without their &#40;owners&#41; explicit permission.  )
-
-[//]: # (  4. Comply with the contribution policy above.)
-
-[//]: # (<br>)
-
-[//]: # (* Your team's **segmentation** contribution should:  )
-
-[//]: # (<br>)
-
-[//]: # (  1. Contain at least 1,000 official cones, e.g., 200 images with 5 cones/image &#40;approx. labeling effort of 14h for one person&#41;.  )
-
-[//]: # (  2. Consist of approx. 50% images showing on-board data of rules-compliant tracks &#40;acceleration, skidpad, autocross, trackdrive&#41;.  )
-
-[//]: # (  3. Not contain images, where one can identify people and license plates without their &#40;owners&#41; explicit permission.  )
-
-[//]: # (  4. Comply with the contribution policy above.   )
-
 > **Note**
 > <br>
 > If you are interested in testing [panoptic segmentation](https://medium.com/@danielmechea/what-is-panoptic-segmentation-and-why-you-should-care-7f6c953d2a6a "Opens in a new tab."){:target="_blank"} for your autonomous pipeline but do not want to commit to a full scale submission yet, please contact us for other options.

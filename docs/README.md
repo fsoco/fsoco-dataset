@@ -57,16 +57,15 @@ We would like to thank all <a href="https://www.fsoco-dataset.com/contributors/"
 <p>This project follows the <a href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification.
 For details on what the emoji mean, please see the <a href="../CONTRIBUTING.md#all_contributors">contribution documentation</a>.</p>
 <h2>Citation</h2>
-<p>If you use the FSOCO dataset in your research, please cite our <a href="https://arxiv.org/abs/2012.07139">arXiv preprint</a>:</p>
+<p>If you use the FSOCO dataset in your research, please cite our <a href="https://arxiv.org/abs/2012.07139">paper</a>:</p>
 <pre>
-<code class="language bibtex" style="font-size: .75em">@misc{fsoco2020,
-      title={{FSOCO}: The Formula Student Objects in Context Dataset},
-      author={David Dodel and Michael Schötz and Niclas Vödisch},
-      year={2020},
-      eprint={2012.07139},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      note={arXiv preprint \href{https://arxiv.org/abs/2012.07139}{arXiv:2012.07139}, Dec 2020}
+<code class="language bibtex" style="font-size: .75em">@article{fsoco_2022,
+  title={FSOCO: The Formula Student Objects in Context Dataset},
+  author={V{\"o}disch, Niclas and Dodel, David and Sch{\"o}tz, Michael},
+  journal={SAE International Journal of Connected and Automated Vehicles},
+  volume={5},
+  number={12-05-01-0003},
+  year={2022}
 }</code>
 </pre>
 <h2>Contact</h2>
