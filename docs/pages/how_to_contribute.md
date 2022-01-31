@@ -112,12 +112,12 @@ stateDiagram
 
 1. Once your team is next in line, we will email you to start the contribution process.
 2. If you have not done yet, please create 1 - 5 accounts on [Supervisely](https://supervise.ly/ "Opens in a new tab."){:target="_blank"} and send us the usernames by replying to our email. *Do not use GitHub to sign up.*
-3. We will add the accounts to our FSOCO team and assign **labeling exams** to you to ensure that you **are familiar with our [labeling guidelines]({{ "/labeling_guidelines/" | relative_url }})**. 
+3. We will add the accounts to our FSOCO team and assign **labeling exams** to you to ensure that you **are familiar with our [labeling guidelines]({{ "/labels/#labeling_guidelines" | relative_url }})**. 
 
 The following steps depend on whether your team already has raw images and existing labels.
 
 **We have images and labels**
-1. Please verify that your existing data **complies with our terms and conditions** above and our [labeling guidelines]({{ "/labeling_guidelines/" | relative_url }}).
+1. Please verify that your existing data **complies with our terms and conditions** above and our [labeling guidelines]({{ "/labels/#labeling_guidelines" | relative_url }}).
 2. You can use one of our provided [label converters]({{ "/tools/#label-converters" | relative_url }}). If you need to write your own tool, please consider making a PR to our tools suite.
 3. Add the [FSOCO Supervisely Import]({{ "/tools/#plugins" | relative_url }}) plugin to your Supervisely team. You will also need to add one of your team's computers as an agent. *Just follow the instructions on Supervisely.*
 4. Upload your data to a private Supervisely team using our import plugin. Please **ensure the following style**:
