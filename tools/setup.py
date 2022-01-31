@@ -45,6 +45,7 @@ setup(
         "screeninfo",
         "networkx",
         "requests",
+        "pascal_voc_writer",
     ],
     extras_require={
         "sly": [
