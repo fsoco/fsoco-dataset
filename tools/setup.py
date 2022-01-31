@@ -30,7 +30,7 @@ setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        "opencv-python<4.0.0,>=3.4.1",
+        "opencv-python>=4.5.5.62",
         "tqdm>=4.0.0",
         "pillow>=6.2.1",
         "click>=7.0.0",
@@ -45,6 +45,7 @@ setup(
         "screeninfo",
         "networkx",
         "requests",
+        "pascal_voc_writer",
     ],
     extras_require={
         "sly": [

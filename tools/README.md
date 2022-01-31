@@ -15,15 +15,15 @@ Create a new Python venv with your tool of choice. We'll be using Anaconda in th
 
 ```shell script
 # Create new environment with Python 3.7
-conda create -n fsoco-tools python=3.7
+conda create -n fsoco python=3.7
 
 # Activate created environment
-conda activate fsoco-tools
+conda activate fsoco
 
 # Upgrade pip to version 19.3.0 or later
 pip install --upgrade pip
 
-# Make sure you're in the tools directory, otherwise adjust the '.' path to point to it.
+# Make sure you are in the tools directory, otherwise adjust the '.' path to point to it.
 # Use Setuptools configuration to install tools to environment
 # For usage of the CLI tools only
 pip install --editable .[sly]
@@ -31,8 +31,8 @@ pip install --editable .[sly]
 pip install -r requirements.txt
 pre-commit install
 
-# You've just installed the FSOCO Tools Python package
-# Have a look at the Usage help with:
+# You have just installed the FSOCO Tools Python package
+# Have a look at the usage help with:
 fsoco --help
 
 # Have fun ;)
