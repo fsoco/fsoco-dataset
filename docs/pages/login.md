@@ -2,7 +2,7 @@
 layout: page
 title: "Login"
 permalink: /login
-feature-img: assets/img/fsg/raw/fsg_inspection.jpg
+feature-img: assets/img/fsg/HD/fsg_inspection.jpg
 feature-img-credits: Photo ©FSG Wintermantel
 order: 8
 ---
