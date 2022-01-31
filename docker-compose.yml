@@ -3,6 +3,7 @@ services:
   web:
     volumes:
       - ./docs/pages:/app/pages
+      - ./docs/assets:/app/assets
     build: .
     ports:
       - "4000:4000"
