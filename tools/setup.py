@@ -25,23 +25,23 @@ setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=[
-        "opencv-python>=4.5.5.62",
-        "tqdm>=4.0.0",
+        "opencv-python",
+        "tqdm",
         "pillow>=6.2.1",
         "click>=7.0.0",
         "pyyaml>=5.0.0",
-        "numpy>=1.17.2",
-        "scipy>=1.5.1",
+        "numpy",
+        "scipy",
         "sklearn",
         "torch>=1.4.0",
         "img2vec_pytorch",
-        "pandas>=1.0.1",
-        "matplotlib>=3.0.0",
+        "pandas",
+        "matplotlib",
         "screeninfo",
         "networkx",
         "requests",
@@ -49,7 +49,7 @@ setup(
     ],
     extras_require={
         "sly": [
-            "supervisely @git+https://github.com/supervisely/supervisely@master#egg=supervisely"
+            "supervisely[apps]",
         ]
     },
     entry_points="""

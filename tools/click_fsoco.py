@@ -39,7 +39,7 @@ def fsoco(ctx, tools_home, debug):
     - Label conversion: fsoco label-converters [Options] Arguments
     - Image watermarking: fsoco watermark [Options] Arguments
 
-    If you're interested in extending the available tools or even adding new ones, have a look at:
+    If you are interested in extending the available tools or even adding new ones, have a look at:
     https://github.com/fsoco/fsoco/blob/master/tools/CONTRIBUTING.md
     """
     ctx.obj = Tools(tools_home, debug)
