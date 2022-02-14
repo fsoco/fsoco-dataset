@@ -23,6 +23,9 @@ conda activate fsoco
 # Upgrade pip to version 19.3.0 or later
 pip install --upgrade pip
 
+# Install setuptools version 60.8.2 as version 60.9.0 introduced a bug.
+pip install setuptools==60.8.2
+
 # Make sure you are in the tools directory, otherwise adjust the '.' path to point to it.
 # Use Setuptools configuration to install tools to environment
 # For usage of the CLI tools only
