@@ -23,7 +23,8 @@ jobs:
       - name: Install dependencies
         working-directory: ./tools
         run: |
-          pip install --upgrade pip setuptools wheel
+          pip install --upgrade pip wheel
+          pip install setuptools==60.8.2
           pip install --editable .[sly]
 
       - name: Run sanity checks
