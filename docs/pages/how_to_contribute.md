@@ -43,7 +43,8 @@ They are based on the experience with the first version of FSOCO.
 
 * Depending on the desired annotation type, your contribution should contain at least ___ official cones *(approx. labeling effort of 15h for one person)*:
 1. Bounding boxes: 2,500
-2. Sementation: 1,500
+<br>**OR**<br>
+2. Segmentation: 1,500
 
 * Furthermore, your contribution should:
 1. Consist of approx. 50% images showing on-board data of rules-compliant tracks (acceleration, skidpad, autocross).
@@ -106,7 +107,7 @@ stateDiagram
 1. **Submit the form** on our [contact us]({{ "/contact_us/" | relative_url }}) page.
 * Information on the similarity score can be found [here]({{ "/tools/#image-similarity-score" | relative_url }}).
 * If applicable, please attach samples of your own images and existing labels. We will contact you for early feedback such that you do not have to wait until there is a free spot.
-2. You will be added to our **waiting list**. To check your current position, please head to the [login]({{ "/login/" | relative_url }}) page.
+2. You will be added to our **waiting list**. To check your current position, please head over to the [login]({{ "/login/" | relative_url }}) page.
 
 #### Label the data
 
