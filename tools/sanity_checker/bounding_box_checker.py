@@ -6,6 +6,12 @@ from .label_checker import LabelChecker, check_label_existence
 
 
 class BoundingBoxChecker(LabelChecker):
+    def __init__(self, *args):
+        super().__init__(*args)
+
+        # Used to check for redundant boxes
+        self.previous_labels = []
+
     def run(self, label: dict):
         if label["geometryType"] != "rectangle":
             raise ValueError(
@@ -24,12 +30,51 @@ class BoundingBoxChecker(LabelChecker):
         )
 
         is_ok = True
+        is_ok &= not self._is_repeated_box(maximum_distance=5)
         is_ok &= not self._is_small_label(minimum_area=20, delete_threshold_area=10)
         is_ok &= not self._is_outside_image_frame(image_border_size=140)
         is_ok &= not self._is_distorted_box(
             minimum_ratio=0.5, maximum_ratio=3.0, skip_if_truncated=True
         )
         return is_ok
+
+    @check_label_existence
+    def _is_repeated_box(self, maximum_distance: int = 0):
+        # This checks for redundant boxes:
+        # - if the location, the class, and the tags are equal, the current label is removed
+        # - if there are differences, add an issue tag
+
+        category = self.label["classTitle"]
+        tags = [tag["name"] for tag in self.label["tags"]]
+        corner_points = self.label["points"]["exterior"]
+
+        is_repeated_box = False
+        for previous_label in self.previous_labels:
+            if (
+                category == previous_label[0]
+                and tags == previous_label[1]
+                and corner_points == previous_label[2]
+            ):
+                # Remove the redundant label
+                Logger.log_info_alt("Remove label")
+                if self.apply_auto_fixes:
+                    self._delete_label(self.label)
+                else:
+                    is_repeated_box = True
+            elif (
+                np.abs(np.array(corner_points) - np.array(previous_label[2]))
+                <= maximum_distance
+            ).all():
+                # Add an issue tag
+                is_repeated_box = True
+        self.previous_labels.append((category, tags, corner_points))
+
+        self._update_issue_tag(self.label, "Repeated label", is_repeated_box)
+
+        if self.verbose and is_repeated_box:
+            log_text = f"{self.image_name} | bounding box | repeated label"
+            Logger.log_info_alt(log_text)
+        return is_repeated_box
 
     @check_label_existence
     def _is_small_label(self, minimum_area: int, delete_threshold_area: int = -1):
