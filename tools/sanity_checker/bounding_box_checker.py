@@ -30,7 +30,7 @@ class BoundingBoxChecker(LabelChecker):
         )
 
         is_ok = True
-        is_ok &= not self._is_repeated_box(maximum_distance=5)
+        is_ok &= not self._is_repeated_box(maximum_distance=2)
         is_ok &= not self._is_small_label(minimum_area=20, delete_threshold_area=10)
         is_ok &= not self._is_outside_image_frame(image_border_size=140)
         is_ok &= not self._is_distorted_box(
