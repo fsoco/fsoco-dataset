@@ -56,9 +56,12 @@ class BoundingBoxChecker(LabelChecker):
                 and corner_points == previous_label[2]
             ):
                 # Remove the redundant label
-                Logger.log_info_alt("Remove label")
                 if self.apply_auto_fixes:
                     self._delete_label(self.label)
+                    log_text = (
+                        f"{self.image_name} | bounding box | repeated label --> removed"
+                    )
+                    Logger.log_info_alt(log_text)
                 else:
                     is_repeated_box = True
             elif (
