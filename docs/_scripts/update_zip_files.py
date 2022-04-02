@@ -99,10 +99,18 @@ def update_stats(project_dir: str, cache_dir: str, drive_folder_id: str):
     if "Segmentation" not in project_dir:
         cmd += " --calc_similarity --gpu --num_workers 4"
     os.system(cmd)
-    df_files = glob(f"{cache_dir}/*.df")
-    for file in df_files:
-        upload_file(file, drive_folder_id)
-        shutil.rmtree(file)
+
+    if 'Segmentation' in project_dir:
+        os.rename(os.path.join(cache_dir, 'bboxes_train_bbox_stats.df'),
+                  os.path.join(cache_dir, 'Segmentation-BBoxes_bbox_stats.df'))
+        os.rename(os.path.join(cache_dir, 'bboxes_train_image_stats.df'),
+                  os.path.join(cache_dir, 'Segmentation-BBoxes_image_stats.df'))
+    else:
+        os.rename(os.path.join(cache_dir, 'bboxes_train_bbox_stats.df'),
+                  os.path.join(cache_dir, 'Bounding_Boxes-train_bbox_stats.df'))
+        os.rename(os.path.join(cache_dir, 'bboxes_train_image_stats.df'),
+                  os.path.join(cache_dir, 'Bounding_Boxes-train_image_stats.df'))
+
 
 
 def main(sly_token: str, download_path: str):
