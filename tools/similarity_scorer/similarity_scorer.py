@@ -86,7 +86,7 @@ class SimilarityScorer:
                 if file not in combined:  # new key
                     folder = "./"
                     if len(file.parts) > 1:
-                        folder = "/".join(file.parts[:-1])
+                        folder = str(file.parent)
 
                     combined[file]["folder"] = folder
                     combined[file]["file_name"] = file.name

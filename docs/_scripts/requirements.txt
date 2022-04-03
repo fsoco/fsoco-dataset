@@ -1,11 +1,13 @@
 beautifulsoup4==4.9
 Markdown==3.3
+jupyter_client==6.1.12
+jupyter_console==6.2.0
 jupyter==1.0
 nbconvert==5.6.1
 jupyter_contrib_nbextensions
 holoviews==1.13
 bokeh==2.0
-pandas==1.1
+pandas==1.4.2
 matplotlib==3.3.2
 scipy==1.5.2
 requests

@@ -71,7 +71,7 @@ def collect_stats(
         box_df.to_pickle(bbox_df_filename)
 
         Logger.log_info(f"Saved per image stats to '{image_df_filename}'")
-        Logger.log_info(f"Saved per image stats to '{bbox_df_filename}'")
+        Logger.log_info(f"Saved per bounding box stats to '{bbox_df_filename}'")
 
 
 if __name__ == "__main__":
