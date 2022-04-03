@@ -148,9 +148,6 @@ def main(sly_token: str, download_path: str):
 
         os.makedirs(project_path, exist_ok=True)
 
-        update_stats(project_path, download_path)
-        continue
-
         download_dataset(
             sly_token,
             sly_team,
@@ -164,8 +161,10 @@ def main(sly_token: str, download_path: str):
         # The connection gets interrupted for such big files
         # upload_zipfile(project_config["zipfile"], DRIVE_DATA_FOLDER_ID)
 
+        update_stats(project_path, download_path)
+
         # os.remove(project_config["zipfile"])
-        shutil.rmtree(project_path)
+        # shutil.rmtree(project_path)
 
         print("-" * 40)
 
