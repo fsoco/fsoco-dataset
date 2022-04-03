@@ -25,9 +25,7 @@ class SegmentationChecker(LabelChecker):
         self.label = label
 
         # Create numpy array from bitmap
-        self.label["mask"] = sly.geometry.bitmap.Bitmap.base64_2_data(
-            self.label["bitmap"]["data"]
-        )
+        self.label["mask"] = sly.Bitmap.base64_2_data(self.label["bitmap"]["data"])
 
         is_ok = True
         is_ok &= not self._is_small_label(minimum_area=10, delete_threshold_area=5)
@@ -134,7 +132,7 @@ class SegmentationChecker(LabelChecker):
         # Sometimes the inferred bounding box is larger than the actual mask
 
         # We just convert the mask back to the encrypted version and check for differences
-        data = sly.geometry.bitmap.Bitmap.data_2_base64(self.label["mask"])
+        data = sly.Bitmap.data_2_base64(self.label["mask"])
         is_ghost_bounding_box = self.label["bitmap"]["data"] != data
 
         if not self.apply_auto_fixes:
