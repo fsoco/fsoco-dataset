@@ -141,7 +141,7 @@ class StatsCollector:
         bboxes = []
 
         for label in ann.labels:
-            if isinstance(label.geometry, sly.geometry.rectangle.Rectangle):
+            if type(label.geometry).__name__ == "Rectangle":
                 class_name = label.obj_class.name
                 cleaned_tags = list(
                     map(lambda tag_dict: tag_dict["name"], label.tags.to_json())

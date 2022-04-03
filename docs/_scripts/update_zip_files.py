@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from glob import glob
 import sys
 import os
 import supervisely_lib as sly
@@ -94,23 +93,30 @@ def upload_file(file_name: str, drive_folder_id: str):
     assert file_drive["headRevisionId"] != prev_revision_id
 
 
-def update_stats(project_dir: str, cache_dir: str, drive_folder_id: str):
+def update_stats(project_dir: str, cache_dir: str):
     cmd = f"fsoco collect-stats {project_dir} --cache_dir {cache_dir}"
     if "Segmentation" not in project_dir:
         cmd += " --calc_similarity --gpu --num_workers 4"
     os.system(cmd)
 
-    if 'Segmentation' in project_dir:
-        os.rename(os.path.join(cache_dir, 'bboxes_train_bbox_stats.df'),
-                  os.path.join(cache_dir, 'Segmentation-BBoxes_bbox_stats.df'))
-        os.rename(os.path.join(cache_dir, 'bboxes_train_image_stats.df'),
-                  os.path.join(cache_dir, 'Segmentation-BBoxes_image_stats.df'))
+    if "Segmentation" in project_dir:
+        os.rename(
+            os.path.join(cache_dir, "bboxes_train_bbox_stats.df"),
+            os.path.join(cache_dir, "Segmentation-BBoxes_bbox_stats.df"),
+        )
+        os.rename(
+            os.path.join(cache_dir, "bboxes_train_image_stats.df"),
+            os.path.join(cache_dir, "Segmentation-BBoxes_image_stats.df"),
+        )
     else:
-        os.rename(os.path.join(cache_dir, 'bboxes_train_bbox_stats.df'),
-                  os.path.join(cache_dir, 'Bounding_Boxes-train_bbox_stats.df'))
-        os.rename(os.path.join(cache_dir, 'bboxes_train_image_stats.df'),
-                  os.path.join(cache_dir, 'Bounding_Boxes-train_image_stats.df'))
-
+        os.rename(
+            os.path.join(cache_dir, "bboxes_train_bbox_stats.df"),
+            os.path.join(cache_dir, "Bounding_Boxes-train_bbox_stats.df"),
+        )
+        os.rename(
+            os.path.join(cache_dir, "bboxes_train_image_stats.df"),
+            os.path.join(cache_dir, "Bounding_Boxes-train_image_stats.df"),
+        )
 
 
 def main(sly_token: str, download_path: str):
@@ -136,14 +142,13 @@ def main(sly_token: str, download_path: str):
         # },
     }
     DRIVE_DATA_FOLDER_ID = "1P0TiljS1RCaqdbKGFqju2W4_Drxd-_GI"
-    DRIVE_STATS_FOLDER_ID = "1lAYZaKQCxRq1AkqIyPyv6_iGCUH9CnCb"
 
     for project_name, project_config in projects.items():
         project_path = os.path.join(download_path, project_name)
 
         os.makedirs(project_path, exist_ok=True)
 
-        update_stats(project_path, download_path, DRIVE_STATS_FOLDER_ID)
+        update_stats(project_path, download_path)
         continue
 
         download_dataset(
@@ -160,7 +165,7 @@ def main(sly_token: str, download_path: str):
         # upload_zipfile(project_config["zipfile"], DRIVE_DATA_FOLDER_ID)
 
         # os.remove(project_config["zipfile"])
-        # shutil.rmtree(project_path)
+        shutil.rmtree(project_path)
 
         print("-" * 40)
 
