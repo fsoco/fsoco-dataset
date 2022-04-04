@@ -110,9 +110,7 @@ class SegmentationChecker(LabelChecker):
             if not np.any(mask):
                 self._delete_label(self.label)
             else:
-                self.label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
-                    mask
-                )
+                self.label["bitmap"]["data"] = sly.Bitmap.data_2_base64(mask)
                 self._update_bitmap_data()
                 # Remove issue tag if it previously existed
                 self._delete_issue_tag(self.label, "Inside watermark")
@@ -188,9 +186,7 @@ class SegmentationChecker(LabelChecker):
         if not self.apply_auto_fixes:
             self._update_issue_tag(self.label, "Perforated label", is_perforated)
         elif is_perforated:
-            self.label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
-                updated_mask
-            )
+            self.label["bitmap"]["data"] = sly.Bitmap.data_2_base64(updated_mask)
             self._update_bitmap_data()
             # Remove issue tag if it previously existed
             self._delete_issue_tag(self.label, "Perforated label")
@@ -229,9 +225,7 @@ class SegmentationChecker(LabelChecker):
             if not np.sum(updated_mask):
                 remove_label = True
             else:
-                self.label["bitmap"]["data"] = sly.geometry.bitmap.Bitmap.data_2_base64(
-                    updated_mask
-                )
+                self.label["bitmap"]["data"] = sly.Bitmap.data_2_base64(updated_mask)
                 self._update_bitmap_data()
                 # Remove issue tag if it previously existed
                 self._delete_issue_tag(self.label, "Separated label")
@@ -255,6 +249,4 @@ class SegmentationChecker(LabelChecker):
         self._update_label(updated_label)
         # Update label object for later checks
         self.label = updated_label.to_json()
-        self.label["mask"] = sly.geometry.bitmap.Bitmap.base64_2_data(
-            self.label["bitmap"]["data"]
-        )
+        self.label["mask"] = sly.Bitmap.base64_2_data(self.label["bitmap"]["data"])
