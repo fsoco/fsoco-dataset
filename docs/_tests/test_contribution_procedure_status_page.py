@@ -60,7 +60,7 @@ def test_google_app_script_response():
     for team in teams:
         logging.info(f"Getting page for {team}")
         r = session.get(GAPPS_URL, params={"team_name": team})
-        status = True if r.find(team) >= 0 else False
+        status = True if r.text.find(team) >= 0 else False
         response_status.append(status)
     assert all(response_status), [
         team_name for team_name, res in zip(teams, response_status) if not res
