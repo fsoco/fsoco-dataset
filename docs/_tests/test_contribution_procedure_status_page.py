@@ -5,7 +5,7 @@ import requests
 from requests_html import HTMLSession
 from typing import List
 
-GAPPS_URL = "https://script.google.com/macros/s/AKfycbwe9WgdWy_nsfyk1zC13pGc-ZnoJ4iRGvvJyIXZ2h4buI5MWLTL/exec"
+GAPPS_URL = "https://script.google.com/macros/s/AKfycbzxi0VKZJPCpySqvnxiGLsfBYOiHuxKo2Wtg4dONoxI_Huw-YkjqJVmBGCfGS7CfhPJ/exec"
 SKIP_DESC_FLAG = "skip_status_page_test"
 
 def get_teams() -> List[str]:
