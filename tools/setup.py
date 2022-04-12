@@ -46,6 +46,7 @@ setup(
         "networkx",
         "requests",
         "pascal_voc_writer",
+        "imgaug",
     ],
     extras_require={
         "sly": [
