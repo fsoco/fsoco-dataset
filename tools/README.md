@@ -4,7 +4,7 @@
 
 The FSOCO Tools are __only supported on Linux__. There is no plan to include Windows support as there are some incompatible dependencies.
 
-The installation process is tested daily against Ubuntu 18.04 and Ubuntu 20.04, but any recent Linux installation should work.
+The installation process is tested daily against Ubuntu 18.04, Ubuntu 20.04, and Ubuntu 22.04.
 
 - Linux OS
 - Python 3.8 (e.g., via Anaconda or virtualenv)
