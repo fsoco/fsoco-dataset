@@ -47,6 +47,7 @@ setup(
         "requests",
         "pascal_voc_writer",
         "imgaug",
+        "sk-video",
     ],
     extras_require={
         "sly": [
