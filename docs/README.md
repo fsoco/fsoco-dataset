@@ -15,6 +15,12 @@ We aim to overcome this problem by providing data and to help experienced teams 
 <p>Details and our contribution procedure are available at:
 <br/>
 www.fsoco-dataset.com</p>
+  
+ <p>The training dataset is available at:
+<br/>
+https://drive.google.com/file/d/1jvmzpz_zcSjxrMntbVwuvbZcjBKA6xkm/view?usp=sharing</p>
+  
+  
 <h2>Formula Student Driverless</h2>
 <p>Formula Student / FSAE is an international design competition, where students design and build full-scale formula style racecars.
 In 2017, Formula Student Germany introduced a new driverless class challenging the students to equip their cars with additional sensors and compute hardware to enable autonomous racing.
