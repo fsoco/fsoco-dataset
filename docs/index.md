@@ -17,6 +17,9 @@ We aim to overcome this problem by providing data and to help experienced teams 
 FSOCO contains bounding box and segmentation annotations from multiple teams and continues to grow thanks to numerous contributions from the Formula Student community.
 Details on supported [object classes]({{ "/overview/" | relative_url }}) and [examples of our annotations]({{ "/examples/" | relative_url }}) can be found on this website.
 
+The training dataset can be downloaded using the following link:  
+https://drive.google.com/file/d/1jvmzpz_zcSjxrMntbVwuvbZcjBKA6xkm/view?usp=sharing
+
 ### Formula Student Driverless
 
 Formula Student / FSAE is an international design competition, where students design and build full-scale formula style racecars.
