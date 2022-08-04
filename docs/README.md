@@ -3,24 +3,23 @@
 <a href="https://www.codacy.com/manual/fsoco/fsoco-dataset?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fsoco/fsoco-dataset&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/16570c4c4b43418aa862bff60f6a61d4"/></a>
 <a href="https://www.fsoco-dataset.com/how_to_contribute/" target="_blank"><img alt="contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat"/></a>
 <a href="https://www.fsoco-dataset.com/contact_us/" target="_blank"><img alt="donations needed" src="https://img.shields.io/badge/data_donations-needed-red?style=flat"/></a> <br/>
+
 <h1>The FSOCO Dataset</h1>
 <p><a href="https://www.fsoco-dataset.com/contributors/" target="_blank"><img alt="Teams: 41" id="num_teams" src="https://img.shields.io/badge/Teams-41-green.svg"/></a>
 <a href="https://www.fsoco-dataset.com/overview/" target="_blank"><img alt="Number of labeled images: 11572" id="num_bbox_images" src="https://img.shields.io/badge/Images-11,572-blue.svg"/></a>
 <a href="https://www.fsoco-dataset.com/overview/" target="_blank"><img alt="Number of labeled cones: 220862" id="num_bbox_cones" src="https://img.shields.io/badge/Cones-220,862-blue.svg"/></a></p>
+
+<span style="color:#337AB7; font-size:15px">**+++ UPDATE: The FSOCO dataset is now publicly available without any contribution requirements. +++**</span>
+
 <p><img align="right" src="assets/img/examples/index.png" width="400"/></p>
 <p>The FSOCO dataset helps Formula Student / FSAE teams to get started with their visual perception system for driverless disciplines.
 State-of-the-art object detection systems require a substantial amount of data, which can be a challenge for new teams.
 We aim to overcome this problem by providing data and to help experienced teams to even further boost their performance on the track with an increased set of ground truth data.</p>
 <p>FSOCO contains bounding box and segmentation annotations from multiple teams and continues to grow thanks to numerous contributions from the Formula Student community.</p>
-<p>Details and our contribution procedure are available at:
+<p>The links to the dataset and more details can be found at:
 <br/>
 www.fsoco-dataset.com</p>
-  
- <p>The training dataset is available at:
-<br/>
-https://drive.google.com/file/d/1jvmzpz_zcSjxrMntbVwuvbZcjBKA6xkm/view?usp=sharing</p>
-  
-  
+
 <h2>Formula Student Driverless</h2>
 <p>Formula Student / FSAE is an international design competition, where students design and build full-scale formula style racecars.
 In 2017, Formula Student Germany introduced a new driverless class challenging the students to equip their cars with additional sensors and compute hardware to enable autonomous racing.

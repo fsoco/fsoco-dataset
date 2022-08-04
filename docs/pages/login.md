@@ -5,6 +5,7 @@ permalink: /login
 feature-img: assets/img/fsg/HD/fsg_inspection.jpg
 feature-img-credits: Photo ©FSG Wintermantel
 order: 8
+hide: true
 ---
 <style>
     iframe{

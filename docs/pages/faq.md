@@ -5,6 +5,7 @@ permalink: /faq/
 feature-img: assets/img/fsg/HD/fsg_high_voltage.jpg
 feature-img-credits: Photo ©FSG Rankin
 order: 7
+hide: true
 ---
 
 ## Frequently Asked Questions

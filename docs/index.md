@@ -6,6 +6,8 @@ feature-img-credits: Photo ©FSG Schulz
 hide: true
 ---
 
+<span style="color:#337AB7; font-size:22px">**+++ UPDATE: The FSOCO dataset is now publicly available without any contribution requirements. +++**</span>
+
 ### The FSOCO Dataset
 
 <img src="assets/img/examples/index.png" style="width: 60%;  height: auto; float:right; vertical-align:middle; margin:25px 0 10px">
@@ -17,8 +19,6 @@ We aim to overcome this problem by providing data and to help experienced teams 
 FSOCO contains bounding box and segmentation annotations from multiple teams and continues to grow thanks to numerous contributions from the Formula Student community.
 Details on supported [object classes]({{ "/overview/" | relative_url }}) and [examples of our annotations]({{ "/examples/" | relative_url }}) can be found on this website.
 
-The training dataset can be downloaded using the following link:  
-https://drive.google.com/file/d/1jvmzpz_zcSjxrMntbVwuvbZcjBKA6xkm/view?usp=sharing
 
 ### Formula Student Driverless
 

@@ -12,6 +12,12 @@ order: 5
 
 *"Sharing is caring."*
 
+> **Update**
+> <br>
+> As of August 2022, the FSOCO dataset is publicly available for all Formula Student / FSAE teams and everyone who is interested in cone detection.
+> It is **not** necessary anymore to contribute before accessing the dataset.
+> If you would still like to add your annotated images, please read the information on this website and then fill the contact form.
+
 In order to continuously increase the size of the FSOCO dataset, we only grant access to our data once your team submitted their contribution.
 Please note, that you will only get access to those types of annotations you included in your submission, e.g., teams submitting bounding box labels will only get access to our existing bounding boxes.
 To access our segmentation data, a separate contribution is required.
