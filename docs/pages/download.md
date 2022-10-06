@@ -17,11 +17,11 @@ Please note that we provide the data in the [Supervisely](https://supervise.ly/ 
 In order to convert it, please have a look at our [tools website]({{ "/tools/" | relative_url }}) and our [GitHub repository](https://github.com/fsoco/fsoco-dataset).
 
 ### Bounding Boxes
-Link: [https://dl.orangedox.com/fsoco-bb-train](https://dl.orangedox.com/fsoco-bb-train "Opens in a new tab."){:target="_blank"}
+Link: [https://dl.orangedox.com/fsoco-bb-train-v2](https://dl.orangedox.com/fsoco-bb-train-v2 "Opens in a new tab."){:target="_blank"}
 <br>
 File size: 24GB
 
 ### Panoptic Segmentation
-Link: [https://dl.orangedox.com/fsoco-seg-train](https://dl.orangedox.com/fsoco-seg-train "Opens in a new tab."){:target="_blank"}
+Link: [https://dl.orangedox.com/fsoco-seg-train-v2](https://dl.orangedox.com/fsoco-seg-train-v2 "Opens in a new tab."){:target="_blank"}
 <br>
 File size: 4GB
