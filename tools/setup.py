@@ -37,7 +37,7 @@ setup(
         "pyyaml>=5.0.0",
         "numpy",
         "scipy",
-        "sklearn",
+        "scikit-learn",
         "torch>=1.4.0",
         "img2vec_pytorch",
         "pandas",
