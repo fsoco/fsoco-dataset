@@ -48,7 +48,7 @@ setup(
         "pascal_voc_writer",
         "imgaug",
         "sk-video",
-        "htppx",
+        "httpx",
     ],
     extras_require={
         "sly": [
