@@ -17,11 +17,14 @@ Please note that we provide the data in the [Supervisely](https://supervise.ly/ 
 In order to convert it, please have a look at our [tools website]({{ "/tools/" | relative_url }}) and our [GitHub repository](https://github.com/fsoco/fsoco-dataset).
 
 ### Bounding Boxes
-Link: [https://dl.orangedox.com/fsoco-bb-train-v2](https://dl.orangedox.com/fsoco-bb-train-v2 "Opens in a new tab."){:target="_blank"}
+Link: [http://fsoco.cs.uni-freiburg.de/src/download_boxes_train.php](http://fsoco.cs.uni-freiburg.de/src/download_boxes_train.php "Opens in a new tab."){:target="_blank"}
 <br>
 File size: 24GB
 
 ### Panoptic Segmentation
-Link: [https://dl.orangedox.com/fsoco-seg-train-v2](https://dl.orangedox.com/fsoco-seg-train-v2 "Opens in a new tab."){:target="_blank"}
+Link: [http://fsoco.cs.uni-freiburg.de/src/download_segmentation_train.php](http://fsoco.cs.uni-freiburg.de/src/download_segmentation_train.php "Opens in a new tab."){:target="_blank"}
 <br>
 File size: 4GB
+
+#### Acknowledgment
+We thank the [Robot Learning Lab](https://rl.uni-freiburg.de/) and the [Autonomous Intelligent Systems Group](http://ais.informatik.uni-freiburg.de/) at the University of Freiburg, Germany, for providing cloud storage to host the FSOCO dataset.
