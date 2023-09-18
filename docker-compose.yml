@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.8"
 services:
   web:
     volumes:
@@ -7,4 +7,13 @@ services:
     build: .
     ports:
       - "4000:4000"
-
+    profiles:
+      - web
+  tools:
+    build: 
+      context: .
+      dockerfile: ./tools/docker/Dockerfile
+    # keep docker container running so we can attach
+    # docker ps -> NAMES
+    # docker exec -it fsoco-dataset-tools-1 <container name>
+    command: tail -F anything
