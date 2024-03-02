@@ -23,7 +23,7 @@ class SuperviselyViewer(Viewer):
     def _draw_labels(self, label_file: Path, image: np.ndarray):
         with open(str(label_file), "r") as label_file:
             label_data = json.load(label_file)
-            image_mask = np.zeros(image.shape[:2], dtype=np.int)
+            image_mask = np.zeros(image.shape[:2], dtype=int)
             image_mask_color = np.zeros(image.shape, dtype=image.dtype)
 
             for label in label_data["objects"]:
@@ -46,10 +46,10 @@ class SuperviselyViewer(Viewer):
 
                     # Find edges of the shape and paint them black
                     ext_mask = np.zeros(
-                        (mask.shape[0] + 2, mask.shape[1] + 2), dtype=np.int
+                        (mask.shape[0] + 2, mask.shape[1] + 2), dtype=int
                     )
                     edge_mask = np.zeros(
-                        (mask.shape[0] + 2, mask.shape[1] + 2), dtype=np.int
+                        (mask.shape[0] + 2, mask.shape[1] + 2), dtype=int
                     )
                     ext_mask[1:-1, 1:-1] = mask
                     edge_mask[1:, :] += np.diff(ext_mask, axis=0)
