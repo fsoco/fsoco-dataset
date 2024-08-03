@@ -4,6 +4,7 @@ from label_converters.labelbox2sly.click_labelbox2sly import labelbox2sly
 from label_converters.yolo2sly.click_yolo2sly import yolo2sly
 from label_converters.sly2yolo.click_sly2yolo import sly2yolo
 from label_converters.sly2voc.click_sly2voc import sly2voc
+from label_converters.sly2yolov8.click_sly2yolov8 import sly2yolov8
 
 
 @click.group()
@@ -23,6 +24,7 @@ label_converters.add_command(yolo2sly)
 label_converters.add_command(sly2yolo)
 label_converters.add_command(sly2voc)
 label_converters.add_command(labelbox2sly, name="lb2sly")
+label_converters.add_command(sly2yolov8)
 
 if __name__ == "__main__":
     print(
