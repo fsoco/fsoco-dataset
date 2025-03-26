@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: ""
+baseurl: "/fsoco-website"
 url: "https://fsoco.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
@@ -16,6 +16,8 @@ footer_text: Made with passion in Deggendorf, Munich, and Zurich
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
 post_navigation: true
+paginate: 10
+paginate_path: "blog/page:num"
 color_image:                                            # A bit transparent for color posts.
 
 # Features

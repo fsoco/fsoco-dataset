@@ -7,5 +7,3 @@ Disallow: /assets/
 Disallow: /stats_for_nerds
 Disallow: /tools/image_similarity_score
 Disallow: /labeling_guidelines/
-
-Sitemap: https://www.fsoco-dataset.com/sitemap.xml
