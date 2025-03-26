@@ -24,43 +24,10 @@ We aim to overcome this problem by providing data and to help experienced teams 
 <p>Formula Student / FSAE is an international design competition, where students design and build full-scale formula style racecars.
 In 2017, Formula Student Germany introduced a new driverless class challenging the students to equip their cars with additional sensors and compute hardware to enable autonomous racing.
 Henceforth, other events have adapted the driverless class and the self-driving racecars are quickly closing the gap to human drivers.</p>
-<h2>Contributing</h2>
-<p>Some of the ways to contribute are:</p>
-<p><a href="https://fsoco.github.io/fsoco-dataset/how_to_contribute/">Dataset contributions</a>:
+<h2>Development kit</h2>
+<p>For the devkit, please refer to:</p>
+<p><a href="https://github.com/fsoco/fsoco-devkit">github.com/fsoco/fsoco-devkit</a>
 </p>
-<ul>
-<li> Donate raw data for other teams to label that do not have cones or sensors</li>
-<li> Label donated images as your contribution to the dataset</li>
-<li> Contribute your team's private dataset</li>
-</ul>
-<p><a href="../CONTRIBUTING.md#contribute">Tools contributions</a>:
-</p>
-<ul>
-<li>Report bugs</li>
-<li>Correct or add documentation</li>
-<li>Add a new tool</li>
-</ul>
-<p>Please be mindful of correctly using the linter and formatter when working on your contributions to the tools.
-Following the development install instructions and reading the linter's quick-start guide should get you going quickly.</p>
-<h3>Contributors</h3>
-<p>FSOCO is only made possible by your contributions.<br/>
-We would like to thank all <a href="https://fsoco.github.io/fsoco-dataset/contributors/">FS teams that have contributed</a> to the dataset.</p>
-<p>Likewise, we would like to thank the individual contributors that have helped write the tools that enable this project:</p>
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-<tr>
-<td align="center"><a href="https://github.com/vniclas"><img alt="" src="https://avatars2.githubusercontent.com/u/49001036?v=4" width="100px;"/><br/><sub><b>Niclas</b></sub></a><br/><a href="https://github.com/fsoco/fsoco-dataset/issues?q=author%3Avniclas" title="Bug reports">🐛</a> <a href="https://github.com/fsoco/fsoco-dataset/commits?author=vniclas" title="Documentation">📖</a> <a href="#tool-vniclas" title="Tools">🔧</a></td>
-<td align="center"><a href="https://github.com/ddavid"><img alt="" src="https://avatars0.githubusercontent.com/u/18621443?v=4" width="100px;"/><br/><sub><b>David Dodel</b></sub></a><br/><a href="https://github.com/fsoco/fsoco-dataset/issues?q=author%3Addavid" title="Bug reports">🐛</a> <a href="https://github.com/fsoco/fsoco-dataset/commits?author=ddavid" title="Documentation">📖</a> <a href="#tool-ddavid" title="Tools">🔧</a></td>
-<td align="center"><a href="https://github.com/MitchellMitch"><img alt="" src="https://avatars0.githubusercontent.com/u/9809116?v=4" width="100px;"/><br/><sub><b>MitchMitchell</b></sub></a><br/><a href="https://github.com/fsoco/fsoco-dataset/issues?q=author%3AMitchellMitch" title="Bug reports">🐛</a> <a href="https://github.com/fsoco/fsoco-dataset/commits?author=MitchellMitch" title="Documentation">📖</a> <a href="#tool-MitchellMitch" title="Tools">🔧</a></td>
-</tr>
-</table>
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-<p>This project follows the <a href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification.
-For details on what the emoji mean, please see the <a href="../CONTRIBUTING.md#all_contributors">contribution documentation</a>.</p>
 <h2>Citation</h2>
 <p>If you use the FSOCO dataset in your research, please cite our <a href="https://arxiv.org/abs/2012.07139">paper</a>:</p>
 <pre>
