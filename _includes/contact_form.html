@@ -1,0 +1,29 @@
+<script type="text/javascript">var submitted_contact=false;</script>
+<iframe name="hidden_iframe_contact" id="hidden_iframe_contact" style="display:none;" onload="if(submitted_contact)  {window.location='/contact_form_thanks/';}"></iframe>
+
+<div class="form-style">
+  <form class="form" name="contact_form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSf2KKgBvmWXuSZqtLIfirDlZZleIgmx7t8bIInjEVrxdy2blQ/formResponse" method="post" target="hidden_iframe_contact" onsubmit="submitted_contact = validateVerification()">
+    <fieldset>
+      <input name="entry.1592597952" type="text" placeholder="Your name" required />
+      <input name="entry.149010718" type="text" placeholder="Your team's name [optional]">
+      <input name="entry.2017816160" type="email" placeholder="Your email" required />
+      <textarea name="entry.288751362" placeholder="Type your message"></textarea>
+      <p>What was the year of the first FSG driverless competition?</p>
+      <input name="entry.83116452" type="text" placeholder="Year" required />
+    </fieldset>
+    <fieldset>
+      <input type="submit" value="Send" />
+    </fieldset>
+  </form>
+</div>
+
+<script>
+function validateVerification() {
+  var x = document.forms["contact_form"]["entry.83116452"].value;
+  if (x != "2017") {
+    alert("You entered the wrong year. If you do not know the answer, go to formulastudent.de");
+    return false;
+  }
+  return true;
+}
+</script>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.0.0
+    Copyright 2016-2019 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  {% include head.html %}
+  {% if page.slides == true %}
+    {% include jupyter_head.html %}
+  {% endif %}
+  <body style="font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size: 1.25em;">
+    {% include navbar.html %}
+    <div class="content">
+      {{ content }}
+    </div>
+    {% unless page.slides == true %}
+        {% include footer.html %}
+    {% endunless %}
+  </body>
+</html>

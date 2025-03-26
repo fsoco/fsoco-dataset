@@ -1,0 +1,20 @@
+{% assign images = include.images | split: ',' %}
+{% assign links = include.links | split: ',' %}
+
+{% if include.column == "auto" %}
+{% assign column = 100.0 | divided_by: images.size %}
+{% elsif include.column > 0 %}
+{% assign column = 100.0 | divided_by: include.column %}
+{% endif %}
+
+<div class="row">
+    {% for image in images %}
+    <div {% unless column %}class="column"{% endunless%} style="flex: {{ column }}%">
+    	<a href="{{ links[forloop.index0] }}" target="_blank">
+    		<p>
+        	<img src="{{ image | prepend: 'assets/img/' | relative_url }}" alt="{{ image | prepend: '/' | split: '/' | last }}">
+        </p>
+    	</a>
+    </div>
+    {% endfor %}
+</div>

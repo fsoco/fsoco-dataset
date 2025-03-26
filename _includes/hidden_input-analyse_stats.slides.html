@@ -1,0 +1,883 @@
+<div class="reveal">
+<div class="slides">
+<section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Heading">Heading<a class="anchor-link" href="#Heading">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>team_name</th>
+      <th>label_folder</th>
+      <th>label_file</th>
+      <th>image_file</th>
+      <th>no_image</th>
+      <th>image_file_size</th>
+      <th>image_width</th>
+      <th>image_height</th>
+      <th>num_boxes</th>
+      <th>duplicates</th>
+      <th>similar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>51905</td>
+      <td>51905</td>
+      <td>51905</td>
+      <td>51905</td>
+      <td>51905</td>
+      <td>5.190500e+04</td>
+      <td>51905.000000</td>
+      <td>51905.000000</td>
+      <td>51905.000000</td>
+      <td>51354.000000</td>
+      <td>51354.000000</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>45</td>
+      <td>55</td>
+      <td>45336</td>
+      <td>45336</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>MitDut</td>
+      <td>mit_2019</td>
+      <td>239.txt.ff</td>
+      <td>153.jpg</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>7955</td>
+      <td>7955</td>
+      <td>7</td>
+      <td>7</td>
+      <td>51354</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5.318268e+05</td>
+      <td>1022.592448</td>
+      <td>1386.104075</td>
+      <td>7.759830</td>
+      <td>26.563734</td>
+      <td>154.907349</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.500940e+06</td>
+      <td>960.954423</td>
+      <td>915.761523</td>
+      <td>7.922572</td>
+      <td>45.899748</td>
+      <td>234.389666</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-1.000000e+00</td>
+      <td>-1.000000</td>
+      <td>-1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.149000e+04</td>
+      <td>480.000000</td>
+      <td>800.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>11.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.098730e+05</td>
+      <td>720.000000</td>
+      <td>1280.000000</td>
+      <td>5.000000</td>
+      <td>6.000000</td>
+      <td>67.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.935360e+05</td>
+      <td>1080.000000</td>
+      <td>1920.000000</td>
+      <td>10.000000</td>
+      <td>30.000000</td>
+      <td>199.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.267661e+07</td>
+      <td>6682.000000</td>
+      <td>7952.000000</td>
+      <td>189.000000</td>
+      <td>324.000000</td>
+      <td>2026.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7fbc50b23d90&gt;]],
+      dtype=object)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[55]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>team_name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>DimitrisMartinArampatzis</th>
+      <td>600.0</td>
+      <td>22.386667</td>
+      <td>13.650557</td>
+      <td>2.0</td>
+      <td>8.00</td>
+      <td>27.0</td>
+      <td>33.0</td>
+      <td>48.0</td>
+    </tr>
+    <tr>
+      <th>lions-racing-braunschweig</th>
+      <td>806.0</td>
+      <td>19.696030</td>
+      <td>9.884333</td>
+      <td>4.0</td>
+      <td>12.00</td>
+      <td>16.0</td>
+      <td>28.0</td>
+      <td>41.0</td>
+    </tr>
+    <tr>
+      <th>fastforest</th>
+      <td>963.0</td>
+      <td>19.446521</td>
+      <td>17.426293</td>
+      <td>1.0</td>
+      <td>8.00</td>
+      <td>15.0</td>
+      <td>25.0</td>
+      <td>189.0</td>
+    </tr>
+    <tr>
+      <th>amz_internal</th>
+      <td>380.0</td>
+      <td>18.600000</td>
+      <td>12.193817</td>
+      <td>1.0</td>
+      <td>7.00</td>
+      <td>18.0</td>
+      <td>27.0</td>
+      <td>52.0</td>
+    </tr>
+    <tr>
+      <th>TUfast</th>
+      <td>778.0</td>
+      <td>16.727506</td>
+      <td>10.137804</td>
+      <td>1.0</td>
+      <td>7.25</td>
+      <td>16.0</td>
+      <td>23.0</td>
+      <td>56.0</td>
+    </tr>
+    <tr>
+      <th>raceyard</th>
+      <td>600.0</td>
+      <td>15.818333</td>
+      <td>9.343134</td>
+      <td>0.0</td>
+      <td>7.00</td>
+      <td>14.0</td>
+      <td>25.0</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>bmefrt</th>
+      <td>1763.0</td>
+      <td>15.812252</td>
+      <td>10.716045</td>
+      <td>1.0</td>
+      <td>8.00</td>
+      <td>13.0</td>
+      <td>21.0</td>
+      <td>57.0</td>
+    </tr>
+    <tr>
+      <th>mmr-driverless</th>
+      <td>600.0</td>
+      <td>14.163333</td>
+      <td>7.439236</td>
+      <td>7.0</td>
+      <td>9.00</td>
+      <td>10.0</td>
+      <td>18.0</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>ituracing</th>
+      <td>600.0</td>
+      <td>14.138333</td>
+      <td>6.903039</td>
+      <td>1.0</td>
+      <td>10.00</td>
+      <td>14.0</td>
+      <td>18.0</td>
+      <td>42.0</td>
+    </tr>
+    <tr>
+      <th>dart</th>
+      <td>1658.0</td>
+      <td>12.822678</td>
+      <td>8.925693</td>
+      <td>0.0</td>
+      <td>6.00</td>
+      <td>11.0</td>
+      <td>18.0</td>
+      <td>48.0</td>
+    </tr>
+    <tr>
+      <th>GFR</th>
+      <td>646.0</td>
+      <td>11.057276</td>
+      <td>1.594020</td>
+      <td>2.0</td>
+      <td>11.00</td>
+      <td>12.0</td>
+      <td>12.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>MitDut</th>
+      <td>7955.0</td>
+      <td>10.671653</td>
+      <td>6.866634</td>
+      <td>0.0</td>
+      <td>6.00</td>
+      <td>9.0</td>
+      <td>13.0</td>
+      <td>53.0</td>
+    </tr>
+    <tr>
+      <th>BaumanRacingTeam</th>
+      <td>600.0</td>
+      <td>10.630000</td>
+      <td>8.557169</td>
+      <td>3.0</td>
+      <td>5.00</td>
+      <td>6.0</td>
+      <td>16.0</td>
+      <td>31.0</td>
+    </tr>
+    <tr>
+      <th>greenteam</th>
+      <td>827.0</td>
+      <td>10.571947</td>
+      <td>8.303014</td>
+      <td>0.0</td>
+      <td>4.00</td>
+      <td>9.0</td>
+      <td>15.0</td>
+      <td>103.0</td>
+    </tr>
+    <tr>
+      <th>dynamis</th>
+      <td>600.0</td>
+      <td>9.823333</td>
+      <td>9.446915</td>
+      <td>0.0</td>
+      <td>4.00</td>
+      <td>8.0</td>
+      <td>12.0</td>
+      <td>78.0</td>
+    </tr>
+    <tr>
+      <th>dhbwengineering</th>
+      <td>600.0</td>
+      <td>9.656667</td>
+      <td>3.627771</td>
+      <td>3.0</td>
+      <td>7.00</td>
+      <td>9.0</td>
+      <td>12.0</td>
+      <td>21.0</td>
+    </tr>
+    <tr>
+      <th>upmracing</th>
+      <td>633.0</td>
+      <td>9.502370</td>
+      <td>3.769096</td>
+      <td>2.0</td>
+      <td>7.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>upbracing</th>
+      <td>949.0</td>
+      <td>8.856691</td>
+      <td>4.194445</td>
+      <td>1.0</td>
+      <td>5.00</td>
+      <td>9.0</td>
+      <td>12.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>fe-belgium</th>
+      <td>600.0</td>
+      <td>8.123333</td>
+      <td>5.181654</td>
+      <td>1.0</td>
+      <td>4.00</td>
+      <td>7.0</td>
+      <td>11.0</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>eforce</th>
+      <td>600.0</td>
+      <td>7.793333</td>
+      <td>5.864123</td>
+      <td>2.0</td>
+      <td>3.00</td>
+      <td>6.0</td>
+      <td>10.0</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>scut</th>
+      <td>791.0</td>
+      <td>7.385588</td>
+      <td>4.466669</td>
+      <td>0.0</td>
+      <td>5.00</td>
+      <td>7.0</td>
+      <td>9.0</td>
+      <td>37.0</td>
+    </tr>
+    <tr>
+      <th>amz</th>
+      <td>791.0</td>
+      <td>7.180784</td>
+      <td>3.221201</td>
+      <td>1.0</td>
+      <td>5.00</td>
+      <td>7.0</td>
+      <td>9.0</td>
+      <td>17.0</td>
+    </tr>
+    <tr>
+      <th>OBU-Autonomous</th>
+      <td>664.0</td>
+      <td>6.983434</td>
+      <td>4.140230</td>
+      <td>1.0</td>
+      <td>3.00</td>
+      <td>7.0</td>
+      <td>11.0</td>
+      <td>21.0</td>
+    </tr>
+    <tr>
+      <th>unicamp_eracing</th>
+      <td>844.0</td>
+      <td>6.817536</td>
+      <td>6.495176</td>
+      <td>0.0</td>
+      <td>4.00</td>
+      <td>5.0</td>
+      <td>8.0</td>
+      <td>31.0</td>
+    </tr>
+    <tr>
+      <th>StarkStromAugsburg</th>
+      <td>1120.0</td>
+      <td>6.697321</td>
+      <td>4.877076</td>
+      <td>1.0</td>
+      <td>3.00</td>
+      <td>5.0</td>
+      <td>9.0</td>
+      <td>45.0</td>
+    </tr>
+    <tr>
+      <th>fstlisboa</th>
+      <td>655.0</td>
+      <td>6.444275</td>
+      <td>4.039127</td>
+      <td>1.0</td>
+      <td>3.00</td>
+      <td>6.0</td>
+      <td>10.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>kthfs</th>
+      <td>631.0</td>
+      <td>5.442155</td>
+      <td>4.075797</td>
+      <td>0.0</td>
+      <td>3.00</td>
+      <td>4.0</td>
+      <td>7.0</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>WisconsinAutonomous</th>
+      <td>631.0</td>
+      <td>5.285261</td>
+      <td>3.834814</td>
+      <td>0.0</td>
+      <td>2.00</td>
+      <td>4.0</td>
+      <td>8.0</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>egnition</th>
+      <td>700.0</td>
+      <td>5.252857</td>
+      <td>1.735040</td>
+      <td>2.0</td>
+      <td>4.00</td>
+      <td>5.0</td>
+      <td>7.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>cure</th>
+      <td>600.0</td>
+      <td>5.086667</td>
+      <td>2.382285</td>
+      <td>1.0</td>
+      <td>3.00</td>
+      <td>4.0</td>
+      <td>7.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>mms</th>
+      <td>3745.0</td>
+      <td>4.882243</td>
+      <td>3.907896</td>
+      <td>0.0</td>
+      <td>1.00</td>
+      <td>4.0</td>
+      <td>7.0</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>driverless_UPC</th>
+      <td>777.0</td>
+      <td>4.344916</td>
+      <td>1.326554</td>
+      <td>1.0</td>
+      <td>4.00</td>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>aristurtle</th>
+      <td>3127.0</td>
+      <td>4.231212</td>
+      <td>2.657444</td>
+      <td>0.0</td>
+      <td>2.00</td>
+      <td>4.0</td>
+      <td>6.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>eufs</th>
+      <td>1094.0</td>
+      <td>4.199269</td>
+      <td>1.439401</td>
+      <td>1.0</td>
+      <td>3.00</td>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>uvigo</th>
+      <td>600.0</td>
+      <td>3.920000</td>
+      <td>2.207953</td>
+      <td>1.0</td>
+      <td>2.00</td>
+      <td>4.0</td>
+      <td>6.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>vermilion</th>
+      <td>897.0</td>
+      <td>3.811594</td>
+      <td>3.093621</td>
+      <td>0.0</td>
+      <td>1.00</td>
+      <td>5.0</td>
+      <td>5.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>elbflorace</th>
+      <td>853.0</td>
+      <td>3.609613</td>
+      <td>2.832367</td>
+      <td>0.0</td>
+      <td>1.00</td>
+      <td>3.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>FaSTTUBe</th>
+      <td>605.0</td>
+      <td>3.004959</td>
+      <td>2.076750</td>
+      <td>0.0</td>
+      <td>1.00</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>fsteamtallinn</th>
+      <td>645.0</td>
+      <td>2.558140</td>
+      <td>1.979346</td>
+      <td>1.0</td>
+      <td>2.00</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>getracing</th>
+      <td>601.0</td>
+      <td>2.419301</td>
+      <td>0.757558</td>
+      <td>0.0</td>
+      <td>2.00</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>fsteamweingarten</th>
+      <td>920.0</td>
+      <td>2.158696</td>
+      <td>3.762369</td>
+      <td>0.0</td>
+      <td>1.00</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>hod</th>
+      <td>927.0</td>
+      <td>1.929881</td>
+      <td>0.859732</td>
+      <td>0.0</td>
+      <td>1.00</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>horsepower_hannover</th>
+      <td>4373.0</td>
+      <td>1.815916</td>
+      <td>0.971790</td>
+      <td>1.0</td>
+      <td>1.00</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>STUBAGreenTeam</th>
+      <td>1996.0</td>
+      <td>1.676353</td>
+      <td>0.776511</td>
+      <td>1.0</td>
+      <td>1.00</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>unipisa</th>
+      <td>560.0</td>
+      <td>1.396429</td>
+      <td>0.521442</td>
+      <td>1.0</td>
+      <td>1.00</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section>
+</div>
+</div>
+
+<script>
+
+require(
+    {
+      // it makes sense to wait a little bit when you are loading
+      // reveal from a cdn in a slow connection environment
+      waitSeconds: 15
+    },
+    [
+      "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/lib/js/head.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/js/reveal.js"
+    ],
+
+    function(head, Reveal){
+
+        // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+
+            transition: "slide",
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/lib/js/classList.js",
+                  condition: function() { return !document.body.classList; } },
+                { src: "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/plugin/notes/notes.js",
+                  async: true,
+                  condition: function() { return !!document.body.classList; } }
+            ]
+        });
+
+        var update = function(event){
+          if(MathJax.Hub.getAllJax(Reveal.getCurrentSlide())){
+            MathJax.Hub.Rerender(Reveal.getCurrentSlide());
+          }
+        };
+
+        Reveal.addEventListener('slidechanged', update);
+
+        function setScrollingSlide() {
+            var scroll = false
+            if (scroll === true) {
+              var h = $('.reveal').height() * 0.95;
+              $('section.present').find('section')
+                .filter(function() {
+                  return $(this).height() > h;
+                })
+                .css('height', 'calc(95vh)')
+                .css('overflow-y', 'scroll')
+                .css('margin-top', '20px');
+            }
+        }
+
+        // check and set the scrolling slide every time the slide change
+        Reveal.addEventListener('slidechanged', setScrollingSlide);
+
+    }
+
+);
+</script>

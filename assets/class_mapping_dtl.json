@@ -1,0 +1,16 @@
+{
+    "action": "data",
+    "src": ["your_pre_fsoco_project/*"],
+    "dst": "$data",
+    "settings": {
+      "classes_mapping": {
+        "blue_cone":"__default__",
+        "YellowCone": "yellow_cone",
+        "OrangeCone": "orange_cone",
+        "BigOrangeCone":"large_orange_cone",
+        "GreenCone":"unknown_cone",
+        "PinkCone":"unknown_cone",
+        "__other__":"__ignore__"
+      }
+    }
+}

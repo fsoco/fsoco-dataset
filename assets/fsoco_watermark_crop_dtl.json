@@ -1,0 +1,35 @@
+[
+  {
+    "action": "data",
+    "src": [
+      "fsocov2/*"
+    ],
+    "dst": "$data",
+    "settings": {
+      "classes_mapping": "default"
+    }
+  },
+  {
+    "action": "crop",
+    "src": [
+      "$data"
+    ],
+    "dst": "$cropped_data",
+    "settings": {
+      "sides": {
+        "top": "140px",
+        "left": "140px",
+        "right": "140px",
+        "bottom": "140px"
+      }
+    }
+  },
+  {
+    "action": "supervisely",
+    "src": [
+      "$cropped_data"
+    ],
+    "dst": "fsocov2_prepared",
+    "settings": {}
+  }
+]

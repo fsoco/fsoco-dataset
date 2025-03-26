@@ -1,0 +1,81 @@
+{
+  "classes": [
+    {
+      "title": "seg_blue_cone",
+      "shape": "bitmap",
+      "color": "#2A00FF",
+      "geometry_config": {}
+    },
+    {
+      "title": "seg_unknown_cone",
+      "shape": "bitmap",
+      "color": "#3BDB0F",
+      "geometry_config": {}
+    },
+    {
+      "title": "seg_yellow_cone",
+      "shape": "bitmap",
+      "color": "#FFFF00",
+      "geometry_config": {}
+    },
+    {
+      "title": "blue_cone",
+      "shape": "rectangle",
+      "color": "#2A00FF",
+      "geometry_config": {}
+    },
+    {
+      "title": "yellow_cone",
+      "shape": "rectangle",
+      "color": "#FFFF00",
+      "geometry_config": {}
+    },
+    {
+      "title": "orange_cone",
+      "shape": "rectangle",
+      "color": "#FF8000",
+      "geometry_config": {}
+    },
+    {
+      "title": "large_orange_cone",
+      "shape": "rectangle",
+      "color": "#FF002A",
+      "geometry_config": {}
+    },
+    {
+      "title": "unknown_cone",
+      "shape": "rectangle",
+      "color": "#3BDB0F",
+      "geometry_config": {}
+    },
+    {
+      "title": "seg_large_orange_cone",
+      "shape": "bitmap",
+      "color": "#FF002A",
+      "geometry_config": {}
+    },
+    {
+      "title": "seg_orange_cone",
+      "shape": "bitmap",
+      "color": "#FF8000",
+      "geometry_config": {}
+    }
+  ],
+  "tags": [
+    {
+      "name": "sticker_band_removed",
+      "value_type": "none",
+      "color": "#2BB178"
+    },
+    {
+      "name": "truncated",
+      "value_type": "none",
+      "color": "#973B8D"
+    },
+    {
+      "name": "knocked_over",
+      "value_type": "none",
+      "color": "#7A2E66"
+    }
+  ]
+}

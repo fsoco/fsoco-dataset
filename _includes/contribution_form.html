@@ -1,0 +1,28 @@
+<script type="text/javascript">var submitted=false;</script>
+<iframe name="hidden_iframe_contribution" id="hidden_iframe_contribution" style="display:none;" onload="if(submitted)  {window.location='/contribution_form_thanks/';}"></iframe>
+
+<div class="form-style">
+  <form class="form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScLFVqeonEBtz7KKmhDsiz70NrivRGS0TlKdcDDRsLuRnBICg/formResponse" method="post" target="hidden_iframe_contribution" onsubmit="submitted = true;">
+    <fieldset>
+      <legend><span class="number">1</span> Team Info</legend>
+      <input name="entry.415824334" type="text" placeholder="Your team's name" required />
+      <input name="entry.540434354" type="email" placeholder="Your team's email to communicate with FSOCO" required />
+      <input name="entry.739222755" type="text" placeholder="Your team's website" required />
+      <input name="entry.1274891070" type="text" placeholder="Link to your team's logo file" required />
+    </fieldset>
+    <fieldset>
+      <legend><span class="number">2</span> Data Info</legend>
+      <input name="entry.41256836" type="number" placeholder="Number of images you can contribute" />
+      <input name="entry.1126921209" type="number" placeholder="Number of labeled cones" />
+      <input name="entry.1050664118" type="text" placeholder="Link to approx. 10 sample images, e.g, hosted on GDrive" />
+      <input name="entry.1825343336" type="number" placeholder="Similarity score of your images" />
+      <input name="entry.886690499" type="number" placeholder="Number of donated images without labels" />
+      <label><input name="entry.1579463580" type="checkbox" value="Yes"/> We do not have images yet but we can label raw data. <br><b>--> Please read the note above!</b></label>
+      <input name="entry.1239135079" type="text" placeholder="We teamed up with this team that has images" />
+    </fieldset>
+    <fieldset>
+      <label><input name="entry.21478232" type="checkbox" value="Agree" required/> We have read and understand the <a href="{{ '/how_to_contribute/#terms-and-conditions' | relative_url}}" target="_blank" title="Opens in a new tab.">terms and conditions</a> to contribute to FSOCO.</label><br>
+      <input type="submit" value="Send" />
+    </fieldset>
+  </form>
+</div>

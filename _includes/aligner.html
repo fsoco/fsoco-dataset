@@ -1,0 +1,15 @@
+{% assign images = include.images | split: ',' %}
+
+{% if include.column == "auto" %}
+{% assign column = 100.0 | divided_by: images.size %}
+{% elsif include.column > 0 %}
+{% assign column = 100.0 | divided_by: include.column %}
+{% endif %}
+
+<div class="row">
+  {% for image in images %}
+  <div {% unless column %}class="column"{% endunless%} style="flex: {{ column }}%" >
+    <img src="{{ image | prepend: 'assets/img/' | relative_url }}" alt="{{ image | prepend: '/' | split: '/' | last }}" style="position: relative; top: 50%; transform: translateY(-50%);">
+  </div>
+  {% endfor %}
+</div>

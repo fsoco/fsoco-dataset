@@ -1,0 +1,26 @@
+h1.title {
+  @extend .header-txt-shadow;
+  padding: $title-padding 0;
+}
+
+.subtitle {
+  font-weight: normal;
+  margin-top: 5px;
+  text-shadow: 1px 1px 2px $text-shadow;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex: 50%;
+
+  img {
+    width: 100%;
+    min-width: 250px;
+  }
+}
+
+//Shared css in _post.scss
