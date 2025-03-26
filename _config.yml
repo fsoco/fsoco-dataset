@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "/fsoco-website"
+baseurl: "/fsoco-dataset"
 url: "https://fsoco.github.io"
 
 # THEME-SPECIFIC CONFIGURATION

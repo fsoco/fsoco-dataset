@@ -1,13 +1,13 @@
 <!-- HTML used for easier automatic updates via scripts --><html><body>
 <a href="../LICENSE" target="_blank"><img alt="License GPL-3.0" src="https://img.shields.io/github/license/fsoco/fsoco-dataset?style=flat"/></a>
 <a href="https://www.codacy.com/manual/fsoco/fsoco-dataset?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fsoco/fsoco-dataset&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/16570c4c4b43418aa862bff60f6a61d4"/></a>
-<a href="https://www.fsoco-dataset.com/how_to_contribute/" target="_blank"><img alt="contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat"/></a>
-<a href="https://www.fsoco-dataset.com/contact_us/" target="_blank"><img alt="donations needed" src="https://img.shields.io/badge/data_donations-needed-red?style=flat"/></a> <br/>
+<a href="https://fsoco.github.io/fsoco-dataset/how_to_contribute/" target="_blank"><img alt="contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat"/></a>
+<a href="https://fsoco.github.io/fsoco-dataset/contact_us/" target="_blank"><img alt="donations needed" src="https://img.shields.io/badge/data_donations-needed-red?style=flat"/></a> <br/>
 
 <h1>The FSOCO Dataset</h1>
-<p><a href="https://www.fsoco-dataset.com/contributors/" target="_blank"><img alt="Teams: 41" id="num_teams" src="https://img.shields.io/badge/Teams-41-green.svg"/></a>
-<a href="https://www.fsoco-dataset.com/overview/" target="_blank"><img alt="Number of labeled images: 11572" id="num_bbox_images" src="https://img.shields.io/badge/Images-11,572-blue.svg"/></a>
-<a href="https://www.fsoco-dataset.com/overview/" target="_blank"><img alt="Number of labeled cones: 220862" id="num_bbox_cones" src="https://img.shields.io/badge/Cones-220,862-blue.svg"/></a></p>
+<p><a href="https://fsoco.github.io/fsoco-dataset/contributors/" target="_blank"><img alt="Teams: 41" id="num_teams" src="https://img.shields.io/badge/Teams-41-green.svg"/></a>
+<a href="https://fsoco.github.io/fsoco-dataset/overview/" target="_blank"><img alt="Number of labeled images: 11572" id="num_bbox_images" src="https://img.shields.io/badge/Images-11,572-blue.svg"/></a>
+<a href="https://fsoco.github.io/fsoco-dataset/overview/" target="_blank"><img alt="Number of labeled cones: 220862" id="num_bbox_cones" src="https://img.shields.io/badge/Cones-220,862-blue.svg"/></a></p>
 
 <span style="color:#337AB7; font-size:15px">**+++ UPDATE: The FSOCO dataset is now publicly available without any contribution requirements. +++**</span>
 
@@ -18,7 +18,7 @@ We aim to overcome this problem by providing data and to help experienced teams 
 <p>FSOCO contains bounding box and segmentation annotations from multiple teams and continues to grow thanks to numerous contributions from the Formula Student community.</p>
 <p>The links to the dataset and more details can be found at:
 <br/>
-www.fsoco-dataset.com</p>
+<a href="https://fsoco.github.io/fsoco-dataset">fsoco.github.io/fsoco-dataset</a></p>
 
 <h2>Formula Student Driverless</h2>
 <p>Formula Student / FSAE is an international design competition, where students design and build full-scale formula style racecars.
@@ -26,7 +26,7 @@ In 2017, Formula Student Germany introduced a new driverless class challenging t
 Henceforth, other events have adapted the driverless class and the self-driving racecars are quickly closing the gap to human drivers.</p>
 <h2>Contributing</h2>
 <p>Some of the ways to contribute are:</p>
-<p><a href="https://www.fsoco-dataset.com/how_to_contribute/">Dataset contributions</a>:
+<p><a href="https://fsoco.github.io/fsoco-dataset/how_to_contribute/">Dataset contributions</a>:
 </p>
 <ul>
 <li> Donate raw data for other teams to label that do not have cones or sensors</li>
@@ -44,7 +44,7 @@ Henceforth, other events have adapted the driverless class and the self-driving 
 Following the development install instructions and reading the linter's quick-start guide should get you going quickly.</p>
 <h3>Contributors</h3>
 <p>FSOCO is only made possible by your contributions.<br/>
-We would like to thank all <a href="https://www.fsoco-dataset.com/contributors/">FS teams that have contributed</a> to the dataset.</p>
+We would like to thank all <a href="https://fsoco.github.io/fsoco-dataset/contributors/">FS teams that have contributed</a> to the dataset.</p>
 <p>Likewise, we would like to thank the individual contributors that have helped write the tools that enable this project:</p>
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -77,7 +77,7 @@ For details on what the emoji mean, please see the <a href="../CONTRIBUTING.md#a
 <p>Please feel free to contact us with any questions, suggestions, or comments:</p>
 <ul>
 <li>
-<p>Contact form: <a href="https://www.fsoco-dataset.com/contact_us/">www.fsoco-dataset.com/contact_us</a></p>
+<p>Contact form: <a href="https://fsoco.github.io/fsoco-dataset/contact_us/">fsoco.github.io/fsoco-dataset/contact_us</a></p>
 </li>
 <li>
 <p>Email: <a href="mailto:fsoco.dataset@gmail.com">fsoco.dataset@gmail.com</a></p>
